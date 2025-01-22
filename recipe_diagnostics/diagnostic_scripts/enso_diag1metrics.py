@@ -257,6 +257,7 @@ def main(cfg):
         obs, models = [], []
         for var_prep in var_preproc: #enumerate 1 or 2 length? if 2 append,
             obs += select_metadata(input_data, variable_group=var_prep, project='OBS')
+            obs += select_metadata(input_data, variable_group=var_prep, project='OBS6')
             models += select_metadata(input_data, variable_group=var_prep, project='CMIP6')
 
         # log

@@ -39,7 +39,11 @@ datasets:
 # 'https://furtherinfo.es-doc.org/CMIP6.NASA-GISS.GISS-E2-1-G-CC.historic ...' grid -'atmospheric grid: 144x90, ocean grid: 288x180'
   # - {dataset: GISS-E2-1-G, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   - {dataset: GISS-E2-1-H, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
-  - {dataset: IITM-ESM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1900, end_year: 2014} # searching esgf, changed year
+  # - {dataset: IITM-ESM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1900, end_year: 2014} # searching esgf, changed year
+#   WARNING [570089] Using 'area_weighted' regridder scheme in Omon variables for dataset IITM-ESM causes discontinuities in the longitude coordinate.
+# ERROR   [570089] Supplementary variables are needed to calculate grid cell areas for irregular or unstructured grid of cube sea_surface_temperature / (degC)    (time: 1380; cell index along second dimension: 24; cell index along first dimension: 50)
+# ERROR   [570089] Failed to run preprocessor function 'area_statistics' on the data
+
   - {dataset: MCM-UA-1-0, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   - {dataset: MIROC6, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   - {dataset: MPI-ESM-1-2-HAM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
@@ -64,7 +68,7 @@ preprocessors:
     convert_units:
       units: degC
     regrid:
-      target_grid: 1x1 ##area_stats without weighting
+      target_grid: 1x1 
       scheme: linear
     extract_region: &nino34
       start_longitude: 190.
@@ -118,7 +122,7 @@ preprocessors:
       period: full
 
   enso_seas_asym: #boreal season in script, climate stddev
-    # custom_order: true
+    custom_order: true
     extract_region: 
       <<: *nino34
     convert_units:

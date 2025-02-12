@@ -1,0 +1,143 @@
+# ESMValTool
+# 
+---
+documentation:
+  description: ENSO CLIVAR metrics - ENSO teleconnections
+  title: Reproducing ENSO teleconnections metrics by Yann Planton
+  authors:
+    - chun_felicity
+    # - sullivan_arnold
+  maintainer:
+    - chun_felicity
+
+datasets:
+  - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: BCC-CSM2-MR, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: BCC-ESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+#/g/data/oi10/replicas/CMIP6/CMIP/BCC/BCC-ESM1/1pctCO2/r1i1p1f1/Ofx/areacello/gn/v20190613/areacello_Ofx_BCC-ESM1_1pctCO2_r1i1p1f1_gn.nc') error
+# There were errors in variable areacello:
+#  There are multiple coordinates with standard_name "latitude": ['lat', 'latitude']
+#  There are multiple coordinates with standard_name "longitude": ['lon', 'longitude']
+
+  # - {dataset: AWI-CM-1-1-MR, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+# extract region bounds error - ValueError: expected 0 or 2 bound values per cell ? unstructured
+  # - {dataset: AWI-ESM-1-1-LR, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: CAS-ESM2-0, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: CESM2-FV2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: CESM2-WACCM-FV2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: CESM2-WACCM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: CESM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: CMCC-CM2-HR4, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: CMCC-CM2-SR5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: CMCC-ESM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: CanESM5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: FGOALS-g3, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: FIO-ESM-2-0, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: GISS-E2-1-G-CC, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+#/g/data/oi10/replicas/CMIP6/CMIP/NASA-GISS/GISS-E2-1-G-CC/piControl/r1i1p1f1/Ofx/areacello/gn/v20190325/areacello_Ofx_GISS-E2-1-G-CC_piControl_r1i1p1f1_gn.nc' dimensions
+# 'https://furtherinfo.es-doc.org/CMIP6.NASA-GISS.GISS-E2-1-G-CC.historic ...' grid -'atmospheric grid: 144x90, ocean grid: 288x180'
+  # - {dataset: GISS-E2-1-G, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: GISS-E2-1-H, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: IITM-ESM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1900, end_year: 2014} # searching esgf, changed year
+#   WARNING [570089] Using 'area_weighted' regridder scheme in Omon variables for dataset IITM-ESM causes discontinuities in the longitude coordinate.
+# ERROR   [570089] Supplementary variables are needed to calculate grid cell areas for irregular or unstructured grid of cube sea_surface_temperature / (degC)    (time: 1380; cell index along second dimension: 24; cell index along first dimension: 50)
+# ERROR   [570089] Failed to run preprocessor function 'area_statistics' on the data
+
+  - {dataset: MCM-UA-1-0, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: MIROC6, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: MPI-ESM-1-2-HAM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: MPI-ESM1-2-HR, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: MPI-ESM1-2-LR, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: MRI-ESM2-0, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: NESM3, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+# missing cell area
+  - {dataset: NorCPM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: NorESM2-LM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: NorESM2-MM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: SAM0-UNICON, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  - {dataset: TaiESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+
+  # observations
+  # - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, mip: Omon}
+  
+  
+preprocessors:
+  sst_enso: &base_enso
+    custom_order: true
+    convert_units:
+      units: degC
+    regrid:
+      target_grid: 1x1 
+      scheme: linear
+    extract_region: &nino34
+      start_longitude: 190.
+      end_longitude: 240.
+      start_latitude: -5.
+      end_latitude: 5.
+    # detrend: #tropflux nan/inf values
+    #   dimension: time
+    #   method: linear
+    area_statistics:
+      operator: mean
+    extract_season: # JJA and DJF
+      season: DJF
+    anomalies:
+      period: full
+
+
+  global_pr:
+    <<: *base_enso
+    convert_units:
+      units: mm/day
+    extract_region: &glb
+      start_longitude: 0.
+      end_longitude: 360.
+      start_latitude: -60.
+      end_latitude: 60.
+  global_sst:
+    <<: *base_enso
+    extract_region:
+      <<: *glb
+
+
+diagnostics:
+  diagnostic_metrics:
+    description: run preprocessors on variables for ENSO metrics
+    variables:
+      tos_enso:
+        short_name: tos
+        mip: Omon
+        preprocessor: sst_enso
+        additional_datasets:
+          - {dataset: TROPFLUX, project: OBS6, type: reanaly, tier: 2, mip: Omon}
+
+      tos_global: #amplitude
+        short_name: tos
+        mip: Omon
+        preprocessor: global_sst
+        additional_datasets:
+          - {dataset: TROPFLUX, project: OBS6, type: reanaly, tier: 2, mip: Omon}
+
+      pr_gbl:
+        short_name: pr
+        mip: Amon
+        preprocessor: global_pr
+        additional_datasets:
+          - {dataset: GPCP-SG, project: OBS, type: atmos, tier: 2, mip: Amon, start_year: 1979, end_year: 2018}
+
+    scripts:
+      plot_script:
+        script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/teleconnections_metrics.py
+
+  diag_collect:
+    description: collect metrics
+    variables:
+      tos: #dummy variable to fill recipe requirements
+        mip: Omon
+    scripts:
+      matrix_collect:
+        script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/matrix.py
+        # above diagnostic name and script name
+        diag_metrics: diagnostic_metrics/plot_script #cfg['work_dir']
+

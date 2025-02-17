@@ -63,7 +63,7 @@ datasets:
   
   
 preprocessors:
-  sst_enso: &base_enso
+  base_enso: &base_enso
     custom_order: true
     convert_units:
       units: degC
@@ -78,13 +78,15 @@ preprocessors:
     # detrend: #tropflux nan/inf values
     #   dimension: time
     #   method: linear
+    # extract_season: # JJA and DJF in script
+    #   season: DJF
+    # anomalies:
+    #   period: full
+  
+  enso_sst:
+    <<: *base_enso
     area_statistics:
       operator: mean
-    extract_season: # JJA and DJF
-      season: DJF
-    anomalies:
-      period: full
-
 
   global_pr:
     <<: *base_enso
@@ -106,20 +108,20 @@ diagnostics:
     description: run preprocessors on variables for ENSO metrics
     variables:
       tos_enso:
-        short_name: tos
-        mip: Omon
-        preprocessor: sst_enso
+        short_name: ts
+        mip: Amon
+        preprocessor: enso_sst
         additional_datasets:
-          - {dataset: TROPFLUX, project: OBS6, type: reanaly, tier: 2, mip: Omon}
+          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3}
 
       tos_global: #amplitude
-        short_name: tos
-        mip: Omon
+        short_name: ts
+        mip: Amon
         preprocessor: global_sst
         additional_datasets:
-          - {dataset: TROPFLUX, project: OBS6, type: reanaly, tier: 2, mip: Omon}
+          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3}
 
-      pr_gbl:
+      pr_global:
         short_name: pr
         mip: Amon
         preprocessor: global_pr

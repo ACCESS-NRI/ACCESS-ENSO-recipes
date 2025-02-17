@@ -18,7 +18,7 @@ from esmvaltool.diag_scripts.shared import (run_diagnostic,
                                             select_metadata,
                                             )
 from esmvalcore.preprocessor import (extract_season,
-                                     climate_statistics)
+                                     anomalies)
 
 
 # This part sends debug statements to stdout
@@ -29,7 +29,7 @@ def plot_level1(input_data, rmse, title): #input data is 2 - model and obs
     figure = plt.figure(figsize=(20, 7), dpi=300)
 
     proj = ccrs.PlateCarree(central_longitude=180)
-
+    figure.suptitle(title)
     i =121
 
     for label, cube in input_data.items():
@@ -44,14 +44,14 @@ def plot_level1(input_data, rmse, title): #input data is 2 - model and obs
         i+=1
 
     plt.text(0.1, -0.3, f'RMSE: {rmse:.2f} ', fontsize=12, ha='left',
-         transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
-    plt.title(title)
+         transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))    
     # Add a single colorbar at the bottom
     cax = plt.axes([0.15,0.08,0.7,0.05])
     cbar = figure.colorbar(cf1, cax=cax, orientation='horizontal', extend='both', ticks=np.arange(-1,1.5,0.5))
     cbar.set_label('regression (°C/°C)')
     logger.info(f"{title}, {label} : metric:{rmse}")
-
+    plt.tight_layout
+    
     return figure
 
 
@@ -75,13 +75,13 @@ def lin_regress_matrix(cubeA, cubeB): #array must not contain infs or NaNs
     # Get data as flattened arrays
     A_data = cubeA.data.reshape(cubeA.shape[0], -1)  # Shape (time, spatial_points)
     B_data = cubeB.data.flatten()  # Shape (time,)
-
+    logger.info("cubes: %s, %s", cubeA.name, cubeB.name)
     # Add intercept term by stacking a column of ones with cubeB
     B_with_intercept = np.vstack([B_data, np.ones_like(B_data)]).T
 
     # Solve the linear equations using least squares method
     coefs, _, _, _ = np.linalg.lstsq(B_with_intercept, A_data, rcond=None)
-    
+    logger.info("%s, %s",cubeA.coords(), cubeA.shape)
     # Extract slopes from coefficients #coefs 1
     slopes = coefs[0].reshape(cubeA.shape[1], cubeA.shape[2])
 
@@ -107,26 +107,28 @@ def mask_pacific(cube):
 def compute_telecon_metrics(input_pair, var_group, metric):
 
     if metric =='pr_telecon':
-        title = 'DJF PR teleconnection'
+        title = '{} PR Teleconnection' # both seasons
     elif metric == 'ts_telecon':
-        title = 'DJF SST teleconnection'
+        title = '{} SST Teleconnection'
 
-    data_values = []
-    cubes = {}
-    for label, ds in input_pair.items(): #obs 0, mod 1
-        # preproc = {}
-        regcube = lin_regress_matrix(ds[var_group[1]], ds[var_group[0]])
-        reg_masked = mask_pacific(regcube)
-        # for seas in ['NDJ','MAM']:
-        #     cube = extract_season(ds[var_group[0]], seas)
-        #     cube = climate_statistics(cube, operator="std_dev", period="full")
-        #     preproc[seas] = cube.data
-        data_values.append(reg_masked.data)
-        cubes[label] = reg_masked
+    val, fig = {}, {}
+    for seas in ['DJF','JJA']:
+        data_values = []
+        cubes = {}
+        for label, ds in input_pair.items(): #obs 0, mod 1
+            preproc = {}
+            for variable in var_group:
+                cube = extract_season(ds[variable].copy(), seas)
+                preproc[variable] = anomalies(cube, period="full")
 
-    val = np.sqrt(np.mean((data_values[0] - data_values[1]) ** 2))
+            regcube = lin_regress_matrix(preproc[var_group[1]], preproc[var_group[0]])
+            reg_masked = mask_pacific(regcube)
 
-    fig = plot_level1(cubes, val, title)
+            data_values.append(reg_masked.data)
+            cubes[label] = reg_masked
+
+        val[seas] = np.sqrt(np.mean((data_values[0] - data_values[1]) ** 2))
+        fig[seas] = plot_level1(cubes, val[seas], title.format(seas))
 
     return val, fig 
 
@@ -161,8 +163,8 @@ def main(cfg):
     input_data = cfg['input_data'].values() 
 
     # iterate through each metric and get variable group, select_metadata, map to function call
-    metrics = {'pr_telecon': ['sst_enso', 'global_pr'],
-                'ts_telecon':['sst_enso','global_sst']}
+    metrics = {'pr_telecon': ['tos_enso', 'pr_global'],
+                'ts_telecon':['tos_enso','tos_global']}
     
     # select twice with project to get obs, iterate through model selection
     for metric, var_preproc in metrics.items(): #if empty or try
@@ -174,7 +176,7 @@ def main(cfg):
             models += select_metadata(input_data, variable_group=var_prep, project='CMIP6')
 
         # log
-        msg = "{} : observation datasets {}, models {}".format(metric, len(obs), pformat(models))
+        msg = "{} : observation datasets {}, models {}".format(metric, len(obs), len(models))
         logger.info(msg)
         
         # list dt_files
@@ -198,17 +200,15 @@ def main(cfg):
             logger.info(pformat(model_datasets))
             # process function for each metric - obs first.. if, else
             ### make one function, with the switches - same params
-            value, fig = compute_telecon_metrics(input_pair, var_preproc, metric)
+            values, fig = compute_telecon_metrics(input_pair, var_preproc, metric)
 
-            # save metric for each pair, check not none
-            if value:
+            # save metric for each pair, check not none teleconnection metric value djf, jja
+            for seas, val in values.items():
                 metricfile = get_diagnostic_filename('matrix', cfg, extension='csv')
                 with open(metricfile, 'a+') as f:
-                    f.write(f"{dataset},{metric},{value}\n")
+                    f.write(f"{dataset},{seas}_{metric},{val}\n")
 
-                save_figure(f'{dataset}_{metric}', prov_record, cfg, figure=fig, dpi=300)
-            #clear value,fig
-            value = None
+                save_figure(f'{dataset}_{seas}_{metric}', prov_record, cfg, figure=fig[seas], dpi=300)#
 
 
 if __name__ == '__main__':

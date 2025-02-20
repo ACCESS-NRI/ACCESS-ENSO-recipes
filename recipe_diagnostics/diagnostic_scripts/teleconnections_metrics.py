@@ -26,7 +26,7 @@ logger = logging.getLogger(os.path.basename(__file__))
 
 def plot_level1(input_data, rmse, title): #input data is 2 - model and obs
 
-    figure = plt.figure(figsize=(20, 7), dpi=300)
+    figure = plt.figure(figsize=(20, 6), dpi=300)
 
     proj = ccrs.PlateCarree(central_longitude=180)
     figure.suptitle(title)
@@ -133,10 +133,6 @@ def compute_telecon_metrics(input_pair, var_group, metric):
     return val, fig 
 
 
-
-def compute(obs, mod):
-    return abs((mod-obs)/obs)*100
-
 def get_provenance_record(caption, ancestor_files):
     """Create a provenance record describing the diagnostic data and plot."""
 
@@ -147,7 +143,7 @@ def get_provenance_record(caption, ancestor_files):
         'plot_types': ['map'],
         'authors': [
             'chun_felicity',
-            'beucher_romain'
+            # 'beucher_romain',
             # 'sullivan_arnold',
         ],
         'references': [
@@ -178,22 +174,20 @@ def main(cfg):
         # log
         msg = "{} : observation datasets {}, models {}".format(metric, len(obs), len(models))
         logger.info(msg)
-        
-        # list dt_files
-        dt_files = []
-        for ds in models: #and obs?
-            dt_files.append(ds['filename'])
-        prov_record = get_provenance_record(f'ENSO metrics {metric}', dt_files)
+
         # obs datasets for each model
         obs_datasets = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in obs}
         
         # group models by dataset
         model_ds = group_metadata(models, 'dataset', sort='project')        
-        # dataset name
         
+        # dataset name # split for teleconnections
         for dataset in model_ds:
             logger.info(f"{metric}, preprocessed cubes:{len(model_ds)}, dataset:{dataset}")
-            
+            dt_files = [ds['filename'] 
+                        for ds in obs] + [ds['filename'] 
+                                          for ds in model_ds[dataset]]
+
             model_datasets = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
                               for attributes in model_ds[dataset]}
             input_pair = {obs[0]['dataset']:obs_datasets, dataset:model_datasets}
@@ -207,7 +201,8 @@ def main(cfg):
                 metricfile = get_diagnostic_filename('matrix', cfg, extension='csv')
                 with open(metricfile, 'a+') as f:
                     f.write(f"{dataset},{seas}_{metric},{val}\n")
-
+                
+                prov_record = get_provenance_record(f'ENSO metrics {seas} {metric}', dt_files)
                 save_figure(f'{dataset}_{seas}_{metric}', prov_record, cfg, figure=fig[seas], dpi=300)#
 
 

@@ -114,7 +114,7 @@ diagnostics:
         additional_datasets:
           - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3}
 
-      tos_global: #amplitude
+      tos_global:
         short_name: ts
         mip: Amon
         preprocessor: global_sst

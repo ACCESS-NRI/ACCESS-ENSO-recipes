@@ -19,7 +19,7 @@ def plot_matrix(diag_path):
 
     metric_df = pd.read_csv(diag_path, header=None)
     # run normalisation on all these values
-    metric_df[2] = (metric_df[2]-metric_df[2].mean())/metric_df[2].std()
+    # metric_df[2] = (metric_df[2]-metric_df[2].mean())/metric_df[2].std()
 
     transformls = []
     for mod in metric_df[0].unique(): #iterate model, translate metrics
@@ -27,6 +27,11 @@ def plot_matrix(diag_path):
         transformls.append(df[[1,2]].set_index(1).T.rename(index={2:mod}))
 
     matrixdf = pd.concat(transformls)
+    
+    # normalise each metric
+    for col in matrixdf.columns:
+        matrixdf[col] = (matrixdf[col] - matrixdf[col].mean()) / matrixdf[col].std()
+
     figure = plt.figure(dpi=300)
     plt.imshow(matrixdf, cmap='coolwarm')
     plt.colorbar()

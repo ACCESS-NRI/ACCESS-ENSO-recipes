@@ -16,78 +16,89 @@ from esmvaltool.diag_scripts.shared import (run_diagnostic,
                                             )
 from esmvalcore.preprocessor import (mask_above_threshold, 
                                      mask_below_threshold,
-                                     rolling_window_statistics
+                                     rolling_window_statistics,
+                                     convert_units,
                                      )
 
 
 # This part sends debug statements to stdout
 logger = logging.getLogger(os.path.basename(__file__))
 
-def plot_level1(input_data, title, metric_varls):
-
+def plot_level1(obs_ds, model_ds, title, metric_varls):
+    var_set = {'ts':5, 'tauu':100, 'ssh':40}
+    xvar = metric_varls[0].split('_')[0]
     figure = plt.figure(figsize=(10, 8), dpi=300)
-    xseq = np.linspace(-4, 4, num=100)
+    xseq = np.linspace(var_set[xvar]*-1, var_set[xvar], num=100) #values change with metric
 
-    obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in input_data['obs']}
-    model_ds = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
-                              for attributes in input_data['mod']}
+    # obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in input_data['obs']}
+    # model_ds = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
+    #                           for attributes in input_data['mod']}
+
     # linreg (tauu cube, tos cube)
     #['ts_east', 'tauu_west', 'tauu_eqp']
     mod_slope, intcpt = linreg_1d(model_ds[metric_varls[1]], model_ds[metric_varls[0]])
     plt.plot(xseq, intcpt+mod_slope*xseq)
-    obs_slope, intcpt = linreg_1d(obs_ds[metric_varls[1]], obs_ds[metric_varls[0]])
+    # time overlap
+    obs1, obs2 = obs_extract_overlap(obs_ds[metric_varls[1]], obs_ds[metric_varls[0]])
+    obs_slope, intcpt = linreg_1d(obs1, obs2)
     plt.plot(xseq, intcpt+obs_slope*xseq, color='black')
 
     metric_val = abs((mod_slope-obs_slope)/obs_slope)*100
 
     plt.scatter(model_ds[metric_varls[0]].data, model_ds[metric_varls[1]].data, s=10)
-    plt.scatter(obs_ds[metric_varls[0]].data, obs_ds[metric_varls[1]].data, s=20, c='black', marker='D')
-    
-    plt_settings([mod_slope, obs_slope, metric_val], lvl1=True)
+    plt.scatter(obs2.data, obs1.data, s=20, c='black', marker='D')
+    logger.info(title)
+    logger.info(obs1.data)
+    logger.info(obs1.data)
+    plt_settings([mod_slope, obs_slope, metric_val], lvl1=True, metric_varls=metric_varls)
     plt.title(title)
     
     return metric_val, figure
 
-def plot_level2(input_data, metric_varls):
+def plot_level2(obs_ds, model_ds, metric_varls, ds_labels):
     """Plot level 2 diagnostics for ENSO feedback metrics."""
-    obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in input_data['obs']}
-    model_ds = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
-                              for attributes in input_data['mod']}
+    # obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in input_data['obs']}
+    # model_ds = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
+    #                           for attributes in input_data['mod']}
     fig = plt.figure(figsize=(13, 5))
     plt.subplot(121)
-    plt_lvl2_subplot(model_ds[metric_varls[0]], model_ds[metric_varls[1]], input_data['mod'][0]['dataset'])
+    plt_lvl2_subplot(model_ds[metric_varls[0]], model_ds[metric_varls[1]], 
+                     ds_labels[1], metric_varls)
 
     plt.subplot(122)
-    obs_ds_label = f"{input_data['obs'][0]['dataset']}_{input_data['obs'][1]['dataset']}"
-    plt_lvl2_subplot(obs_ds[metric_varls[0]], obs_ds[metric_varls[1]], obs_ds_label)
+    obs1, obs2 = obs_extract_overlap(obs_ds[metric_varls[0]], obs_ds[metric_varls[1]])
+    # obs_ds_label = f"{input_data['obs'][0]['dataset']}_{input_data['obs'][1]['dataset']}"
+    plt_lvl2_subplot(obs1, obs2, ds_labels[0], metric_varls)
     return fig
 
-def plt_lvl2_subplot(ts_cube, tauu_cube, dataset_label): ##for lv 1 too
+def plt_lvl2_subplot(ts_cube, tauu_cube, dataset_label, metric_varls): ##for lv 1 too
     
     df = pd.DataFrame({'tos':ts_cube.data, 'tauu':tauu_cube.data})
     slopes = []
     logger.info(f'{dataset_label}, shape: {df.shape}')
-    # for lvl 1 do for each dataset
+    var_set = {'ts':5, 'tauu':100, 'ssh':40}
+    xvar = metric_varls[0].split('_')[0]
+
     plt.scatter(ts_cube.data, tauu_cube.data, c='k', s=10)
-    xseq = np.linspace(-5, 5, num=50)
+    xseq = np.linspace(var_set[xvar]*-1, var_set[xvar], num=50)
     slope, intcpt = linreg_1d(df['tauu'], df['tos']) #df or cube
     plt.plot(xseq, intcpt+slope*xseq, c='black') # colour for model blue
     slopes.append(slope)
     # end for lvl 1?
 
-    xseq = np.linspace(-5, 0, num=50) #
+    xseq = np.linspace(var_set[xvar]*-1, 0, num=50) #
     slope, intcpt = linreg_1d(df.loc[df['tos']<0, 'tauu'], df.loc[df['tos']<0, 'tos'])
     
     plt.plot(xseq, intcpt+slope*xseq, linewidth=3)
     slopes.append(slope)
     
-    xseq = np.linspace(0, 5, num=50)
+    xseq = np.linspace(0, var_set[xvar], num=50)
     slope, intcpt = linreg_1d(df.loc[df['tos']>0, 'tauu'], df.loc[df['tos']>0, 'tos'])
     plt.plot(xseq, intcpt+slope*xseq, color='red', linewidth=3)
     slopes.append(slope)
 
     plt.title(dataset_label)
-    plt_settings(slopes, lvl1=False)
+    plt_settings(slopes, lvl1=False, metric_varls=metric_varls)
 
 def linreg_1d(tauu, ts): #cube or df
     """Perform linear regression on 1D data."""
@@ -104,14 +115,22 @@ def linreg_1d(tauu, ts): #cube or df
     return slope, intercept
 
 
-def plt_settings(slopes, lvl1):
-    plt.xlim(-4,4)
-    plt.xticks(np.arange(-4,5,2))
-    plt.ylim(-100,100)
-    plt.yticks(np.arange(-100,120,50))
+def plt_settings(slopes, lvl1, metric_varls):
+    """Set plot settings for ENSO feedback metrics."""
+    var_set = {'ts':(5,'°C'), 'tauu':(100,'1e-3 N/m2'), 'ssh':(40,'cm'), 
+                    'east':'nino3', 'west':'nino4'}
+    # variable, limit, units, region
+    xvar = metric_varls[0].split('_')[0] # ts, tauu, ssh
+    yvar = metric_varls[1].split('_')[0]
+    xregion = var_set[metric_varls[0].split('_')[1]] # east, west, eqp
+    yregion = var_set[metric_varls[1].split('_')[1]]
+    plt.xlim(var_set[xvar][0]*-1, var_set[xvar][0])
+    plt.xticks(np.arange(var_set[xvar][0]*-1, var_set[xvar][0]+1, var_set[xvar][0]/2))
+    plt.ylim(var_set[yvar][0]*-1, var_set[yvar][0])
+    plt.yticks(np.arange(var_set[yvar][0]*-1, var_set[yvar][0]+1, var_set[yvar][0]/2))
     plt.grid(linestyle='--')
-    plt.ylabel(f'nino4 TAUXA (1e-3 N/m2)') # parse labels
-    plt.xlabel(f'nino3 SSTA (°C)') #
+    plt.ylabel(f'{yregion} {yvar.upper()}A ({var_set[yvar][1]})') # parse labels/units
+    plt.xlabel(f'{xregion} {xvar.upper()}A ({var_set[xvar][1]})') #
 
     if lvl1:
         #for lvl1 #slopes is mod 0, obs 1, metric_val 2
@@ -171,6 +190,22 @@ def feedback_nonlin(sst_cube, tauu_cube):
 
     return outreg_cube, posreg_cube, msk_dt
 
+def obs_extract_overlap(obs_1, obs_2):
+    """Extract overlapping time range from two observation datasets."""
+    start_1 = obs_1.coord('time').cell(0).point #
+    end_1 = obs_1.coord('time').cell(-1).point
+    start_2 = obs_2.coord('time').cell(0).point
+    end_2 = obs_2.coord('time').cell(-1).point
+
+    start_overlap = max(start_1, start_2)
+    end_overlap = min(end_1, end_2)
+    # convert to yymmdd? use extract time, num2date
+    logger.info(f'{obs_1.standard_name}, {obs_2.standard_name} obs time overlap: {start_overlap} to {end_overlap}')
+    obs1 = obs_1.extract(iris.Constraint(time=lambda t: start_overlap <= t.point <= end_overlap))
+    obs2 = obs_2.extract(iris.Constraint(time=lambda t: start_overlap <= t.point <= end_overlap))
+
+    return obs1, obs2
+
 def format_longitude(x, pos):
     if x > 180:
         return f'{int(360 - x)}°W'
@@ -179,11 +214,11 @@ def format_longitude(x, pos):
     else:
         return f'{int(x)}°E'
     
-def plot_level3(input_data, metric_varls):
+def plot_level3(obs_ds, model_ds, metric_varls, ds_labels):
     """Plot level 3 diagnostics for ENSO feedback metrics."""
-    obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in input_data['obs']}
-    model_ds = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
-                              for attributes in input_data['mod']}
+    # obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in input_data['obs']}
+    # model_ds = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
+    #                           for attributes in input_data['mod']}
     figure = plt.figure(figsize=(10, 6), dpi=300)
     tau_modcube = rolling_window_statistics(model_ds[metric_varls[2]], 
                                      coordinate='longitude',operator='mean',window_length=30)
@@ -191,28 +226,33 @@ def plot_level3(input_data, metric_varls):
                                      coordinate='longitude',operator='mean',window_length=30)
     # plot whole regression
     cb = lin_regress_matrix(tau_modcube, model_ds[metric_varls[0]])            
-    qplt.plot(cb, color='black', linestyle='solid', label=input_data['mod'][0]['dataset'])
+    qplt.plot(cb, color='black', linestyle='solid', label=ds_labels[1])
 
-    obs_ds_label = f"{input_data['obs'][0]['dataset']}_{input_data['obs'][1]['dataset']}"
-    cb2 = lin_regress_matrix(tau_obcube, obs_ds[metric_varls[0]])
-    qplt.plot(cb2, color='black', linestyle='--', label=obs_ds_label)
+    # obs datasets can have different time range..
+    obs1, obs2 = obs_extract_overlap(tau_obcube, obs_ds[metric_varls[0]])
+    # obs_ds_label = f"{input_data['obs'][0]['dataset']}_{input_data['obs'][1]['dataset']}"
+    cb2 = lin_regress_matrix(obs1, obs2)
+    qplt.plot(cb2, color='black', linestyle='--', label=ds_labels[0])
     # process model data split
     neg, pos, cnts = feedback_nonlin(model_ds[metric_varls[0]], tau_modcube)
+    
+    xvar = metric_varls[0].split('_')[0] # ts, tauu, ssh
+    yvar = metric_varls[1].split('_')[0]
 
-    qplt.plot(neg, color='blue', linestyle='solid', label=f"SSTA<0")
-    qplt.plot(pos, color='red', linestyle='solid', label=f"SSTA>0")
+    qplt.plot(neg, color='blue', linestyle='solid', label=f"{xvar.upper()}A<0")
+    qplt.plot(pos, color='red', linestyle='solid', label=f"{xvar.upper()}A>0")
     # process obs data split
-    neg, pos, cnts = feedback_nonlin(obs_ds[metric_varls[0]], tau_obcube)
+    neg, pos, cnts = feedback_nonlin(obs2, obs1)
     qplt.plot(neg, color='blue', linestyle='--')
     qplt.plot(pos, color='red', linestyle='--')
 
     plt.xlim(170, 250)
     plt.xlabel('longitude')
-    plt.ylabel('reg(SSTA, TAUXA)') #
+    plt.ylabel(f'reg({xvar.upper()}A, {yvar.upper()}A)') #
     plt.grid(linestyle='--')
     plt.gca().xaxis.set_major_formatter(plt.FuncFormatter(format_longitude))
     plt.legend()
-    plt.title('Wind stress feedback') #
+    plt.title('feedback') #title
     return figure
 
 def get_provenance_record(caption, ancestor_files):
@@ -242,10 +282,10 @@ def main(cfg):
 
     # iterate through each metric and get variable group, select_metadata, map to function call
     metrics = {'SST_TAUX': ['ts_east', 'tauu_west', 'tauu_eqp'],
-            #    'TAUX_SSH':['tos_enso','tos_global'],
-            #    'SSH_SST': ['tos_enso', 'pr_global'],
+               'TAUX_SSH':['tauu_west', 'ssh_east','ssh_eqp'],
+               'SSH_SST': ['ts_east', 'ssh_east', 'ssh_eqp_area', 'ts_eqp'],
                 }
-    
+    var_units = {'ts': 'degC', 'ssh': 'mm/day', 'tauu': '1e-3 N/m2'}
     # select twice with project to get obs, iterate through model selection
     for metric, var_preproc in metrics.items(): #if empty or try
         logger.info(f"{metric},{var_preproc}")
@@ -269,11 +309,20 @@ def main(cfg):
                         for ds in obs] + [ds['filename'] 
                                           for ds in model_ds[dataset]]
 
-            input_data = {'obs': obs, 'mod': mod_ds}
+            
+            obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in obs}
+            model = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
+                                    for attributes in mod_ds}
 
-            title = f'{metric.replace('_',' to ')} coupling' # based on metric, different levels
+            for var_prep in var_preproc:
+                sn = var_prep.split('_')[0]
+                obs_ds[var_prep] = convert_units(obs_ds[var_prep], units=var_units[sn])
+                model[var_prep] = convert_units(model[var_prep], units=var_units[sn])
+            
+            # input_grouped = {'obs': obs, 'mod': mod_ds} #obs_ds, model
+            title = f"{metric.replace('_',' to ')} coupling" # based on metric, different levels
             # obs-(tauu cube, tos cube), mod-(tauu, tos)
-            value, fig = plot_level1(input_data, title, var_preproc)
+            value, fig = plot_level1(obs_ds, model, title, var_preproc)
 
             metricfile = get_diagnostic_filename('matrix', cfg, extension='csv')
             with open(metricfile, 'a+') as f:
@@ -282,9 +331,14 @@ def main(cfg):
             prov_record = get_provenance_record(f'ENSO metrics {metric} feedback', dt_files)
             save_figure(f'{dataset}_{metric}', prov_record, cfg, figure=fig, dpi=300)#
 
-            fig = plot_level2(input_data, var_preproc)
+            ds_labels = [f"{obs[0]['dataset']}_{obs[1]['dataset']}", mod_ds[0]['dataset']]
+            fig = plot_level2(obs_ds, model, var_preproc, ds_labels)
             save_figure(f'{dataset}_{metric}_lvl2', prov_record, cfg, figure=fig, dpi=300)#
-            fig = plot_level3(input_data, var_preproc)
+            # plot level 3 check for ssh_sst
+            if len(var_preproc) == 4:
+                var_preproc = ['ssh_eqp_area', ' ', 'ts_eqp']
+
+            fig = plot_level3(obs_ds, model, var_preproc, ds_labels)
             save_figure(f'{dataset}_{metric}_lvl3', prov_record, cfg, figure=fig, dpi=300)#
 
 

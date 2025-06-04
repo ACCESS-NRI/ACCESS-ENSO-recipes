@@ -46,8 +46,8 @@ datasets:
 preprocessors:
   base_east: &base #20sst, 21ssh
     custom_order: true
-    convert_units:
-      units: degC
+    # convert_units:
+    #   units: degC
     mask_landsea:
       mask_out: land
     anomalies:
@@ -93,15 +93,50 @@ preprocessors:
       end_latitude: 5.
     meridional_statistics:
       operator: mean
-    # rolling_window_statistics:
+    # rolling_window_statistics: # error with using longitude
     #   coordinate: longitude
     #   window_length: 30
     #   operator: mean
   
-  ssh_eqp: # all levels
+  ssh_eqp: #lvl3
     <<: *eqp_lv3
+    regrid:
+      target_grid: 1x1 
+      scheme: linear
     convert_units:
       units: cm
+
+  ssh_east:
+    # <<: *base
+    custom_order: true
+    convert_units:
+      units: cm
+    mask_landsea:
+      mask_out: land
+    anomalies:
+      period: monthly
+    detrend:
+      dimension: time
+      method: linear
+    extract_region:
+      <<: *east
+    area_statistics:
+      operator: mean
+  
+  ssh_eqp_area:
+    <<: *base
+    # convert_units:
+    #   units: cm
+    extract_region:
+      <<: *eqp
+
+  sst_eqp_merid: #lvl3
+    <<: *eqp_lv3
+    # regrid:
+    #   target_grid: 1x1 
+    #   scheme: linear
+    convert_units:
+      units: degC
 
 diagnostics:
   diagnostic_metrics:
@@ -112,14 +147,21 @@ diagnostics:
         mip: Amon
         preprocessor: base_east
         additional_datasets:
-          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, start_year: 1979, end_year: 2014}
+          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, version: 1, start_year: 1979, end_year: 2014}
+
+      ts_eqp:
+        short_name: ts
+        mip: Amon
+        preprocessor: sst_eqp_merid
+        additional_datasets:
+          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, version: 1, start_year: 1979, end_year: 2014}
 
       tauu_west:
         short_name: tauu
         mip: Amon
         preprocessor: west
-        additional_datasets:
-          - {dataset: NCEP-DOE-R2, project: OBS6, type: reanaly, tier: 2, start_year: 1979, end_year: 2014}
+        additional_datasets: #time same for lin regress - check in diag
+          - {dataset: NCEP-DOE-R2, project: OBS6, type: reanaly, tier: 2, version: 2, start_year: 1979, end_year: 2014} 
 
       tauu_eqp:
         short_name: tauu
@@ -128,6 +170,25 @@ diagnostics:
         additional_datasets:
           - {dataset: NCEP-DOE-R2, project: OBS6, type: reanaly, tier: 2, start_year: 1979, end_year: 2014}
       
+      ssh_east:
+        short_name: zos
+        mip: Omon
+        preprocessor: base_east
+        additional_datasets:
+          - {dataset: CMEMS, project: OBS6, type: sat, tier: 2, version: SEALEVEL-GLO-PHY-L4, start_year: 1993, end_year: 2018}
+      ssh_eqp:
+        short_name: zos
+        mip: Omon
+        preprocessor: ssh_eqp
+        additional_datasets:
+          - {dataset: CMEMS, project: OBS6, type: sat, tier: 2, version: SEALEVEL-GLO-PHY-L4, start_year: 1993, end_year: 2018}
+      ssh_eqp_area:
+        short_name: zos
+        mip: Omon
+        preprocessor: ssh_eqp_area
+        additional_datasets:
+          - {dataset: CMEMS, project: OBS6, type: sat, tier: 2, version: SEALEVEL-GLO-PHY-L4, start_year: 1993, end_year: 2018}
+
       hfns:
         short_name: hfns
         mip: Amon

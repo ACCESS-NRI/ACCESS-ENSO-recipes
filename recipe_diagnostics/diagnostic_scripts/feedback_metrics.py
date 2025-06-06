@@ -237,7 +237,7 @@ def plot_level3(obs_ds, model_ds, metric_varls, ds_labels):
     neg, pos, cnts = feedback_nonlin(model_ds[metric_varls[0]], tau_modcube)
     
     xvar = metric_varls[0].split('_')[0] # ts, tauu, ssh
-    yvar = metric_varls[1].split('_')[0]
+    yvar = metric_varls[2].split('_')[0]
 
     qplt.plot(neg, color='blue', linestyle='solid', label=f"{xvar.upper()}A<0")
     qplt.plot(pos, color='red', linestyle='solid', label=f"{xvar.upper()}A>0")
@@ -285,7 +285,7 @@ def main(cfg):
                'TAUX_SSH':['tauu_west', 'ssh_east','ssh_eqp'],
                'SSH_SST': ['ts_east', 'ssh_east', 'ssh_eqp_area', 'ts_eqp'],
                 }
-    var_units = {'ts': 'degC', 'ssh': 'mm/day', 'tauu': '1e-3 N/m2'}
+    # var_units = {'ts': 'degC', 'ssh': 'cm', 'tauu': '1e-3 N/m2'}
     # select twice with project to get obs, iterate through model selection
     for metric, var_preproc in metrics.items(): #if empty or try
         logger.info(f"{metric},{var_preproc}")
@@ -314,10 +314,11 @@ def main(cfg):
             model = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
                                     for attributes in mod_ds}
 
-            for var_prep in var_preproc:
-                sn = var_prep.split('_')[0]
-                obs_ds[var_prep] = convert_units(obs_ds[var_prep], units=var_units[sn])
-                model[var_prep] = convert_units(model[var_prep], units=var_units[sn])
+            # for var_prep in var_preproc:
+            #     sn = var_prep.split('_')[0]
+            #     if sn == 'ts':
+            #         obs_ds[var_prep] = convert_units(obs_ds[var_prep], units='degC')
+            #         model[var_prep] = convert_units(model[var_prep], units='degC')
             
             # input_grouped = {'obs': obs, 'mod': mod_ds} #obs_ds, model
             title = f"{metric.replace('_',' to ')} coupling" # based on metric, different levels

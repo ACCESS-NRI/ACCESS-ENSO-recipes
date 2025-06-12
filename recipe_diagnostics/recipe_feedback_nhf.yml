@@ -11,15 +11,13 @@ documentation:
   maintainer:
     - chun_felicity
 
-datasets:
-  - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
-    # supplementary_variables: [{short_name: areacella, mip: fx},{short_name: sftlf, mip: fx}]} #separate Ofx
-  - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
-    # supplementary_variables: [{short_name: areacella, mip: fx},{short_name: sftlf, mip: fx}]} #Ofx and fx
+# datasets: &model_datasets
+#   - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   # - {dataset: BCC-CSM2-MR, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   # - {dataset: CAS-ESM2-0, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
-  - {dataset: CESM2-FV2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
-  - {dataset: CESM2-WACCM-FV2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: CESM2-FV2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: CESM2-WACCM-FV2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   # - {dataset: CESM2-WACCM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   # - {dataset: CESM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   # - {dataset: CMCC-CM2-HR4, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
@@ -40,11 +38,14 @@ datasets:
   # - {dataset: NorESM2-MM, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   # - {dataset: SAM0-UNICON, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   # - {dataset: TaiESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+
+  # observations
+  # - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, mip: Omon}
   
   
 preprocessors:
   base_east: &base #20sst, 21ssh
-    custom_order: true
+    custom_order: true # turned off degC is last - looks wrong
     convert_units:
       units: degC
     mask_landsea:
@@ -64,16 +65,6 @@ preprocessors:
       end_latitude: 5.
     area_statistics:
       operator: mean
- 
-  west: # all levels
-    <<: *base
-    convert_units:
-      units: 1e-3 N/m2
-    extract_region: &west
-      start_longitude: 160.
-      end_longitude: 210.
-      start_latitude: -5.
-      end_latitude: 5.
 
   taux_eqp: &eqp_lv3
     convert_units:
@@ -95,20 +86,6 @@ preprocessors:
       end_latitude: 5.
     meridional_statistics:
       operator: mean
-    # rolling_window_statistics: # error with using longitude
-    #   coordinate: longitude
-    #   window_length: 30
-    #   operator: mean
-  
-  ssh_eqp: #lvl3
-    <<: *eqp_lv3
-    convert_units:
-      units: cm
-
-  ssh_east:
-    <<: *base
-    convert_units:
-      units: cm
   
   ssh_eqp_area:
     <<: *base
@@ -128,68 +105,35 @@ preprocessors:
       units: W m-2
 
 diagnostics:
-  feedback_metrics:
-    description: run preprocessors on variables for ENSO metrics
+  
+  nhf_metrics:
+    description: run for SST NHF metrics
     variables:
       sst_east:
         short_name: ts
         mip: Amon
         preprocessor: base_east
         additional_datasets:
-          - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, version: 1, start_year: 1979, end_year: 2017}
+          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, version: 1, start_year: 1979, end_year: 2014}
 
-      sst_eqp:
-        short_name: ts
+      nhf_east_mod: 
+        short_name: hfns
         mip: Amon
-        preprocessor: sst_eqp_merid
-        additional_datasets:
-          - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, version: 1, start_year: 1979, end_year: 2017}
-
-      taux_west:
-        short_name: tauu
-        mip: Amon
-        preprocessor: west
-        additional_datasets:
-          - {dataset: NCEP-DOE-R2, project: OBS6, type: reanaly, tier: 2, version: 2, start_year: 1979, end_year: 2017} 
-
-      taux_eqp:
-        short_name: tauu
-        mip: Amon
-        preprocessor: taux_eqp
-        additional_datasets:
-          - {dataset: NCEP-DOE-R2, project: OBS6, type: reanaly, tier: 2, version: 2, start_year: 1979, end_year: 2017}
-      
-      ssh_east:
-        short_name: zos
+        derive: true # hfls+hfss ..#need to make negative for hfds
+        preprocessor: hf_east #obs separate? hfds not derive
+        additional_datasets: 
+          - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+        
+      nhf_east_obs:
+        short_name: hfds
         mip: Omon
-        preprocessor: ssh_east
+        preprocessor: hf_east
         additional_datasets:
-          - {dataset: CMEMS, project: OBS6, type: sat, tier: 2, version: SEALEVEL-GLO-PHY-L4, start_year: 1993, end_year: 2018}
-      ssh_eqp:
-        short_name: zos
-        mip: Omon
-        preprocessor: ssh_eqp
-        additional_datasets:
-          - {dataset: CMEMS, project: OBS6, type: sat, tier: 2, version: SEALEVEL-GLO-PHY-L4, start_year: 1993, end_year: 2018}
-      ssh_eqp_area:
-        short_name: zos
-        mip: Omon
-        preprocessor: ssh_eqp_area
-        additional_datasets:
-          - {dataset: CMEMS, project: OBS6, type: sat, tier: 2, version: SEALEVEL-GLO-PHY-L4, start_year: 1993, end_year: 2018}
-
+          - {dataset: TROPFLUX, project: OBS6, type: reanaly, tier: 2, version: 1, start_year: 1979, end_year: 2014}
+    
+ 
     scripts:
       plot_script:
         script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/feedback_metrics.py
 
-  # diag_collect:
-  #   description: collect metrics
-  #   variables:
-  #     tos: #dummy variable to fill recipe requirements
-  #       mip: Omon
-  #   scripts:
-  #     matrix_collect:
-  #       script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/matrix.py
-  #       # above diagnostic name and script name
-  #       diag_metrics: diagnostic_metrics/plot_script #cfg['work_dir']
 

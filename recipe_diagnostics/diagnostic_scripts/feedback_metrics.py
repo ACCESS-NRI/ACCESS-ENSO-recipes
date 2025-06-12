@@ -1,4 +1,4 @@
-"""diagnostic script to plot ENSO teleconnections metrics"""
+"""diagnostic script to plot ENSO feedback metrics"""
 
 import os
 import logging
@@ -25,17 +25,12 @@ from esmvalcore.preprocessor import (mask_above_threshold,
 logger = logging.getLogger(os.path.basename(__file__))
 
 def plot_level1(obs_ds, model_ds, title, metric_varls):
-    var_set = {'ts':5, 'tauu':100, 'ssh':40}
+    var_set = {'sst':5, 'taux':100, 'ssh':40}
     xvar = metric_varls[0].split('_')[0]
     figure = plt.figure(figsize=(10, 8), dpi=300)
-    xseq = np.linspace(var_set[xvar]*-1, var_set[xvar], num=100) #values change with metric
+    xseq = np.linspace(var_set[xvar]*-1, var_set[xvar], num=100)
 
-    # obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in input_data['obs']}
-    # model_ds = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
-    #                           for attributes in input_data['mod']}
-
-    # linreg (tauu cube, tos cube)
-    #['ts_east', 'tauu_west', 'tauu_eqp']
+    # linreg (tauu cube, tos cube) #['ts_east', 'tauu_west', 'tauu_eqp']
     mod_slope, intcpt = linreg_1d(model_ds[metric_varls[1]], model_ds[metric_varls[0]])
     plt.plot(xseq, intcpt+mod_slope*xseq)
     # time overlap
@@ -47,9 +42,7 @@ def plot_level1(obs_ds, model_ds, title, metric_varls):
 
     plt.scatter(model_ds[metric_varls[0]].data, model_ds[metric_varls[1]].data, s=10)
     plt.scatter(obs2.data, obs1.data, s=20, c='black', marker='D')
-    logger.info(title)
-    logger.info(obs1.data)
-    logger.info(obs1.data)
+
     plt_settings([mod_slope, obs_slope, metric_val], lvl1=True, metric_varls=metric_varls)
     plt.title(title)
     
@@ -57,9 +50,6 @@ def plot_level1(obs_ds, model_ds, title, metric_varls):
 
 def plot_level2(obs_ds, model_ds, metric_varls, ds_labels):
     """Plot level 2 diagnostics for ENSO feedback metrics."""
-    # obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in input_data['obs']}
-    # model_ds = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
-    #                           for attributes in input_data['mod']}
     fig = plt.figure(figsize=(13, 5))
     plt.subplot(121)
     plt_lvl2_subplot(model_ds[metric_varls[0]], model_ds[metric_varls[1]], 
@@ -67,16 +57,16 @@ def plot_level2(obs_ds, model_ds, metric_varls, ds_labels):
 
     plt.subplot(122)
     obs1, obs2 = obs_extract_overlap(obs_ds[metric_varls[0]], obs_ds[metric_varls[1]])
-    # obs_ds_label = f"{input_data['obs'][0]['dataset']}_{input_data['obs'][1]['dataset']}"
+
     plt_lvl2_subplot(obs1, obs2, ds_labels[0], metric_varls)
     return fig
 
-def plt_lvl2_subplot(ts_cube, tauu_cube, dataset_label, metric_varls): ##for lv 1 too
+def plt_lvl2_subplot(ts_cube, tauu_cube, dataset_label, metric_varls):
     
     df = pd.DataFrame({'tos':ts_cube.data, 'tauu':tauu_cube.data})
     slopes = []
     logger.info(f'{dataset_label}, shape: {df.shape}')
-    var_set = {'ts':5, 'tauu':100, 'ssh':40}
+    var_set = {'sst':5, 'taux':100, 'ssh':40}
     xvar = metric_varls[0].split('_')[0]
 
     plt.scatter(ts_cube.data, tauu_cube.data, c='k', s=10)
@@ -117,7 +107,7 @@ def linreg_1d(tauu, ts): #cube or df
 
 def plt_settings(slopes, lvl1, metric_varls):
     """Set plot settings for ENSO feedback metrics."""
-    var_set = {'ts':(5,'°C'), 'tauu':(100,'1e-3 N/m2'), 'ssh':(40,'cm'), 
+    var_set = {'sst':(5,'°C'), 'taux':(100,'1e-3 N/m2'), 'ssh':(40,'cm'), 
                     'east':'nino3', 'west':'nino4'}
     # variable, limit, units, region
     xvar = metric_varls[0].split('_')[0] # ts, tauu, ssh
@@ -160,7 +150,7 @@ def lin_regress_matrix(cubeA, cubeBsst):
     coefs, _, _, _ = np.linalg.lstsq(B_with_intercept, A_data, rcond=None)
 
     # Create a new Iris Cube for the regression results
-    result_cube = iris.cube.Cube(coefs[0], long_name='regression SSTA,TAUXA',
+    result_cube = iris.cube.Cube(coefs[0], long_name='regression A',
                                  dim_coords_and_dims=[(cubeA.coord('longitude'), 0)])
 
     return result_cube
@@ -172,10 +162,10 @@ def feedback_nonlin(sst_cube, tauu_cube):
     tauu_aux.add_aux_coord(sst_coord, 0)
     logger.info(f'non linear shapes {sst_cube.shape}, {tauu_cube.shape}')
     logger.info(tauu_aux.summary())
-    below0 = iris.Constraint(coord_values={sst_cube.standard_name:lambda cell: cell < 0}) #ts name as veriable?
+    below0 = iris.Constraint(coord_values={sst_cube.standard_name:lambda cell: cell < 0})
     above0 = iris.Constraint(coord_values={sst_cube.standard_name:lambda cell: cell > 0})
     ssta_neg = mask_above_threshold(sst_cube.copy(), 0) #x<0
-    ssta_pos = mask_below_threshold(sst_cube.copy(), 0) #x=>0 ? g
+    ssta_pos = mask_below_threshold(sst_cube.copy(), 0) #x=>0
     xbelow0 = tauu_aux.extract(below0)
     xabove0 = tauu_aux.extract(above0)
 
@@ -184,7 +174,7 @@ def feedback_nonlin(sst_cube, tauu_cube):
     ky, cnts = np.unique(ssta_neg.data.mask, return_counts=True)
     msk_neg = dict(zip(ky.tolist(), cnts.tolist()))
     msk_dt = {'pos': msk_pos[False], 'neg':msk_neg[False]}
-    logger.info(f'pos: {msk_pos[False]} tau: {xabove0.shape}, neg: {msk_neg[False]} tau: {xbelow0.shape}')
+    logger.info(f'pos: {msk_pos[False]} cube: {xabove0.shape}, neg: {msk_neg[False]} cube: {xbelow0.shape}')
     outreg_cube = lin_regress_matrix(xbelow0, ssta_neg)
     posreg_cube = lin_regress_matrix(xabove0, ssta_pos)
 
@@ -214,11 +204,8 @@ def format_longitude(x, pos):
     else:
         return f'{int(x)}°E'
     
-def plot_level3(obs_ds, model_ds, metric_varls, ds_labels):
+def plot_level3(obs_ds, model_ds, metric_varls, ds_labels, title):
     """Plot level 3 diagnostics for ENSO feedback metrics."""
-    # obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in input_data['obs']}
-    # model_ds = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
-    #                           for attributes in input_data['mod']}
     figure = plt.figure(figsize=(10, 6), dpi=300)
     tau_modcube = rolling_window_statistics(model_ds[metric_varls[2]], 
                                      coordinate='longitude',operator='mean',window_length=30)
@@ -252,7 +239,7 @@ def plot_level3(obs_ds, model_ds, metric_varls, ds_labels):
     plt.grid(linestyle='--')
     plt.gca().xaxis.set_major_formatter(plt.FuncFormatter(format_longitude))
     plt.legend()
-    plt.title('feedback') #title
+    plt.title(title)
     return figure
 
 def get_provenance_record(caption, ancestor_files):
@@ -281,11 +268,12 @@ def main(cfg):
     input_data = cfg['input_data'].values() 
 
     # iterate through each metric and get variable group, select_metadata, map to function call
-    metrics = {'SST_TAUX': ['ts_east', 'tauu_west', 'tauu_eqp'],
-               'TAUX_SSH':['tauu_west', 'ssh_east','ssh_eqp'],
-               'SSH_SST': ['ts_east', 'ssh_east', 'ssh_eqp_area', 'ts_eqp'],
+    metrics = {'SST_TAUX': ['sst_east', 'taux_west', 'taux_eqp'],
+               'TAUX_SSH':['taux_west', 'ssh_east','ssh_eqp'],
+               'SSH_SST': ['ssh_east', 'sst_east', 'ssh_eqp_area', 'sst_eqp'],
+            #    'SST_NHF': ['sst_east', 'hnf_east', 'taux_eqp'],
                 }
-    # var_units = {'ts': 'degC', 'ssh': 'cm', 'tauu': '1e-3 N/m2'}
+
     # select twice with project to get obs, iterate through model selection
     for metric, var_preproc in metrics.items(): #if empty or try
         logger.info(f"{metric},{var_preproc}")
@@ -313,16 +301,8 @@ def main(cfg):
             obs_ds = {dataset['variable_group']: iris.load_cube(dataset['filename']) for dataset in obs}
             model = {attributes['variable_group']: iris.load_cube(attributes['filename']) 
                                     for attributes in mod_ds}
-
-            # for var_prep in var_preproc:
-            #     sn = var_prep.split('_')[0]
-            #     if sn == 'ts':
-            #         obs_ds[var_prep] = convert_units(obs_ds[var_prep], units='degC')
-            #         model[var_prep] = convert_units(model[var_prep], units='degC')
             
-            # input_grouped = {'obs': obs, 'mod': mod_ds} #obs_ds, model
-            title = f"{metric.replace('_',' to ')} coupling" # based on metric, different levels
-            # obs-(tauu cube, tos cube), mod-(tauu, tos)
+            title = f"{metric.replace('_',' to ')} coupling"
             value, fig = plot_level1(obs_ds, model, title, var_preproc)
 
             metricfile = get_diagnostic_filename('matrix', cfg, extension='csv')
@@ -335,11 +315,14 @@ def main(cfg):
             ds_labels = [f"{obs[0]['dataset']}_{obs[1]['dataset']}", mod_ds[0]['dataset']]
             fig = plot_level2(obs_ds, model, var_preproc, ds_labels)
             save_figure(f'{dataset}_{metric}_lvl2', prov_record, cfg, figure=fig, dpi=300)#
+
+            title = f"{metric.replace('_','-')} feedback"
             # plot level 3 check for ssh_sst
             if len(var_preproc) == 4:
-                var_preproc = ['ssh_eqp_area', ' ', 'ts_eqp']
-
-            fig = plot_level3(obs_ds, model, var_preproc, ds_labels)
+                preproc_ls = ['ssh_eqp_area', ' ', 'sst_eqp']
+                fig = plot_level3(obs_ds, model, preproc_ls, ds_labels, title)
+            else:
+                fig = plot_level3(obs_ds, model, var_preproc, ds_labels, title)
             save_figure(f'{dataset}_{metric}_lvl3', prov_record, cfg, figure=fig, dpi=300)#
 
 

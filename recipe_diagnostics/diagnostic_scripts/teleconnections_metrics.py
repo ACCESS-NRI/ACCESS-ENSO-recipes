@@ -317,7 +317,7 @@ def main(cfg):
             dataset["variable_group"]: iris.load_cube(dataset["filename"])
             for dataset in obs
         }
-
+        obsds_label = f'{obs[0]["dataset"]}_{obs[1]["dataset"]}'
         # group models by dataset
         model_ds = group_metadata(models, "dataset", sort="project")
 
@@ -335,7 +335,7 @@ def main(cfg):
                 for attributes in model_ds[dataset]
             }
 
-            input_pair = {obs[0]["dataset"]: obs_datasets, dataset: model_datasets}
+            input_pair = {obsds_label: obs_datasets, dataset: model_datasets}
             logger.info(pformat(model_datasets))
             # process function for each metric
             values, fig, fig_lvl2 = compute_telecon_metrics(

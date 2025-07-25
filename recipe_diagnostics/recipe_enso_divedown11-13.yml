@@ -28,7 +28,7 @@ preprocessors:
     regrid:
       target_grid: 1x1 
       scheme: linear
-    extract_region: &ext
+    extract_region:
       start_longitude: 150.
       end_longitude: 280.
       start_latitude: -5.
@@ -86,18 +86,19 @@ preprocessors:
     <<: *base_enso
     meridional_statistics:
       operator: mean
-  enso_seas_5:
-    <<: *base_enso
-    extract_region: 
-      start_longitude: 120.
-      end_longitude: 290.
-      start_latitude: -5.
-      end_latitude: 5.
+  # enso_seas_5:
+  #   <<: *base_enso
+  #   extract_region: 
+  #     start_longitude: 120.
+  #     end_longitude: 290.
+  #     start_latitude: -15.
+  #     end_latitude: 15.
 
   enso_asymmetry:
     <<: *base_enso
     extract_region: # extract again for lvl2 (5 lats)
       <<: *latext
+      end_longitude: 290.
 
 diagnostics:
   diagnostic_metrics:
@@ -115,15 +116,15 @@ diagnostics:
         short_name: tos
         mip: Omon
         preprocessor: enso_seas_4
-      tos_seas_map: #seasonality
-        short_name: tos
-        mip: Omon
-        preprocessor: enso_seas_5
+      # tos_seas_map: #seasonality use tos_asym
+      #   short_name: tos
+      #   mip: Omon
+      #   preprocessor: enso_seas_5
 
       tos_amp: #amplitude
         short_name: tos
         mip: Omon
-        preprocessor: enso_ampl_3 # 2 do y stat in script
+        preprocessor: enso_amp3 # 2 use seas4 -tos_seas_split
       tos_asym: #asymmetry
         short_name: tos
         mip: Omon

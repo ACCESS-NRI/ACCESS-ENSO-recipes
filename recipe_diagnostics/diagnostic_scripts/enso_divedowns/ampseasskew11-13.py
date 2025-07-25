@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import iris.quickplot as qplt
 import iris.plot as iplt
 import matplotlib.colors as mcolors
+import matplotlib as mpl
 import cartopy.feature as cfeature
 import cartopy.crs as ccrs
 
@@ -24,6 +25,7 @@ from esmvaltool.diag_scripts.shared import (run_diagnostic,
                                             select_metadata,
                                             )
 from esmvalcore.preprocessor import (extract_season,
+                                     extract_region,
                                      climate_statistics,
                                      meridional_statistics)
 
@@ -33,12 +35,13 @@ logger = logging.getLogger(os.path.basename(__file__))
 
 def seasonality_level2(mod_obs_cubes, dt_ls):
     fig = plt.figure(figsize=(6, 6), dpi=150)
-    pltcolors = ['tab:blue', 'black']
+    pltcolors = ['black', 'tab:blue']
     for i, cube in enumerate(mod_obs_cubes):
         qplt.plot(cube, label=dt_ls[i], color=pltcolors[i], linewidth=4)
 
     months = ['Jan', 'May', 'Sep']
     plt.xticks(range(1,13,4),labels=months)
+    plt.xlim(1,12)
     # Set the x and y axis labels
     plt.xlabel('Months')
     plt.ylabel('SSTA std (°C)')
@@ -74,7 +77,7 @@ def seasonality_level3(mod_obs_cubes, dt_ls):
 
 def seasonality_level4(mod_obs_cubes, dt_ls):
     fig = plt.figure(figsize=(10, 8), dpi=300)
-    lines = {f'{dt_ls[0]}': 'solid', f'{dt_ls[1]}': 'dashdot'}
+    lines = {f'{dt_ls[1]}': 'solid', f'{dt_ls[0]}': 'dashdot'}
     for label, cube in dict(zip(dt_ls, mod_obs_cubes)).items():
         for seas, col in {'NDJ':'red','MAM':'blue'}.items():
             cube_plot = extract_season(cube, seas) # get NDJ #{ NDJ, MAM, red, blue
@@ -84,6 +87,7 @@ def seasonality_level4(mod_obs_cubes, dt_ls):
     plt.xlabel('longitude')
     plt.ylabel('SSTA std (°C)')
     plt.title('SSTA standard deviation')
+    plt.xlim(150, 270)
     # plt.legend()
     create_legend_seas(dt_ls)
     plt.grid(linestyle='--')
@@ -95,19 +99,19 @@ def create_legend_seas(dt_ls):
     legend_elements = [
         Line2D([0], [0], marker='o', color='w', markerfacecolor='blue', markersize=8, label='MAM'),
         Line2D([0], [0], marker='o', color='w', markerfacecolor='red', markersize=8, label='NDJ'),
-        Line2D([0], [0], linestyle='solid', color='k', lw=1.5, label= dt_ls[0]),
-        Line2D([0], [0], linestyle='dashdot', color='k', lw=1.5, label= f'Ref: {dt_ls[1]}')
+        Line2D([0], [0], linestyle='solid', color='k', lw=1.5, label= dt_ls[1]),
+        Line2D([0], [0], linestyle='dashdot', color='k', lw=1.5, label= f'Ref: {dt_ls[0]}')
     ]
     plt.legend(handles=legend_elements)
 
 def amplitude_level2(mod_obs_cubes, dt_ls):
-    fig = plt.figure(figsize=(10, 6), dpi=300)
-    pltcolors = ['tab:blue', 'black']
-    region = {"start_longitude": 120., "end_longitude": 280., "start_latitude": -5., "end_latitude": 5.}
+    fig = plt.figure(figsize=(6, 6), dpi=300)
+    pltcolors = ['black','tab:blue']
+    # region = {"start_longitude": 120., "end_longitude": 280., "start_latitude": -5., "end_latitude": 5.}
     for i, cube in enumerate(mod_obs_cubes):
-        extract_region(cube, **region)  # extract lat 5
-        # axis y / meridional statistics
-        cube = meridional_statistics(cube, operator='mean')
+        # extract_region(cube, **region)  # extract lat 5
+        # axis y / meridional statistics #using seas 4 preproc
+        cube = climate_statistics(cube, operator="std_dev", period="full")
         qplt.plot(cube, label=dt_ls[i], color=pltcolors[i], linewidth=4)
     # qplt.plot(mod_obs_cubes[1], color='black', label=dt_ls[1], linewidth=4)
     plt.gca().xaxis.set_major_formatter(plt.FuncFormatter(format_longitude))
@@ -120,19 +124,25 @@ def amplitude_level2(mod_obs_cubes, dt_ls):
     plt.legend()
     return fig
 
-def map_plots(mod_obs_cubes, dt_ls, i=121, valrange):
+def map_plots(mod_obs_cubes, dt_ls, i, valrange, cmap):
     fig = plt.figure(figsize=(20, 7))
-    proj = ccrs.Orthographic(central_longitude=210.0)
+    if i < 200:
+        extent = [120, 290, -20, 20]
+        proj = ccrs.Orthographic(central_longitude=210.0)
+        cbarext = [0.15,0.08,0.7,0.05]
+    else:
+        extent = [120, 290, -15, 15]
+        proj = ccrs.PlateCarree(central_longitude=180)
+        cbarext = [0.15,0.05,0.7,0.03]
     # i = 121
-    # process = {**model_datasets_prep3, "HadISST":obs_datasets_prep3["HadISST"]}
     for label, cube in dict(zip(dt_ls, mod_obs_cubes)).items():
         
         ax1 = plt.subplot(i,projection=proj)
         ax1.add_feature(cfeature.LAND, facecolor='gray')  # Add land feature with gray color
         ax1.coastlines()
-        cf1 = iplt.contourf(cube, levels=np.arange(valrange[0], valrange[1], 0.1), extend='both', cmap='Reds')
-        if i < 200:  # 121 or 122
-            ax1.set_extent([130, 290, -20, 20], crs=ccrs.PlateCarree())
+        cf1 = iplt.contourf(cube, levels=np.arange(valrange[0], valrange[1], 0.1), extend='both', cmap=cmap)
+        # if i < 200:  # 121 or 122
+        ax1.set_extent(extent, crs=ccrs.PlateCarree())
         ax1.set_title(label)
 
         # Add gridlines for latitude and longitude
@@ -142,23 +152,24 @@ def map_plots(mod_obs_cubes, dt_ls, i=121, valrange):
         i+=1
 
     # Add a single colorbar at the bottom
-    cax = plt.axes([0.15,0.08,0.7,0.05])
+    cax = plt.axes(cbarext)
     cbar = fig.colorbar(cf1, cax=cax, orientation='horizontal', extend='both', ticks=np.arange(valrange[0], valrange[1]+0.2, 0.5))
     cbar.set_label('SSTA std (°C)')
     return fig
 
 def asym_level2(mod_obs_ls, dt_ls):
-    fig = plt.figure(figsize=(8, 6), dpi=150)
-    pltcolors = ['tab:blue', 'black']
+    fig = plt.figure(figsize=(7, 6), dpi=150)
+    pltcolors = ['black','tab:blue']
 
     for i, tuplepoints in enumerate(mod_obs_ls):
         plt.plot(*tuplepoints, label=dt_ls[i], color=pltcolors[i], linewidth=4)
-
+    plt.axhline(y=0, color='black', linewidth=2) 
     plt.gca().xaxis.set_major_formatter(plt.FuncFormatter(format_longitude))
     plt.xlim(150, 275)  # Set x-axis limits to match the region of interest
     # Adding labels and title
+    plt.title('SSTA skewness')
     plt.xlabel('Longitude')
-    plt.ylabel('SSTA skewness (°C)')
+    plt.ylabel('SSTA skew (°C)')
     plt.grid(linestyle='--')
     plt.legend()
     return fig
@@ -173,29 +184,33 @@ def format_longitude(x, pos):
 
 
 def compute_enso_metrics(input_pair, dt_ls, var_group, metric): 
-    model_obs = [input_pair[1][var_group[0]], input_pair[0][var_group[0]]]
+    model_obs = [input_pair[0][var_group[0]], input_pair[1][var_group[0]]]
     # input_pair: obs first
     if metric == '11amplitude':    
 
         fig2 = amplitude_level2(model_obs, dt_ls)
-        fig3 = map_plots(model_obs, dt_ls, i=121, valrange=[0,2])
+        fig3 = map_plots([input_pair[0][var_group[1]],
+                          input_pair[1][var_group[1]]], 
+                          dt_ls, i=121, valrange=[0,2], cmap='Reds')
         figs = [fig2, fig3]
+    
     elif metric == '12seasonality':
         fig2 = seasonality_level2(model_obs, dt_ls)
-        fig3 = seasonality_level3([input_pair[1][var_group[1]],
-                                    input_pair[0][var_group[1]]],
+        fig3 = seasonality_level3([input_pair[0][var_group[1]],
+                                    input_pair[1][var_group[1]]],
                                     dt_ls
                                     )
-        fig4 = seasonality_level4([input_pair[1][var_group[2]],
-                                    input_pair[0][var_group[2]]], dt_ls)
+        fig4 = seasonality_level4([input_pair[0][var_group[2]],
+                                    input_pair[1][var_group[2]]], dt_ls)
         process = {}
         for seas in ['NDJ','MAM']:
-            for label, cube in dict(zip(dt_ls,[input_pair[1][var_group[3]], input_pair[0][var_group[3]]])).items():
+            for label, cube in dict(zip(dt_ls,[input_pair[0][var_group[3]], input_pair[1][var_group[3]]])).items():
                 cube_plot = extract_season(cube, seas)
                 cube_plot = climate_statistics(cube_plot, operator="std_dev", period="full")
                 process[f'{label} {seas}'] = cube_plot
-        fig5 = map_plots(list(process.values()), list(process.keys()), i=221, valrange=[0,2])
+        fig5 = map_plots(list(process.values()), list(process.keys()), i=221, valrange=[0,2], cmap='Reds')
         figs = [fig2, fig3, fig4, fig5]
+    
     elif metric == '13asymmetry':
         asymls, asym_cubes = [], []
         region = {"start_longitude": 150., "end_longitude": 275., "start_latitude": -5., "end_latitude": 5.}
@@ -211,7 +226,7 @@ def compute_enso_metrics(input_pair, dt_ls, var_group, metric):
             asym_cubes.append(new_cube)
 
         fig2 = asym_level2(asymls, dt_ls)
-        fig3 = map_plots(asym_cubes, dt_ls, i=121, valrange=[-1.5, 1.5])
+        fig3 = map_plots(asym_cubes, dt_ls, i=121, valrange=[-1.5, 1.5], cmap='RdBu_r')
         figs = [fig2, fig3]
 
     return figs
@@ -240,10 +255,10 @@ def main(cfg):
     """Run ENSO metrics."""
 
     input_data = cfg['input_data'].values() 
-
+    mpl.rc('font', size=12)
     # iterate through each metric and get variable group, select_metadata, map to function call
-    metrics = {'11amplitude': ['tos_amp'],
-                '12seasonality': ['tos_seas_area','tos_seas_meri','tos_seas_split','tos_seas_map'],
+    metrics = {'11amplitude': ['tos_seas_split','tos_amp'],
+                '12seasonality': ['tos_seas_area','tos_seas_meri','tos_seas_split','tos_asym'],
                 '13asymmetry': ['tos_asym']
                 }
     
@@ -279,7 +294,7 @@ def main(cfg):
             logger.info(pformat(model_datasets))
 
             # compute metric, get figure
-            figs = compute_enso_metrics(input_pair, [dataset, obs[0]['dataset']], var_preproc, metric)
+            figs = compute_enso_metrics(input_pair, [obs[0]['dataset'], dataset], var_preproc, metric)
             
             dt_files = obs_files + [ds['filename'] for ds in models]
             for i, fig in enumerate(figs):

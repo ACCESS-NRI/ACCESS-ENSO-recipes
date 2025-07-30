@@ -1,4 +1,4 @@
-"""diagnostic script to plot ENSO metrics
+"""diagnostic script to plot ENSO metrics dive downs
 
 """
 
@@ -19,6 +19,7 @@ from esmvaltool.diag_scripts.shared import (run_diagnostic,
                                             select_metadata,
                                             )
 from esmvalcore.preprocessor import (extract_month,
+                                     rolling_window_statistics,
                                      mask_above_threshold,
                                      mask_below_threshold,
                                      )
@@ -33,22 +34,23 @@ def mask_to_years(events):    # build time with mask
     return [events.coord('time').units.num2date(time).year for time in maskedTime.compressed()]
 
 
-def enso_events_lc(cube): # get cube years min/max, remove 3:-3
+def enso_events_lc(cube, metric): # get cube years min/max, remove 3:-3
     datayears = [cube.coord('time').units.num2date(time).year for time in cube.coord('time').points]
     leadlagyrs = datayears[:3] + datayears[-3:]
     
     cb_std = cube.data.std()
     a_events = mask_to_years(mask_above_threshold(cube.copy(), -0.5*cb_std))
     o_events = mask_to_years(mask_below_threshold(cube.copy(), 0.5*cb_std))
-    events = {'la nina':a_events, 'el nino':o_events} 
-    for key,yrls in events.items():
-        events[key] = [yr for yr in yrls if yr not in leadlagyrs]
+    events = {'la nina':a_events, 'el nino':o_events}
+    if metric == '14duration':
+        for key, yrls in events.items(): #if for lifecycle
+            events[key] = [yr for yr in yrls if yr not in leadlagyrs]
         
     return events
 
 def enso_composite(n34):
     n34_dec = extract_month(n34, 12)
-    events = enso_events(n34_dec) #check years not in first/last 3
+    events = enso_events_lc(n34_dec, '14duration') #check years not in first/last 3
     # print(events)
     enso_res = {}
     for enso, years in events.items(): 
@@ -64,7 +66,7 @@ def enso_composite(n34):
             year_enso = iris.Constraint(time=lambda cell: cell.point.year in enso_epoch)
             cube_2 = n34.extract(year_enso) #extract rolling 6
             yr = enso_epoch[2]
-            cube_data[yr] = cube_2.data.data
+            cube_data[yr] = cube_2.data
 
         durations = [threshold_duration(line, 0.5, enso) for yr, line in cube_data.items()]
         enso_res[enso] = durations #ls of durations for each event
@@ -80,6 +82,7 @@ def threshold_duration(line, value, enso):
         cnt_month = line < - value
     cnt = 0
     durations = []
+    
     for a in cnt_month:
         if a:
             cnt += 1
@@ -87,24 +90,80 @@ def threshold_duration(line, value, enso):
             if cnt != 0:
                 durations.append(cnt)
             cnt = 0
+    if not durations:
+        durations.append(cnt)  # if no events, append 0
+    # logger.info(durations)
     return max(durations)
 
 def duration_composite_plot(obs_model, dt_ls):
-
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 7), sharey=True)
-
-    for ninanino, ax in zip(['la nina', 'el nino'], [ax1, ax2]):
-        ax.boxplot([obs_model[0][ninanino], obs_model[1][ninanino]], labels=dt_ls,
-                   vert=False, patch_artist=True, notch=True,
-                   boxprops=dict(facecolor='lightblue', color='blue'),
-                   whiskerprops=dict(color='blue'),
-                   capprops=dict(color='blue'),
-                   medianprops=dict(color='red'))
-        ax.set_title(f'{ninanino.title()} duration')
-        ax1.set_ylabel(f'SSTA{symbol[ninanino]}0.5 (months)')
-        ax.grid(linestyle='--', axis='y')
     
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 7), sharey=True)
+    symbol = {'el nino': '> ', 'la nina': '< -'}
+    for ninanino, ax in zip(['la nina', 'el nino'], [ax1, ax2]):
+        bplt =ax.boxplot([obs_model[0][ninanino], obs_model[1][ninanino]], tick_labels=dt_ls,
+                   showmeans=True,)
+
+        ax.set_title(f'{ninanino.title()} duration')
+        ax.set_ylabel(f'SSTA{symbol[ninanino]}0.5 (months)')
+        ax.grid(linestyle='--', axis='y')
+        colour_boxplots(bplt)
+
     return fig
+
+def colour_boxplots(bplt):
+    colour = ['black', 'tab:blue']
+    for k in bplt.keys(): #colour separately
+        logger.info(f'{k}: {bplt[k]}')
+        for j, line in enumerate(bplt[k]):
+            if len(bplt[k]) > 2: #caps,whiskers first 2
+                n = 0 if j < len(bplt[k]) / 2 else 1
+                line.set_color(colour[n])
+            else:
+                line.set_color(colour[j])
+            line.set_linewidth(2)
+            if k == 'means':
+                line.set_markerfacecolor(colour[j])
+                line.set_markeredgecolor(colour[j])
+
+def diversity_plots3(div_data, dt_ls):
+    """Plot ENSO diversity for ENSO and composites."""
+    # fig = plt.figure(figsize=(12, 8))
+    fig, (ax1, ax2) = plt.subplots(2, 2, figsize=(16, 10), sharey=True)
+    symbol = {'el nino': 'max', 'la nina': 'min', 'enso': 'max/min'}
+    for ninanino, ax in zip(['la nina', 'el nino', 'enso'], [ax1[0], ax1[1], ax2[0]]):
+        bplt = ax.boxplot([div_data[0][ninanino], div_data[1][ninanino]], tick_labels=dt_ls,
+                   showmeans=True,)
+ 
+        ax.yaxis.set_major_formatter(plt.FuncFormatter(format_longitude))
+        ax.set_ylabel(f'longitude of {symbol[ninanino]} SSTA')
+        ax.set_title(f'{ninanino.title()} Diversity')
+        ax.grid(linestyle='--', axis='y')
+        colour_boxplots(bplt)
+
+    ax2[0].set_title('ENSO Diversity')
+    ax2[1].remove()
+        
+    return fig
+
+def diversity(ssta_cube, events_dict): #2 masks/events list
+    
+    ssta_cube = extract_month(ssta_cube, 12) #extra preprocessing
+    ssta_cube = rolling_window_statistics(ssta_cube, coordinate='longitude', operator='mean', window_length=5)
+    
+    res_lon = {}
+    for enso, events in events_dict.items():# each enso year, max/min SSTA, get longitude
+        year_enso = iris.Constraint(time=lambda cell: cell.point.year in events)
+        cube = ssta_cube.extract(year_enso)
+        if enso == 'nina':
+            cube = cube * -1
+        #iterate through cube, each time get max/min value and return lon
+        loc_ls = []
+        for yr_slice in cube.slices(['longitude']):
+            indx = np.argmax(yr_slice.data) # if nina multiply by -1 or min
+            loc_ls.append(cube.coord('longitude').points[indx])
+
+        res_lon[enso] = loc_ls
+    return res_lon
 
 def compute_enso_metrics(input_pair, dt_ls, var_group, metric): 
 
@@ -114,10 +173,18 @@ def compute_enso_metrics(input_pair, dt_ls, var_group, metric):
         mod = enso_composite(input_pair[1][var_group[0]])
         obs = enso_composite(input_pair[0][var_group[0]])
 
-        fig3 = duration_composite_plot([obs, mod], dt_ls)
+        fig = duration_composite_plot([obs, mod], dt_ls)
+    elif metric =='15diversity':
+        data_box = []
+        for ds in input_pair: #obs first
+            events = enso_events_lc(ds[var_group[0]], metric)
+            results_lon = diversity(ds[var_group[1]], events)
+            results_lon['enso'] = results_lon['el nino'] + results_lon['la nina']
+            data_box.append(results_lon)
 
+        fig = diversity_plots3(data_box, dt_ls)
 
-    return fig3
+    return fig
 
 def format_longitude(x, pos):
     if x > 180:
@@ -153,7 +220,8 @@ def main(cfg):
     input_data = cfg['input_data'].values() 
 
     # iterate through each metric and get variable group, select_metadata, map to function call
-    metrics = {'14diversity':['tos_lifdur1'],
+    metrics = {'14duration':['tos_lifdur1'],
+               '15diversity':['tos_patdiv1','tos_lifdurdiv2'],
                 }
     
     # select twice with project to get obs, iterate through model selection
@@ -187,15 +255,12 @@ def main(cfg):
             input_pair = [obs_datasets, model_datasets]
 
             # compute metric, get figure
-            figs = compute_enso_metrics(input_pair, [dataset, obs[0]['dataset']], var_preproc, metric)
+            figs = compute_enso_metrics(input_pair, [obs[0]['dataset'], dataset], var_preproc, metric)
             
             dt_files = obs_files + [ds['filename'] for ds in models]
+            prov_record = get_provenance_record(f'ENSO metrics {metric} dive down', dt_files)
 
-            # for i, fig in enumerate(figs):
-
-            prov_record = get_provenance_record(f'ENSO metrics {metric} level {i+2}', dt_files)
-
-            save_figure(f'{dataset}_{metric}_level_3', prov_record, cfg, figure=figs, dpi=300)
+            save_figure(f'{dataset}_{metric}_divedown', prov_record, cfg, figure=figs, dpi=300)
 
 
 if __name__ == '__main__':

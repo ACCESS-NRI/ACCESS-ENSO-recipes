@@ -2,7 +2,7 @@
 # 
 ---
 documentation:
-  description: Reproducing basic ENSO characteristics metrics by Yann Planton
+  description: Reproducing basic ENSO characteristics dive down metrics by Yann Planton
   title: ENSO CLIVAR metrics - ENSO characteristics dive downs
   authors:
     - chun_felicity

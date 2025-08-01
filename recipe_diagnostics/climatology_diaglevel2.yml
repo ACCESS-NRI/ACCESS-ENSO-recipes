@@ -21,7 +21,7 @@ preprocessors:
   map_bias_level2: &map_bias
     custom_order: true
     # mask_landsea:
-    #   mask_out: land # search for supplementary sftlf, sftof #error for tauu, Omon
+    #   mask_out: land # search for supplementary sftlf, sftof
     climate_statistics:
       operator: mean
       period: full
@@ -64,9 +64,21 @@ diagnostics:
         mip: Omon
         additional_datasets:
           - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, mip: Omon}
+      sst_seacycle:
+        short_name: tos
+        preprocessor: map_sea_cyclel2
+        mip: Omon
+        additional_datasets:
+          - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, mip: Omon}
       tauu_bias:
         short_name: tauu
         preprocessor: map_bias_level2
+        mip: Amon
+        additional_datasets:
+         - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
+      tauu_seacycle:
+        short_name: tauu
+        preprocessor: map_sea_cyclel2
         mip: Amon
         additional_datasets:
          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
@@ -75,4 +87,7 @@ diagnostics:
       plot_script:
         script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/climatology_diagnosticlevel2.py
       
+      plotlevel3_script:
+        script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/climatology_diagnosticlevel3.py
+        vargroups: [pr_seacycle, sst_seacycle, tauu_seacycle] # meridional stats and zonal for pr
 

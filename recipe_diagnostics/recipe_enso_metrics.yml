@@ -2,8 +2,8 @@
 # 
 ---
 documentation:
-  description: ENSO CLIVAR metrics - basic ENSO characteristics
-  title: Reproducing basic ENSO characteristics metrics by Yann Planton
+  description: Reproducing basic ENSO characteristics metrics by Yann Planton
+  title: ENSO CLIVAR metrics - basic ENSO characteristics
   authors:
     - chun_felicity
     # - sullivan_arnold
@@ -12,7 +12,7 @@ documentation:
 
 datasets:
   - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
-#   - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
 #   - {dataset: BCC-CSM2-MR, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
 #   # - {dataset: BCC-ESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
 # #/g/data/oi10/replicas/CMIP6/CMIP/BCC/BCC-ESM1/1pctCO2/r1i1p1f1/Ofx/areacello/gn/v20190613/areacello_Ofx_BCC-ESM1_1pctCO2_r1i1p1f1_gn.nc') error
@@ -69,6 +69,9 @@ preprocessors:
       mask_out: land
     convert_units:
       units: degC
+    detrend:
+      dimension: time
+      method: linear
     regrid:
       target_grid: 1x1 
       scheme: linear

@@ -10,7 +10,7 @@ import iris
 import iris.plot as iplt
 import matplotlib.pyplot as plt
 import numpy as np
-from esmvalcore.preprocessor import convert_units
+from esmvalcore.preprocessor import convert_units, extract_region, zonal_statistics, meridional_statistics
 
 from esmvaltool.diag_scripts.shared import (
     group_metadata,
@@ -24,13 +24,18 @@ logger = logging.getLogger(os.path.basename(__file__))
 
 def plotmaps_level3(input_data, itcz=False):
     """Create month structure plots for pair of input data."""
-    fig = plt.figure(figsize=(20, 10))
-    i=121
+    fig = plt.figure(figsize=(14, 8))
+    colmap = {
+        "pr": "YlGn",
+        "tos": "inferno",
+        "ts": "inferno",
+        "tauu": "RdBu_r",
+    }
 
     # Define tick positions and labels for the y-axis (months)
     month_ticks = np.arange(1, 13, 4)
     month_labels =['Jan', 'May', 'Sep'] 
-    levels= {'pr': np.arange(0,15.5,0.5), 'tos': np.arange(20,31,1), 'tauu': np.arange(-85,95,10)}
+    levels= {'pr': np.arange(0, 12, 1), 'tos': np.arange(20,31,1), 'ts': np.arange(20,31,1), 'tauu': np.arange(-80,90,10)}
     for plt_pos, dataset in enumerate(input_data, start=121):
 
         logger.info(
@@ -41,15 +46,19 @@ def plotmaps_level3(input_data, itcz=False):
         cube, cbar_label, x_label = load_seacycle_stat(dataset, itcz)
 
         ax1 = plt.subplot(plt_pos)
-        cf1 = iplt.contourf(cube,coords=[x_label,'month_number'],levels=levels[dataset["short_name"]],cmap="viridis")
+        cf1 = iplt.contourf(cube,coords=[x_label,'month_number'],levels=levels[dataset["short_name"]],
+                            extend='both',cmap=colmap[dataset["short_name"]])
         ax1.set_ylim(1, 12)
         ax1.set_yticks(ticks=month_ticks, labels=month_labels)
         ax1.set_title(dataset["dataset"])
         ax1.set_ylabel("months")
+        if not itcz:
+            ax1.xaxis.set_major_formatter(plt.FuncFormatter(format_longitude))
         ax1.set_xlabel(x_label)
 
+    plt.subplots_adjust(bottom=0.2)
     # Add a single colorbar at the bottom
-    cax = plt.axes([0.15, 0.08, 0.7, 0.05])
+    cax = plt.axes([0.15, 0.07, 0.7, 0.05])
     cbar = fig.colorbar(cf1, cax=cax, orientation="horizontal", extend="both")
     cbar.set_label(cbar_label)
 
@@ -58,7 +67,7 @@ def plotmaps_level3(input_data, itcz=False):
 
 def load_seacycle_stat(dataset, itcz=False):
     """Load, seasonal cycle std dev if required."""
-    var_units = {"tos": "degC", "pr": "mm/day", "tauu": "1e-3 N/m2"}
+    var_units = {"tos": "degC", "ts": "degC", "pr": "mm/day", "tauu": "1e-3 N/m2"}
     sname = dataset["short_name"]
     cube = iris.load_cube(dataset["filename"])
     # convert units for different variables
@@ -81,24 +90,32 @@ def load_seacycle_stat(dataset, itcz=False):
     return cube, cbar_label, x_label
 
 
+def format_longitude(x, pos):
+    if x > 180:
+        return f'{int(360 - x)}°W'
+    elif x == 180:
+        return f'{int(x)}°'
+    else:
+        return f'{int(x)}°E'
+
+
 def provenance_record(var_grp, ancestor_files):
     """Create a provenance record describing the diagnostic plot."""
     caption = {
-        "pr_bias": (
-            "Time-mean precipitation bias in the equatorial Pacific, "
-            + "primarily highlighting the double intertropical convergence "
-            + "zone (ITCZ) bias."
+        "doubleITCZ_seacycle": (
+            "Meridional structure of the mean seasonal cycle of "
+            + "precipitation (PR) in the eastern Pacific (150-90°W averaged)."
         ),
         "pr_seacycle": (
-            "Bias in the amplitude of the mean seasonal cycle of "
-            + "precipitation in the equatorial Pacific."
+            "Zonal structure of the mean seasonal cycle of "
+            + "precipitation (PR) in the eastern Pacific (5°S-5°N averaged)."
         ),
-        "sst_bias": (
-            "Time-mean sea surface temperature bias in the "
-            + "equatorial Pacific."
+        "sst_seacycle": (
+            "Zonal structure of the mean seasonal cycle of "
+            + "sea surface temperature (SST) in the eastern Pacific (5°S-5°N averaged)."
         ),
-        "tauu_bias": "Time-mean zonal wind stress bias in the "
-        + "equatorial Pacific.",
+        "tauu_seacycle": "Zonal structure of the mean seasonal cycle of "
+        + "zonal wind stress (TAUX) in the eastern Pacific (5°S-5°N averaged).",
     }
     record = {
         "caption": caption[var_grp],
@@ -165,16 +182,16 @@ def main(cfg):
                     )
                     if grp == "pr_seacycle":
                         #replace pr with doubleITCZ
-                        grp = "doubleITCZ_seacycle"
+                        grp_itcz = "doubleITCZ_seacycle"
                         fig = plotmaps_level3(pairs, itcz=True)
                         filename = "_".join(
                             [
                                 metadata["dataset"],
-                                grp,
+                                grp_itcz,
                                 "level3"
                             ],
                         )
-                        prov = provenance_record(grp, list(cfg["input_data"].keys()))
+                        prov = provenance_record(grp_itcz, list(cfg["input_data"].keys()))
                         save_figure(
                             filename,
                             prov,

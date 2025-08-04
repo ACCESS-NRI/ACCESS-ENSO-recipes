@@ -103,8 +103,16 @@ def provenance_record(var_grp, ancestor_files):
             "Time-mean sea surface temperature bias in the "
             + "equatorial Pacific."
         ),
+        "sst_seacycle": (
+            "Bias in the amplitude of the mean seasonal cycle of "
+            + "sea surface temperature in the equatorial Pacific."
+        ),
         "tauu_bias": "Time-mean zonal wind stress bias in the "
         + "equatorial Pacific.",
+        "tauu_seacycle": (
+            "Bias in the amplitude of the mean seasonal cycle of "
+            + "zonal wind stress in the equatorial Pacific."
+        ),
     }
     record = {
         "caption": caption[var_grp],

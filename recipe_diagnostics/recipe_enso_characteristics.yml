@@ -2,8 +2,8 @@
 # 
 ---
 documentation:
-  description: ENSO CLIVAR metrics - ENSO teleconnections
-  title: Reproducing ENSO teleconnections metrics by Yann Planton
+  description: Reproducing basic ENSO characteristics metrics by Yann Planton
+  title: ENSO CLIVAR metrics - basic ENSO characteristics
   authors:
     - chun_felicity
     # - sullivan_arnold
@@ -12,7 +12,7 @@ documentation:
 
 datasets:
   - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
-#   - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
 #   - {dataset: BCC-CSM2-MR, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
 #   # - {dataset: BCC-ESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
 # #/g/data/oi10/replicas/CMIP6/CMIP/BCC/BCC-ESM1/1pctCO2/r1i1p1f1/Ofx/areacello/gn/v20190613/areacello_Ofx_BCC-ESM1_1pctCO2_r1i1p1f1_gn.nc') error
@@ -59,19 +59,19 @@ datasets:
 #   - {dataset: TaiESM1, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
 
   # observations
-  # - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, mip: Omon}
-  
+  - {dataset: HadISST, project: OBS, type: reanaly, tier: 2}
+  # - {dataset: TROPFLUX, project: OBS6, type: reanaly, tier: 2, mip: Omon}
   
 preprocessors:
-  base_enso: &base_enso
+  ssta_enso: &base_enso #pattern, lifecycle w/o month, duration, diversity
     custom_order: true
+    mask_landsea:
+      mask_out: land
     convert_units:
       units: degC
-    anomalies:
-      period: monthly
-    detrend: #tropflux nan/inf values
+    detrend:
       dimension: time
-      method: linear       
+      method: linear
     regrid:
       target_grid: 1x1 
       scheme: linear
@@ -80,110 +80,110 @@ preprocessors:
       end_longitude: 240.
       start_latitude: -5.
       end_latitude: 5.
-    # extract_season: # JJA and DJF in script
-    #   season: DJF
-
-  enso_sst:
-    <<: *base_enso
-    mask_landsea:
-      mask_out: land
-    area_statistics:
-      operator: mean
-
-  global_pr:
-    <<: *base_enso
-    convert_units:
-      units: mm/day
-    extract_region: &glb
-      start_longitude: 0.
-      end_longitude: 360.
-      start_latitude: -60.
-      end_latitude: 60.
-  global_sst:
-    <<: *base_enso
-    extract_region:
-      <<: *glb
-
-  mask_sea:
-    extract_time: #one time step
-      start_year: 1979
-      start_month: 1
-      start_day: 1
-      end_year: 1979
-      end_month: 1
-      end_day: 31
-    regrid:
-      target_grid: 1x1 
-      scheme: linear
-    extract_region:
-      <<: *glb
-    mask_landsea:
-      mask_out: sea
-
-  nino34_sstadec:
-    <<: *base_enso
-    extract_region: &nino34_ssta
-      start_longitude: 150.
-      end_longitude: 270.
-      start_latitude: -5.
-      end_latitude: 5.
-    rolling_window_statistics:
+    rolling_window_statistics: #twice
       coordinate: time
       operator: mean
       window_length: 5
+    anomalies:
+      period: monthly
+
+  ssta_ninoarea: ##lifecycle duration
+    <<: *base_enso
+    area_statistics:
+      operator: mean
+
+  ssta_dec_area: ##pattern diversity
+    <<: *base_enso
     area_statistics:
       operator: mean
     extract_month:
       month: 12
 
+  ssta_meridional: #diversity more smoothing, lifecycle duration
+    <<: *base_enso
+    extract_region: &eqp #lifecycle 160 280
+      start_longitude: 150.
+      end_longitude: 270.
+      start_latitude: -5.
+      end_latitude: 5.
+    meridional_statistics:
+      operator: mean
+  
+  ssta_pattern2: #pattern
+    <<: *base_enso
+    extract_region:
+      <<: *eqp
+    extract_month:
+      month: 12
+    meridional_statistics:
+      operator: mean
+
+  enso_amplitude:
+    <<: *base_enso
+    area_statistics:
+      operator: mean
+    climate_statistics:
+      operator: std_dev
+      period: full
+
+  enso_seas_asym: #boreal season in script, climate stddev
+    custom_order: true
+    extract_region: 
+      <<: *nino34
+    convert_units:
+      units: degC
+    mask_landsea:
+      mask_out: land
+    anomalies:
+      period: monthly
+    area_statistics:
+      operator: mean
+
+
 diagnostics:
   diagnostic_metrics:
     description: run preprocessors on variables for ENSO metrics
     variables:
-      tos_enso:
+      tos_seas_asym: #seasonality and asymmetry
         short_name: ts
         mip: Amon
-        preprocessor: enso_sst
-        additional_datasets:
-          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3}
+        preprocessor: enso_seas_asym
 
-      tos_global:
+      tos_amp: #amplitude
         short_name: ts
         mip: Amon
-        preprocessor: global_sst
-        additional_datasets:
-          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3}
+        preprocessor: enso_amplitude
 
-      pr_global:
-        short_name: pr
-        mip: Amon
-        preprocessor: global_pr
-        additional_datasets:
-          - {dataset: GPCP-SG, project: OBS, type: atmos, tier: 2, mip: Amon, start_year: 1979, end_year: 2018}
-    
-      ts_enso_events:
+      tos_patdiv1: # pattern diversity pt1
         short_name: ts
         mip: Amon
-        preprocessor: nino34_sstadec
-        additional_datasets:
-          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3}
-      enso_mask:
+        preprocessor: ssta_dec_area
+      tos_lifdur1: # lifecycle duration pt1
         short_name: ts
         mip: Amon
-        preprocessor: mask_sea
+        preprocessor: ssta_ninoarea
+      tos_lifdurdiv2: # pt2 diversity lifecycle duration
+        short_name: ts
+        mip: Amon
+        preprocessor: ssta_meridional
+      tos_pat2: # pt2 pattern
+        short_name: ts
+        mip: Amon
+        preprocessor: ssta_pattern2
+
 
     scripts:
       plot_script:
-        script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/teleconnections_metrics.py
+        script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/enso_diag1metrics.py
 
-  diag_collect:
-    description: collect metrics
-    variables:
-      tos: #dummy variable to fill recipe requirements
-        mip: Omon
-    scripts:
-      matrix_collect:
-        script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/matrix.py
-        # above diagnostic name and script name
-        diag_metrics: diagnostic_metrics/plot_script #cfg['work_dir']
+  # diag_collect: ## collect in notebook.
+  #   description: collect metrics
+  #   variables:
+  #     tos: #dummy variable to fill recipe requirements
+  #       mip: Omon
+  #   scripts:
+  #     matrix_collect:
+  #       script: /home/189/fc6164/esmValTool/repos/ENSO_recipes/recipe_diagnostics/diagnostic_scripts/matrix.py
+  #       # above diagnostic name and script name
+  #       diag_metrics: diagnostic_metrics/plot_script #cfg['work_dir']
 

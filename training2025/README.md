@@ -1,16 +1,16 @@
 # Training day - ACCESS Workshop 2025
 
-Session schedule
+|Schedule | Description |
 | --- | --- |
 |1345-1415 | notebook presentation with overview on esmvalcore and tools used|
-|1415-1430 | example ENSO climatology notebooks (use main, 01bias, 09ENSO amplitude)|
+|1415-1430 | example ENSO climatology notebooks (use main, 01bias, 11ENSO amplitude)|
 |1430-1500 | exercise notbook - change dataset?|
 |1500-1515 | ESMValTool recipe format? - example multimodels/ensembles|
 |1515-1530 | **Afternoon Tea**|
 |1530-1600 | notebook presentation with ACCESS-MOPPeR, CMIP7 context|
 |1600-1610 | run MOPPeR on ENSO variables demo|
 |1610-1620 | example ENSO notebooks comparing ESM1.6|
-|1620-1640 | exercise notbook - update basic to read in spin-ups and run|
+|1620-1640 | exercise notebook - update basic to read in spin-ups and run|
 |1640-1700 | Code and share, feedback, discussion|
 
 ## Pre-requisites
@@ -38,16 +38,16 @@ You will now be presented with the main JupyterLab instance configuration form. 
 
 - *3.1* **Walltime**: The number of hours the JupyterLab instance will run. For the session please insert a walltime of `4` hours.
 
-<p align="center"><img src="docs/assets_ARE/walltime.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/walltime.png" alt="drawing" width="60%"/></p>
 
 - *3.2* **Compute Size**: Select `Medium (4 cpus, 18G mem)` from the dropdown menu. 
     - - *If you want to run ACCESS-MOPPeR select `X-Large (24cpus, 95G mem)`*
 
-<p align="center"><img src="docs/assets_ARE/compute.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/compute.png" alt="drawing" width="60%"/></p>
 
 - *3.3* **Project**: Please enter `nf33`. This will allocate SU usage to the workshop project.
 
-<p align="center"><img src="docs/assets_ARE/project.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/project.png" alt="drawing" width="60%"/></p>
 
 - *3.4* **Storage**: In ARE, storage locations need to be explicitly defined to access these data from within a JupyterLab instance.
    Please copy and paste the following string in its entirety into the storage input field:
@@ -55,7 +55,7 @@ You will now be presented with the main JupyterLab instance configuration form. 
 gdata/xp65+gdata/fs38+gdata/oi10+gdata/ct11+scratch/nf33
 ```
 
-<p align="center"><img src="docs/assets_ARE/project.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/project.png" alt="drawing" width="60%"/></p>
 
 - *3.5* Click `Advanced options ...`
   * Optional: You can check the box here to receive an email notification when your JupyterLab instance starts, but as we are running a relatively small instance, it will likely spin up quickly so this probably isn't necessary.</p>
@@ -65,34 +65,35 @@ gdata/xp65+gdata/fs38+gdata/oi10+gdata/ct11+scratch/nf33
 /g/data/xp65/public/modules
 ```
 
-<p align="center"><img src="docs/assets_ARE/module_directories.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/module_directories.png" alt="drawing" width="60%"/></p>
 
 - *3.7* **Modules** To load an environment with ESMValTool, please copy and paste the following. This is equivalent to using `module load` on the command line.
 ```
 conda/analysis3
 ```
 
-<p align="center"><img src="docs/assets_ARE/modules.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/modules.png" alt="drawing" width="60%"/></p>
 
 - *3.7* Click `Launch` to start your JupyterLab instance.
 
 
-<p align="center"><img src="docs/assets_ARE/launch.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/launch.png" alt="drawing" width="60%"/></p>
 
 ## 4. Launch JupyterLab session
 Once you have clicked `Launch` the browser will redirect to the 'interactive sessions' page where you will see your JupyterLab instance details and current status which will look something like this:
 
-<p align="center"><img src="docs/assets_ARE/queue.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/queue.png" alt="drawing" width="60%"/></p>
 
 Once the JupyterLab instance has started (this usually takes around 30 seconds), this status window should update and look something like the following, reporting that the instance has started and the time remaining. More detailed information on the instance can be accessed by clicking the `Session ID` link.
 
-<p align="center"><img src="docs/assets_ARE/running.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/running.png" alt="drawing" width="60%"/></p>
 
 Click `Open JupyterLab`. This opens the instance in a new browser window where you can navigate to the location of the files.
 
 ## Clone repo in Gadi
-Open a terminal and go to working folder.
-<img>
+Open a terminal and `cd` to working folder.
+<p align="center"><img src="./../docs/assets_ARE/clone_enso_recipes.png" alt="drawing" width="60%"/></p>
+
 `git clone https://github.com/ACCESS-NRI/ACCESS-ENSO-recipes.git`
 
 ### Other learning resources

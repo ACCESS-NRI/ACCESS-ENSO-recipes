@@ -81,7 +81,7 @@ gdata/xp65+gdata/fs38+gdata/oi10+gdata/al33+gdata/rr3+gdata/rt52+gdata/zz93+gdat
 
 - *3.7* **Modules** To load the ESMValTool-workflow environment, please copy and paste the following. This is equivalent to using `module load` on the command line.
 ```
-esmvaltool
+conda/analysis3
 ```
 
 <p align="center"><img src="docs/assets_ARE/modules.png" alt="drawing" width="60%"/></p>

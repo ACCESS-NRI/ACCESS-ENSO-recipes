@@ -8,7 +8,7 @@
 |1500-1515 | ESMValTool recipe format? - example multimodels/ensembles|
 |1515-1530 | **Afternoon Tea**|
 |1530-1600 | notebook presentation with ACCESS-MOPPeR, CMIP7 context|
-|1600-1610 | run MOPPeR on ENSO variables demo|
+|1600-1610 | run ACCESS-MOPPeR on ENSO variables demo|
 |1610-1620 | example ENSO notebooks comparing ESM1.6|
 |1620-1640 | exercise notebook - update basic to read in spin-ups and run|
 |1640-1700 | Code and share, feedback, discussion|

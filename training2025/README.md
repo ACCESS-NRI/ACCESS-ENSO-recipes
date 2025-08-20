@@ -2,9 +2,9 @@
 
 |Schedule | Description |
 | --- | --- |
-|1345-1415 | notebook presentation with overview on esmvalcore and tools used|
+|1345-1415 | notebook presentation with overview on `esmvalcore` and tools used|
 |1415-1430 | example ENSO climatology notebooks (use main, 01bias, 11ENSO amplitude)|
-|1430-1500 | exercise notbook - change dataset?|
+|1430-1500 | exercise notebook - change dataset?|
 |1500-1515 | ESMValTool recipe format? - example multimodels/ensembles|
 |1515-1530 | **Afternoon Tea**|
 |1530-1600 | notebook presentation with ACCESS-MOPPeR, CMIP7 context|
@@ -101,4 +101,3 @@ Some details may be out of date with most recent software but can be helpful for
 
 - previous hackathon day https://access-nri.github.io/CMIP7_MED_Hackathon/index.html
 - videos https://www.youtube.com/playlist?list=PLFjfi2xLaFpJp59LvDc1upQsj_xzFlFLc
-- 

@@ -145,14 +145,14 @@ class Visualization():
             
         return padded_rgba
 
-    def opacity_rgba(self, padded_array, opacity_array):
-        array = self.normalise_array(opacity_array)
-        oarray = array
-        oarray = np.nan_to_num(oarray)
-        oarray = (oarray * 255).astype(np.uint8)
-        padded_array[::, ::, 3] = oarray
+    # def opacity_rgba(self, padded_array, opacity_array):
+    #     array = self.normalise_array(opacity_array)
+    #     oarray = array
+    #     oarray = np.nan_to_num(oarray)
+    #     oarray = (oarray * 255).astype(np.uint8)
+    #     padded_array[::, ::, 3] = oarray
         
-        return padded_array
+    #     return padded_array
 
     def generate_lv(self):
         lv = accessvis.plot_earth(texture='bluemarble', background="white", vertical_exaggeration=20)
@@ -204,6 +204,7 @@ class Visualization():
             lv.window(resolution=self.resolution)
         else:
             lv.display(resolution=self.resolution)
+
 
     def visualise_gradient(self, window=False):
         lv = self.generate_lv()

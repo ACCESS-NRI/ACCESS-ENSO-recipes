@@ -46,24 +46,24 @@ def plot_level1(obs_data, input_data, cfg):
             #plot title 
             title = f"{dataset['long_name']} seasonal"
         # model_data = cube.data
-        if proj == 'CMIP5':
-            qplt.plot(cube, color='lightcoral', alpha=0.5, linewidth=0.5)
-            #collect cubes for mean
-            cbls5.append(cube)
-            if dt == 'MultiModelMean':
-                qplt.plot(cube, color='red', linewidth=3, label='CMIP5 MMM')
-        elif proj == 'CMIP6':
+        # if proj == 'CMIP5':
+        #     qplt.plot(cube, color='lightcoral', alpha=0.5, linewidth=0.5)
+        #     #collect cubes for mean
+        #     cbls5.append(cube)
+        #     if dt == 'MultiModelMean':
+        #         qplt.plot(cube, color='red', linewidth=3, label='CMIP5 MMM')
+        if proj == 'CMIP6':
             qplt.plot(cube, color='dodgerblue', alpha=0.5, linewidth=0.5)
             cbls6.append(cube)
-            if dt == 'MultiModelMean':
+            if dt == 'CMIP6Mean':
                 qplt.plot(cube, color='blue', linewidth=3, label='CMIP6 MMM')
 
         filename = [dataset['variable_group']]
     
     # multimodel mean for seasonal cycle - 
     if filename[0] == 'eq_sst_seacycle':
-        mmm5 = multi_model_statistics(cbls5, span='full', statistics=['mean'], ignore_scalar_coords=True)['mean']
-        qplt.plot(mmm5, color='red', linewidth=3, label='CMIP5 MMM')
+        # mmm5 = multi_model_statistics(cbls5, span='full', statistics=['mean'], ignore_scalar_coords=True)['mean']
+        # qplt.plot(mmm5, color='red', linewidth=3, label='CMIP5 MMM')
         mmm6 = multi_model_statistics(cbls6, span='full', statistics=['mean'], ignore_scalar_coords=True)['mean']
         qplt.plot(mmm6,  color='blue', linewidth=3, label='CMIP6 MMM')
 

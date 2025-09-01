@@ -41,7 +41,7 @@ You will now be presented with the main JupyterLab instance configuration form. 
 <p align="center"><img src="./../docs/assets_ARE/walltime.png" alt="drawing" width="60%"/></p>
 
 - *3.2* **Compute Size**: Select `Medium (4 cpus, 18G mem)` from the dropdown menu. 
-    - - *If you want to run ACCESS-MOPPeR select `X-Large (24cpus, 95G mem)`*
+    - - *If running ACCESS-MOPPeR select `XX-Large (28cpus, 126G mem)`*
 
 <p align="center"><img src="./../docs/assets_ARE/compute.png" alt="drawing" width="60%"/></p>
 
@@ -55,7 +55,7 @@ You will now be presented with the main JupyterLab instance configuration form. 
 gdata/xp65+gdata/fs38+gdata/oi10+gdata/ct11+scratch/nf33
 ```
 
-<p align="center"><img src="./../docs/assets_ARE/project.png" alt="drawing" width="60%"/></p>
+<p align="center"><img src="./../docs/assets_ARE/storage.png" alt="drawing" width="60%"/></p>
 
 - *3.5* Click `Advanced options ...`
   * Optional: You can check the box here to receive an email notification when your JupyterLab instance starts, but as we are running a relatively small instance, it will likely spin up quickly so this probably isn't necessary.</p>
@@ -101,3 +101,11 @@ Some details may be out of date with most recent software but can be helpful for
 
 - previous hackathon day https://access-nri.github.io/CMIP7_MED_Hackathon/index.html
 - videos https://www.youtube.com/playlist?list=PLFjfi2xLaFpJp59LvDc1upQsj_xzFlFLc
+
+### References and docs
+- [ESMValTool documentation](https://docs.esmvaltool.org/en/latest)
+- [ACCESS-MOPPeR](https://access-mopper-v2.readthedocs.io/en/latest/index.html)
+- [ACCESS-MOPPeR code](https://github.com/ACCESS-NRI/ACCESS-MOPPeR/tree/v2)
+- [CLIVAR ENSO metrics](https://doi.org/10.1175/BAMS-D-19-0337.1)
+- [preprocessors API documentation](https://docs.esmvaltool.org/projects/ESMValCore/en/latest/api/esmvalcore.preprocessor.html)
+- [iris](https://scitools-iris.readthedocs.io/en/stable/)

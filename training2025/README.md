@@ -96,12 +96,6 @@ Open a terminal and `cd` to working folder.
 
 `git clone https://github.com/ACCESS-NRI/ACCESS-ENSO-recipes.git`
 
-### Other learning resources
-Some details may be out of date with most recent software but can be helpful for some background.
-
-- previous hackathon day https://access-nri.github.io/CMIP7_MED_Hackathon/index.html
-- videos https://www.youtube.com/playlist?list=PLFjfi2xLaFpJp59LvDc1upQsj_xzFlFLc
-
 ### References and docs
 - [ESMValTool documentation](https://docs.esmvaltool.org/en/latest)
 - [ACCESS-MOPPeR](https://access-mopper-v2.readthedocs.io/en/latest/index.html)
@@ -109,3 +103,9 @@ Some details may be out of date with most recent software but can be helpful for
 - [CLIVAR ENSO metrics](https://doi.org/10.1175/BAMS-D-19-0337.1)
 - [preprocessors API documentation](https://docs.esmvaltool.org/projects/ESMValCore/en/latest/api/esmvalcore.preprocessor.html)
 - [iris](https://scitools-iris.readthedocs.io/en/stable/)
+
+### Other learning resources
+Some details may be out of date with most recent software but can be helpful for some background.
+
+- [2024 training day](https://access-nri.github.io/CMIP7_MED_Hackathon/index.html)
+- [2024 video series](https://www.youtube.com/playlist?list=PLFjfi2xLaFpJp59LvDc1upQsj_xzFlFLc)

@@ -92,6 +92,7 @@ Click `Open JupyterLab`. This opens the instance in a new browser window where y
 ## Clone repo in Gadi
 Open a terminal and `cd` to working folder.
 <p align="center"><img src="./../docs/assets_ARE/clone_enso_recipes.png" alt="drawing" width="60%"/></p>
+
 ```
 git clone https://github.com/ACCESS-NRI/ACCESS-ENSO-recipes.git
 ```

@@ -2,14 +2,14 @@
 
 |Schedule | Description |
 | --- | --- |
-|1345-1425 | arrival, overview on `esmvalcore` and tools used, CMIP7|
-|1425-1440 | example ENSO climatology notebooks (use main, 01bias, 11ENSO amplitude)|
-|1440-1515 | exercise notebooks -ex01,11|
+|1345-1425 | Arrival, overview on `esmvalcore` and tools used, and CMIP7|
+|1425-1440 | Example ENSO climatology notebooks (use main, 01bias, 11ENSO amplitude)|
+|1440-1515 | Exercise notebooks -ex01,11|
 |1515-1530 | **Afternoon Tea**|
 |1530-1600 | Intro to ACCESS-MOPPeR|
-|1600-1610 | run ACCESS-MOPPeR on ENSO variables demo|
-|1610-1620 | example ENSO notebooks comparing ESM1.6|
-|1620-1640 | exercise notebook - update basic to read in spin-ups and run - ex12|
+|1600-1610 | Run ACCESS-MOPPeR on ENSO variables demo|
+|1610-1620 | Example ENSO notebooks comparing ESM1.6|
+|1620-1640 | Exercise notebook - update to read in spin-ups - ex12|
 |1640-1700 | Code and share, feedback, discussion|
 
 ## Pre-requisites
@@ -92,10 +92,11 @@ Click `Open JupyterLab`. This opens the instance in a new browser window where y
 ## Clone repo in Gadi
 Open a terminal and `cd` to working folder.
 <p align="center"><img src="./../docs/assets_ARE/clone_enso_recipes.png" alt="drawing" width="60%"/></p>
+```
+git clone https://github.com/ACCESS-NRI/ACCESS-ENSO-recipes.git
+```
 
-`git clone https://github.com/ACCESS-NRI/ACCESS-ENSO-recipes.git`
-
-### References and docs
+## References and docs
 - [ESMValTool documentation](https://docs.esmvaltool.org/en/latest)
 - [ACCESS-MOPPeR](https://access-mopper-v2.readthedocs.io/en/latest/index.html)
 - [ACCESS-MOPPeR code](https://github.com/ACCESS-NRI/ACCESS-MOPPeR/tree/v2)

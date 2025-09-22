@@ -6,8 +6,8 @@
 |1425-1440 | Example ENSO climatology notebooks (use main, 01bias, 11ENSO amplitude)|
 |1440-1515 | Exercise notebooks -ex01,11|
 |1515-1530 | **Afternoon Tea**|
-|1530-1600 | Intro to ACCESS-MOPPeR|
-|1600-1610 | Run ACCESS-MOPPeR on ENSO variables demo|
+|1530-1550 | Intro to ACCESS-MOPPeR|
+|1550-1610 | Run ACCESS-MOPPeR on ENSO variables demo|
 |1610-1620 | Example ENSO notebooks comparing ESM1.6|
 |1620-1640 | Exercise notebook - update to read in spin-ups - ex12|
 |1640-1700 | Code and share, feedback, discussion|

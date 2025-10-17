@@ -444,9 +444,10 @@ def group_obs_models(obs, models, metric, var_preproc, cfg):
             var_preproc,
             metric,
         )
-        # # save returned cubes
-        # for i, cube in enumerate(output[2]):
-        #     save_data(f"{data_labels[i]}_{metric}", prov_record, cfg, cube)
+        # save returned cubes - obs if not exists
+        for i, cube in enumerate(output[2]):
+            if not os.path.exists(get_diagnostic_filename(f"{data_labels[i]}_{metric}", cfg, extension="nc")):
+                save_data(f"{data_labels[i]}_{metric}", prov_record, cfg, cube)
 
         if output[0]:
             with open(metricfile, "a+", encoding="utf-8") as fileo:

@@ -4,6 +4,7 @@ import logging
 import os
 
 import iris
+from iris.util import rolling_window
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.lines import Line2D
@@ -125,33 +126,16 @@ def lin_regress(cube_ssta, cube_nino34):
 def sst_regressed(n34_cube):
     """Regression function for sst_time_series on sst_enso(dec)."""
     n34_dec = extract_month(n34_cube, 12)
-    n34_dec_years = [
-        n34_dec.coord("time").units.num2date(time).year
-        for time in n34_dec.coord("time").points
-    ]
-    # Ensure that the selected years are not the last years
-    n34_selected = []
-    for year in n34_dec_years[3:-3]:
-        enso_epoch = [year - 2, year - 1, year, year + 1, year + 2, year + 3]
 
-        # Select the data for the current year and append it to n34_selected
-        year_enso = iris.Constraint(
-            time=lambda cell, enso_epoch=enso_epoch: cell.point.year
-            in enso_epoch,
-        )
-        cube_2 = n34_cube.extract(year_enso)
-        n34_selected.append(cube_2.data.data)
-
-    event_constr = iris.Constraint(
-        time=lambda cell: cell.point.year in n34_dec_years[3:-3],
-    )
-    n34_dec_ct = n34_dec.extract(event_constr)
-
+    # 6 year epoch: [yr-2, yr-1, yr, yr+1, yr+2, yr+3] # exclude first year
+    n34_sel = rolling_window(n34_cube[12:].data, window=6*12, step=12, axis=-1) #axis only time - 1d
+    
     # 1) linear regression of sst_time_series on sst_enso
-    a_data = np.array(n34_selected)
-    b_data = n34_dec_ct.data
+    # not first 3 or last 3 years for epochs
+    b_data = n34_dec[3:-3].data
     b_with_intercept = np.vstack([b_data, np.ones_like(b_data)]).T
-    coefs, _, _, _ = np.linalg.lstsq(b_with_intercept, a_data, rcond=None)
+    print(n34_sel.shape, b_with_intercept.shape)
+    coefs, _, _, _ = np.linalg.lstsq(b_with_intercept, n34_sel, rcond=None)
 
     return coefs[0]
 

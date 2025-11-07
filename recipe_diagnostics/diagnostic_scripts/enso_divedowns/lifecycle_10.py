@@ -3,6 +3,7 @@
 import matplotlib.pyplot as plt
 
 import iris
+from iris.util import rolling_window
 import os
 import logging
 import numpy as np
@@ -24,41 +25,22 @@ from esmvalcore.preprocessor import (
 logger = logging.getLogger(os.path.basename(__file__))
 
 
-def dec_and_years(n34_cube):
-    """Extract December data and years."""
-    n34_dec = extract_month(n34_cube, 12)
-    leadlagyr = 3
-    n34_dec_years = [
-        n34_dec.coord("time").units.num2date(time).year
-        for time in n34_dec.coord("time").points
-    ]
-    event_years = n34_dec_years[leadlagyr:-leadlagyr]
-    # Ensure that the selected years are not the last years
-    return n34_dec, event_years
-
-
-def sst_regressed_2d(event_years, n34_area, n34_dec):
+def sst_regressed_2d(n34_area, n34):
     """Regression function for sst_time_series area on sst_enso."""
-    n34_area_selected = []
-    for yr in event_years:
-        enso_epoch = [yr - 2, yr - 1, yr, yr + 1, yr + 2, yr + 3]
-        year_enso = iris.Constraint(time=lambda cell: cell.point.year in enso_epoch)
-
-        n34_area_selected.append(n34_area.extract(year_enso).data)
-
-    event_constr = iris.Constraint(time=lambda cell: cell.point.year in event_years)
-    n34_dec_ct = n34_dec.extract(event_constr)
-    # print(f'{len(event_years)} years, cube meri:{n34_area.shape}')
-
-    # 2 area linear regression
-    b_data = n34_dec_ct.data
+    n34_dec = extract_month(n34, 12)
+    # 6 year epoch: [yr-2, yr-1, yr, yr+1, yr+2, yr+3] 
+    n34area_sel = rolling_window(n34_area[12:].data, window=6*12, step=12, axis=0)
+    logger.info(n34_area.summary(shorten=True), n34area_sel.shape)
+    
+    #2 area linear regression
+    b_data = n34_dec[3:-3].data
     b_with_intercept = np.vstack([b_data, np.ones_like(b_data)]).T
-    a_arr = np.array(n34_area_selected)
-    a_data = a_arr.reshape(a_arr.shape[0], -1)
 
-    # print(a_arr.shape, a_data.shape, b_data.shape)
+    a_data = n34area_sel.reshape(n34area_sel.shape[0], -1)
+    
+    # print(n34area_sel.shape, a_data.shape, b_data.shape)
     coefs_area, _, _, _ = np.linalg.lstsq(b_with_intercept, a_data, rcond=None)
-    slope_area = coefs_area[0].reshape(a_arr.shape[1], a_arr.shape[2])
+    slope_area = coefs_area[0].reshape(n34area_sel.shape[1], n34area_sel.shape[2])
 
     return slope_area
 
@@ -131,45 +113,34 @@ def enso_composite_plot(model_n34, label, line):
     """Plot the ENSO composite lifecycle lines."""
     n34_dec = extract_month(model_n34, 12)
     events = enso_events_lc(n34_dec)  # check years not in first/last 3
+    n34_sel = rolling_window(model_n34[12:].data, window=6*12, step=12, axis=-1) 
     colors = {"la nina": "blue", "el nino": "red"}
     months = np.arange(1, 73) - 36
     logger.info(events)
     for enso, years in events.items():
-        cube_data = []
-        for yr in years:
-            enso_epoch = [yr - 2, yr - 1, yr, yr + 1, yr + 2, yr + 3]
-            year_enso = iris.Constraint(time=lambda cell: cell.point.year in enso_epoch)
-            cube_2 = model_n34.extract(year_enso)  # extract rolling 6yr
-            cube_data.append(cube_2.data.data)
-
         # No regression, mean enso epoch
-        mean = np.mean(np.array(cube_data), axis=0)
+        arr = n34_sel[years]
+        mean = np.mean(arr, axis=0)
         # label=f'{enso} {label}'
         plt.plot(months, mean, linestyle=line, color=colors[enso], lw=3)
-
-
-def sst_2d(event_years, n34_area):
-    """Extract SST area data for the event years."""
-    n34_area_selected = []
-    for yr in event_years:
-        enso_epoch = [yr - 2, yr - 1, yr, yr + 1, yr + 2, yr + 3]
-        year_enso = iris.Constraint(time=lambda cell: cell.point.year in enso_epoch)
-        n34_area_selected.append(n34_area.extract(year_enso).data)
-
-    arr = np.array(n34_area_selected)
-    a_data = arr.reshape(arr.shape[0], -1)
-    means = np.mean(a_data, axis=0)
-    return means.reshape(arr.shape[1], arr.shape[2])
 
 
 def enso_composite_plot4(n34_cube, n34_area, label, i, axes):
     """Plot the ENSO composite lifecycle dive down 4."""
     n34_dec = extract_month(n34_cube, 12)
     events = enso_events_lc(n34_dec)
+    # exclude first year
+    n34area_sel = rolling_window(n34_area[12:].data, window=6*12, step=12, axis=0) # axis 0 time
 
     for enso, years in events.items():
         # plot area
-        means = sst_2d(years, n34_area)
+        arr = n34area_sel[years]
+        a_data = arr.reshape(arr.shape[0], -1) 
+        logger.info(f"selected years{arr.shape}, data for means{a_data.shape}")
+        
+        means = np.mean(a_data, axis=0)
+        means = means.reshape(arr.shape[1], arr.shape[2])
+
         cplot = plot_ssta(
             axes[enso],
             n34_area.coord("longitude").points,
@@ -255,11 +226,9 @@ def plot4_enso_contour(model_ds, obs_ds, dt_ls):
 
 def compute_enso_metrics(input_pair, dt_ls, var_group):
     """Compute the ENSO lifecycle dive downs."""
-    mod_dec, mod_years = dec_and_years(input_pair[1][var_group[0]])
-    model_area = sst_regressed_2d(mod_years, input_pair[1][var_group[1]], mod_dec)
+    model_area = sst_regressed_2d(input_pair[1][var_group[1]], input_pair[1][var_group[0]])
     # level 2, input_pair: obs first
-    obs_dec, obs_years = dec_and_years(input_pair[0][var_group[0]])
-    obs_area = sst_regressed_2d(obs_years, input_pair[0][var_group[1]], obs_dec)
+    obs_area = sst_regressed_2d(input_pair[0][var_group[1]], input_pair[0][var_group[0]])
 
     # plot function #need xticks, labels as dict/ls
     modds = (input_pair[1][var_group[1]].coord("longitude").points, model_area)
@@ -292,14 +261,14 @@ def enso_events_lc(cube):
         cube.coord("time").units.num2date(time).year
         for time in cube.coord("time").points
     ]
-    leadlagyrs = datayears[:3] + datayears[-3:]
-    # get cube years min/max, remove 3:-3
+    indexmap = {yr: index for index, yr in enumerate(datayears[3:-3])}
+    
     cb_std = cube.data.std()
-    a_events = mask_to_years(mask_above_threshold(cube.copy(), -0.5 * cb_std))
-    o_events = mask_to_years(mask_below_threshold(cube.copy(), 0.5 * cb_std))
-    events = {"la nina": a_events, "el nino": o_events}
-    for key, yrls in events.items():
-        events[key] = [yr for yr in yrls if yr not in leadlagyrs]
+    a_events = mask_to_years(mask_above_threshold(cube.copy(), -0.5*cb_std))
+    o_events = mask_to_years(mask_below_threshold(cube.copy(), 0.5*cb_std))
+    
+    events = {'la nina':[indexmap[nyr] for nyr in a_events if nyr in datayears[3:-3]],
+              'el nino':[indexmap[nyr] for nyr in o_events if nyr in datayears[3:-3]]}
 
     return events
 

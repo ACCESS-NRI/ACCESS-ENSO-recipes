@@ -3,6 +3,7 @@
 import matplotlib.pyplot as plt
 
 import iris
+from iris.util import rolling_window
 import os
 import logging
 import numpy as np
@@ -60,12 +61,9 @@ def enso_composite(n34):
 
     enso_res = {}
     for enso, years in events.items():
-        years_of_interest = []
-        for yr in years:
-            years_of_interest.append([yr - 2, yr - 1, yr, yr + 1, yr + 2, yr + 3])
-
         cube_data = {}
-        for enso_epoch in years_of_interest:
+        for yr in years:
+            enso_epoch = [yr - 2, yr - 1, yr, yr + 1, yr + 2, yr + 3]
             year_enso = iris.Constraint(time=lambda cell: cell.point.year in enso_epoch)
             cube_2 = n34.extract(year_enso)  # extract rolling 6
             yr = enso_epoch[2]

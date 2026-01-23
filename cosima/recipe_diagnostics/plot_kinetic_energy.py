@@ -15,6 +15,7 @@ from esmvaltool.diag_scripts.shared import (
     run_diagnostic,
     save_figure,
     group_metadata,
+    save_data,
 )
 from esmvalcore.preprocessor import (
     add_supplementary_variables,
@@ -26,20 +27,40 @@ from esmvalcore.preprocessor import (
 # This part sends debug statements to stdout
 logger = logging.getLogger(os.path.basename(__file__))
 
-def kineticenergy(u_vel, v_vel, thkcel):
-    """Calculate kinetic energy from u and v components."""
-    # calculate KE = 0.5*(u^2 + v^2)
+
+def ke_calc(u_vel, v_vel, thkcel):
     KE = 0.5*(u_vel**2 + v_vel**2)
     KE = add_supplementary_variables(KE, [thkcel])
-    KE = KE.collapsed('depth', iris.analysis.SUM, weights='cell_thickness')
-    KE = axis_statistics(KE, operator='mean', axis='t')
-    KE = regrid(KE, '0.5x0.5', scheme='linear')  # regrid to map
     return KE
 
+def kinetic_energys(u_vel, v_vel, thkcel):
+    """Calculate kinetic energy from u and v components."""
+    
+    u_mean = axis_statistics(u_vel, operator='mean', axis='t')
+    v_mean = axis_statistics(v_vel, operator='mean', axis='t')
+    mke = ke_calc(u_mean, v_mean, thkcel)
+    mke = mke.collapsed('depth', iris.analysis.SUM, weights='cell_thickness')
+    mke.long_name = 'Mean Kinetic Energy'
+    # eke
+    u_transient = u_vel - u_mean
+    v_transient = v_vel - v_mean
+    eke = ke_calc(u_transient, v_transient, thkcel) 
+    eke = eke.collapsed('depth', iris.analysis.SUM, weights='cell_thickness')
+    eke = axis_statistics(eke, operator='mean', axis='t')
+    eke.long_name = 'Eddy Kinetic Energy'
+    # tke
+    tke = ke_calc(u_vel, v_vel, thkcel)
+    tke = axis_statistics(tke, operator='mean', axis='t')
+    tke = tke.collapsed('depth', iris.analysis.SUM, weights='cell_thickness')
+    tke.long_name = 'Total Kinetic Energy'
+    
+    KEall = [regrid(ke, '0.5x0.5', scheme='nearest') for ke in [tke, mke, eke]]  # regrid to map
+    return KEall # tke,mke,eke
 
-def circumpolar_map():
-    # fig = plt.figure(figsize = (12, 8))
-    ax = plt.axes(projection = ccrs.SouthPolarStereo())
+def circumpolar_map(fig, i): # make 3 subplots
+    # fig = plt.figure(figsize = (12, 8)) #move
+    # ax = plt.axes(projection = ccrs.SouthPolarStereo())
+    ax = fig.add_subplot(i, projection = ccrs.SouthPolarStereo()) # i 221
     ax.set_extent([-180, 180, -80, -50], crs = ccrs.PlateCarree())
     ax.set_facecolor('lightgrey')
     # Map the plot boundaries to a circle
@@ -49,17 +70,7 @@ def circumpolar_map():
     circle = mpath.Path(verts * radius + center)
     ax.set_boundary(circle, transform = ax.transAxes)
 
-    return fig, ax
-
-
-# fig, axs = circumpolar_map()
-
-def subplot_ke(ke_cube, axs, title):
-    """Plot KE on circumpolar map."""
-
-    iplt.contourf(ke_cube, levels=np.arange(0,26,0.5), extend='max', axes=axs, cmap = cmocean.cm.ice)
-    axs.set_title(title)
-    plt.colorbar(label='m$^3$ s$^{-2}$',ticks=np.arange(0,26,5), shrink=0.6)
+    return ax
 
 
 def get_provenance_record(caption, ancestor_files):
@@ -69,7 +80,7 @@ def get_provenance_record(caption, ancestor_files):
         "caption": caption,
         "statistics": ["other"],
         "domains": ["shpolar"],
-        "plot_types": ["vert"],
+        "plot_types": ["map"],
         "authors": [
             "chun_felicity",
         ],
@@ -82,7 +93,7 @@ def get_provenance_record(caption, ancestor_files):
 
 
 def main(cfg):
-    """Create Hovmoller diagrams."""
+    """Create kinetic energy diagrams."""
 
     input_data = cfg["input_data"].values()
 
@@ -92,43 +103,43 @@ def main(cfg):
         "dataset",
     )
 
-    levels_tempsal = {'thetao':np.arange(-0.3, 0.31, 0.01), 'so':np.arange(-0.03, 0.031, 0.001)}
-    cmapcm = {'thetao':cmocean.cm.balance, 'so':cmocean.cm.curl}
-    axi = {'thetao':0, 'so':1}
-    # for each ds plt ts, sal 
+    #
     for grp, var_attr in ds_groups.items():
-        fig, ax = plot_hovmoller(fsize = 14)
-        files=[]
-        for metadata in var_attr:  #[thetao, so]
-            name = metadata["dataset"]
+        fig = plt.figure(figsize = (12, 10))
+        
+        files, data_cubes = [], {}
+        for metadata in var_attr:  #{vo,uo, thkcello}
+            
             shortname = metadata["short_name"]
             input_file = metadata['filename']
             cube = iris.load_cube(metadata['filename'])
-            hov_cube = hovmoller(cube, metadata['start_year'])
-
-            # plot TKE, MKE, EKE (3subplts)
-            for i in [axi[shortname], axi[shortname]+2]:
-                p1 = iplt.contourf(hov_cube,
-                            levels = levels_tempsal[shortname],
-                            extend = 'both',
-                            cmap = cmapcm[shortname],
-                            axes = ax[i], #0,2 temp
-                            )
+            data_cubes[shortname] = cube
             files.append(input_file)
+            thkness = cube.ancillary_variable('cell_thickness')
 
-            if shortname == 'so':
-                cf_salt = p1
-            else:
-                cf_temp = p1
+        tke, mke, eke = kinetic_energys(data_cubes['uo'], data_cubes['vo'], thkness)
+
+        plt_titles = ['Total Kinetic Energy (TKE)', 'Mean Kinetic Energy (MKE)', 'Eddy Kinetic Energy (EKE)']
+        # plot TKE, MKE, EKE (3subplts)
+        for i, ke_cube in enumerate([tke, mke, eke]):
+            axs = circumpolar_map(fig, 221+i)
+            cf1 = iplt.contourf(ke_cube, levels=np.arange(0,26,0.5), extend='max', axes=axs, cmap = cmocean.cm.ice)
+            axs.set_title(plt_titles[i])
+
+            data_prov = get_provenance_record(
+                f'{plt_titles[i]} for {grp}.',
+                files,
+            ) # save data out
+            save_data(f"{plt_titles[i][-4:-1]}_{grp}", data_prov, cfg, ke_cube)
         
-        plot_details(ax, cf_temp, cf_salt)
-        # Save output
+        fig.colorbar(cf1, cax=fig.add_axes([0.85, 0.08, 0.02, 0.4]), label='m$^3$ s$^{-2}$',ticks=np.arange(0,26,5), shrink=0.6) # share colorbar
+        # Save figure
         prov_record = get_provenance_record(
-            f'Depth-Time Temperature and Salinity from {name}.',
+            f'Kinetic Energy {grp}.',
             files,
         )
         save_figure(
-            f"hovmoller_{name}",
+            f"kinetic_energy_{grp}",
             prov_record,
             cfg,
             figure=fig,

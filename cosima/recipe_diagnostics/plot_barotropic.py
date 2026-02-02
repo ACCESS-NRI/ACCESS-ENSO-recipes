@@ -74,6 +74,8 @@ def main(cfg):
         cube.data = cube.data / p0  # divide by density for volume
         cube.data = cube.data / 1e6  # then divide by 10^6 for Sv
         cube.data = cube.data.cumsum(1)  #latitude index 1
+        logger.info(cube.summary(shorten=True))
+        cube.units = 'Sv'
         cube = climate_statistics(cube, period='full', operator='mean')
 
         # plot

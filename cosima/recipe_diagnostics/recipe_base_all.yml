@@ -10,22 +10,8 @@ documentation:
     - chun_felicity
   
   
-preprocessors:
+# preprocessors:
 # take advantage of common preprocessing operations before custom diagnostic script 
-# streamfunction will have cumulative sum, units handling, climate mean in script
-## TO DO: plot not looking correct - check and change preproc
-  streamfunction: 
-    mask_landsea:
-      mask_out: land
-    depth_integration:
-    regrid:
-      target_grid: 0.5x0.5 
-      scheme: linear
-    extract_region: # antarctic
-      start_longitude: 0.
-      end_longitude: 360.
-      start_latitude: -80.
-      end_latitude: -40.
 
 
 diagnostics:
@@ -37,9 +23,10 @@ diagnostics:
       sst_east:
         short_name: umo
         mip: Omon
-        preprocessor: streamfunction
         additional_datasets: #additional datasets can be added for each diagnostic
           - {dataset: ACCESS-OM2, project: CMIP6, exp: omip2, activity: OMIP,
+              ensemble: r1i1p1f1, grid: gn, start_year: 0356, end_year: 0366}
+          - {dataset: ACCESS-OM2-025, project: CMIP6, exp: omip2, activity: OMIP,
               ensemble: r1i1p1f1, grid: gn, start_year: 0356, end_year: 0366}
     scripts:
       plot_script: # custom script in directory the recipe is run from

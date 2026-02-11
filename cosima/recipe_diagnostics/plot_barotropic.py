@@ -16,7 +16,8 @@ from esmvaltool.diag_scripts.shared import (
     select_metadata,
 )
 from esmvalcore.preprocessor import (
-    climate_statistics
+    climate_statistics,
+    regrid
 )
 
 
@@ -71,8 +72,10 @@ def main(cfg):
 
         # units cumulative sum and climate mean
         p0 = 1035.0
+        cube = cube.collapsed('depth', iris.analysis.SUM)
         cube.data = cube.data / p0  # divide by density for volume
         cube.data = cube.data / 1e6  # then divide by 10^6 for Sv
+        cube = regrid(cube, target_grid='0.5x0.5', scheme="linear")
         cube.data = cube.data.cumsum(1)  #latitude index 1
         logger.info(cube.summary(shorten=True))
         cube.units = 'Sv'

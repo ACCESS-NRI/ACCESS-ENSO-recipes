@@ -31,6 +31,8 @@ as described in the repository README, then open the desired notebook.
 | `12-Cross_contour_transport.ipynb` | Cross-contour transport |
 | `13-Heaving_decomposition.ipynb` | Isopycnal heave and along-isopycnal decomposition |
 | `14-Neutral_density.ipynb` | Neutral density |
+| `15-Hydrographic_benchmark.ipynb` | Fixed-depth temperature and salinity differences against WOA18, plus piControl drift |
+| `16-Density_compensation.ipynb` | Thermal and haline contributions to the model-minus-WOA density difference |
 
 ## Scope and important limitations
 
@@ -48,3 +50,14 @@ The existing `cosima/Temperature_Salinity_Diagram.ipynb` remains a
 native-model example. `07-Temperature_salinity_diagram.ipynb` is its
 CMIP6-oriented companion, with CMOR inputs and a volume-weighted
 histogram.
+
+Notebooks 15 and 16 use the WOA18 1981–2010 climatology. Its OBS6 files
+have a representative year of 2000; check that the local temperature and
+salinity files both came from the WOA18 `decav81B0` normal before using the
+comparison. WOA temperature is converted from in-situ to potential
+temperature using WOA salinity. The notebooks were run on Gadi with
+ACCESS-CM2 and the available OBS6 files, but the original WOA source
+filenames were not retained in the supplied file metadata. Their numerical
+results therefore still require source-file provenance confirmation. The
+notebooks include no saved Gadi outputs; rerun them to inspect the figures
+for your model and data archive.

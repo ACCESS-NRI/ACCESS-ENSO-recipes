@@ -25,7 +25,7 @@ logger = logging.getLogger(os.path.basename(__file__))
 def plot_level1(input_data, cfg): #input data is 2 - model and obs
     plt.clf()
     figure = plt.figure(figsize=(10, 6), dpi=300)
-    var_units = {'tos': 'degC', 'pr': 'mm/day', 'tauu': '1e-3 N/m2'}
+    var_units = {'tos': 'degC', 'ts': 'degC', 'pr': 'mm/day', 'tauu': '1e-3 N/m2'}
 
     for dataset in input_data:  
         # Load the data
@@ -108,9 +108,9 @@ def format_longitude(x, pos):
         return f'{int(x)}°E'
 
 def main(cfg):
-    """Compute sea ice area for each input dataset."""
+    """Compute for each input dataset."""
     provenance_record = {
-        'caption': "ENSO metrics",
+        'caption': "ENSO/IOD metrics",
         'authors': [
             'chun_felicity',
         ],

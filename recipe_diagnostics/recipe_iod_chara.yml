@@ -1,0 +1,155 @@
+# ESMValTool
+# 
+---
+documentation:
+  description: IOD diagnostics based on ENSO characteristics recipes
+  title: IOD diagnostics
+  authors:
+    - chun_felicity
+    # - gillett_zoe
+    # - chung_christine
+  maintainer:
+    - chun_felicity
+
+datasets:
+  - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+
+
+  # observations
+  - {dataset: HadISST, project: OBS, type: reanaly, tier: 2}
+  # - {dataset: TROPFLUX, project: OBS6, type: reanaly, tier: 2, mip: Omon}
+  
+preprocessors:
+  iod_west: &base # seasonality extract season
+    custom_order: true
+    convert_units:
+      units: degC
+    extract_region: &iod_west
+      start_longitude: 50.
+      end_longitude: 70.
+      start_latitude: -10.
+      end_latitude: 10.
+    # detrend: ##? issue when masked data
+    #   dimension: time
+    #   method: linear
+    anomalies:
+      period: monthly
+    area_statistics:
+      operator: mean
+
+  iod_east: &base_east
+    <<: *base
+    extract_region: &iod_east
+      start_longitude: 90.
+      end_longitude: 110.
+      start_latitude: -10.
+      end_latitude: 0.
+
+  ssta_trop: &trop_base # amplitude, stdev in script
+    custom_order: true
+    extract_region: &io_trop
+      start_longitude: 50.
+      end_longitude: 110.
+      start_latitude: -10.
+      end_latitude: 10.
+    regrid:
+      target_grid: 1x1
+      scheme: linear
+    anomalies:
+      period: monthly
+
+  sst_meridional: &sst_meridional # lifecycle amp
+    <<: *trop_base
+    meridional_statistics:
+      operator: mean
+  sst_mer_climstd: #seasonality lv3
+    <<: *sst_meridional
+    climate_statistics:
+      operator: std_dev
+      period: monthly
+  
+  sst_pattern_iode: #pattern
+    <<: *base_east
+    extract_month:
+      month: 9
+
+  sst_pattern_iodw:
+    <<: *base
+    extract_month:
+      month: 9
+
+  sst_eq: &sst_eq #pattern
+    custom_order: true #get landmask in diag script
+    regrid:
+      target_grid: 1x1
+      scheme: linear
+    extract_region: &eq_region
+      start_longitude: 40.
+      end_longitude: 120.
+      start_latitude: -15.
+      end_latitude: 15.
+    extract_month:
+      month: 9
+    anomalies:
+      period: monthly
+    
+  sst_eq_meridional:
+    <<: *sst_eq
+    meridional_statistics:
+      operator: mean
+
+
+diagnostics:
+  diagnostic_metrics:
+    description: run preprocessors on variables for IOD metrics
+    variables:
+      iod_west:
+        short_name: tos
+        mip: Omon
+        preprocessor: iod_west
+      iod_east:
+        short_name: tos
+        mip: Omon
+        preprocessor: iod_east
+
+      trop:
+        short_name: tos
+        mip: Omon
+        preprocessor: ssta_trop
+
+      meridional:
+        short_name: tos
+        mip: Omon
+        preprocessor: sst_meridional
+      mer_climstd:
+        short_name: tos
+        mip: Omon
+        preprocessor: sst_mer_climstd
+      
+      pattern_iode:
+        short_name: tos
+        mip: Omon
+        preprocessor: sst_pattern_iode
+      pattern_iodw:
+        short_name: tos
+        mip: Omon
+        preprocessor: sst_pattern_iodw
+
+      sst_eq:
+        short_name: tos
+        mip: Omon
+        preprocessor: sst_eq
+      sst_eq_meridional:
+        short_name: tos
+        mip: Omon
+        preprocessor: sst_eq_meridional
+
+
+    scripts:
+      plot_pattern:
+        script: diagnostic_scripts/iod_pattern.py
+      plot_lifecycle: #seas, amp
+        script: diagnostic_scripts/iod_lifecycle.py
+
+

@@ -56,7 +56,8 @@ def plotmaps_level2(input_data, grp, figsize=[18, 6], cenlon=210.0):
             ax1.set_extent([130, 290, -20, 20], crs=ccrs.PlateCarree())
         else:
             ax1.set_extent([50, 110, -25, 25], crs=ccrs.PlateCarree())
-        ax1.set_title(dataset["dataset"])
+        ens = dataset.get('ensemble', '')
+        ax1.set_title(f"{dataset['dataset']} {ens}")
 
         # Add gridlines for latitude and longitude
         gl1 = ax1.gridlines(draw_labels=True, linestyle="--")
@@ -162,14 +163,16 @@ def main(cfg):
         for metadata in var_attr:
             # create pairs, add obs first to list
             pairs = [var_attr[-1]]
+            # prov = provenance_record(grp, list(cfg["input_data"].keys()), iod=iod)
             logger.info("iterate though datasets\n %s", pformat(metadata))
-            if metadata["project"] == "CMIP6":
+            if metadata["project"] in ["CMIP6", "CMIP7"]:
                 pairs.append(metadata)
                 fig = plotmaps_level2(pairs, grp, cfg["figsize"], cfg["cenlon"])
                 # save_plotdata(data_cubes, grp, pairs, cfg)
                 filename = "_".join(
                     [
                         metadata["dataset"],
+                        metadata["ensemble"],
                         metadata["short_name"],
                         metadata["preprocessor"],
                     ],

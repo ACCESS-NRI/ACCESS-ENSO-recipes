@@ -348,7 +348,7 @@ def group_obs_models(obs, models, metric, var_preproc, cfg):
             metric,
             dataset,
         )
-        data_labels = [obs[0]["dataset"], dataset]
+        data_labels = [obs[0]["dataset"], dataset+"_"+attributes[0]["ensemble"]]
         output = compute_enso_metrics(
             [
                 obs_datasets,
@@ -367,11 +367,11 @@ def group_obs_models(obs, models, metric, var_preproc, cfg):
 
         if output[0]: # metric_values dict, iterate
             with open(metricfile, "a+", encoding="utf-8") as fileo:
-                fileo.write(f"{dataset},{metric},{output[0]}\n")
+                fileo.write(f"{data_labels[1]},{metric},{output[0]}\n")
         if output[1]: # figures list, iterate
             for i, figure in enumerate(output[1]):
                 save_figure(
-                    f"{dataset}_{metric}_level{i+1}",
+                    f"{data_labels[1]}_{metric}_level{i+1}",
                     prov_record, # level 1 different record?
                     cfg,
                     figure=figure,
@@ -445,6 +445,11 @@ def main(cfg):
                 input_data,
                 variable_group=var_prep,
                 project="CMIP6",
+            )
+            models += select_metadata(
+                input_data,
+                variable_group=var_prep,
+                project="CMIP7",
             )
 
         group_obs_models(obs, models, metric, var_preproc, cfg)

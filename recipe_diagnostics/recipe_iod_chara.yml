@@ -12,9 +12,10 @@ documentation:
     - chun_felicity
 
 datasets:
-  - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
+  # - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
   # - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1850, end_year: 2014}
-
+  - {dataset: ACCESS-ESM1-6, project: CMIP7, exp: esm-hist, ensemble: '*', activity: CMIP, institute: ACCESS-Consortium,
+      frequency: mon, region: glb, mip: ocean, grid: g118, branding_suffix: tavg-u-hxy-sea, timerange: '1950/2014'}
 
   # observations
   - {dataset: HadISST, project: OBS, type: reanaly, tier: 2}

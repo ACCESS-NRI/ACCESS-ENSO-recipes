@@ -50,7 +50,10 @@ def plotmaps_level3(input_data, itcz=False, iod=False):
                             extend='both',cmap=colmap[dataset["short_name"]])
         ax1.set_ylim(1, 12)
         ax1.set_yticks(ticks=month_ticks, labels=month_labels)
-        ax1.set_title(dataset["dataset"])
+        if plt_pos == 122:
+            ax1.set_title(f"{dataset['dataset']}_{dataset['ensemble']}")
+        else:
+            ax1.set_title(dataset["dataset"])
         ax1.set_ylabel("months")
         if not itcz:
             ax1.xaxis.set_major_formatter(plt.FuncFormatter(format_longitude))
@@ -164,13 +167,14 @@ def main(cfg):
                 # create pairs, add obs first to list
                 pairs = [var_attr[-1]]
                 logger.info("iterate though datasets\n %s", pformat(metadata))
-                if metadata["project"] == "CMIP6":
+                if metadata["project"] in ["CMIP6", "CMIP7"]:
                     pairs.append(metadata)
                     fig = plotmaps_level3(pairs, itcz=False, iod=cfg["iod"])
                     # save_plotdata(data_cubes, grp, pairs, cfg)
                     filename = "_".join(
                         [
                             metadata["dataset"],
+                            metadata["ensemble"],
                             grp,
                             "level3"
                         ],
@@ -190,6 +194,7 @@ def main(cfg):
                         filename = "_".join(
                             [
                                 metadata["dataset"],
+                                metadata["ensemble"],
                                 grp_itcz,
                                 "level3"
                             ],

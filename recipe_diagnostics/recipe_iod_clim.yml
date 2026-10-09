@@ -9,8 +9,13 @@ documentation:
   maintainer:
     - chun_felicity
 
-datasets:
-  - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1950, end_year: 2014}
+model_cmip7: &model_cmip7
+  - {dataset: ACCESS-ESM1-6, project: CMIP7, exp: esm-hist, ensemble: r(3:29)i1p1f1, grid: g115, mip: atmos,
+      activity: CMIP, institute: ACCESS-Consortium, frequency: mon, region: glb, branding_suffix: tavg-u-hxy-u, timerange: '1950/2014'}
+model6: &model6
+  - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, mip: Amon, timerange: '1950/2014'}
+# datasets:
+#   - {dataset: ACCESS-ESM1-5, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1950, end_year: 2014}
   # - {dataset: ACCESS-CM2, project: CMIP6, exp: historical, ensemble: r1i1p1f1, grid: gn, start_year: 1950, end_year: 2014}
 
 
@@ -61,40 +66,46 @@ diagnostics:
       eq_pr_bias:
         short_name: pr
         preprocessor: eq_bias
-        mip: Amon
         additional_datasets:
+          # - {<<: *model6}
+          - {<<: *model_cmip7}
           - {dataset: GPCP-SG, project: OBS, type: sat, tier: 2, mip: Amon, start_year: 1979, end_year: 2018}
       eq_sst_bias:
         short_name: ts
         preprocessor: eq_bias
-        mip: Amon
         additional_datasets:
+          # - {<<: *model6}
+          - {<<: *model_cmip7}
           - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, mip: Amon}
       eq_tauu_bias:
         short_name: tauu
         preprocessor: eq_bias
-        mip: Amon
         additional_datasets:
-         - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
+          # - {<<: *model6}
+          - {<<: *model_cmip7, grid: g109}
+          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
 
       eq_pr_seacycle:
         short_name: pr
         preprocessor: eq_sea_cycle
-        mip: Amon
         additional_datasets:
+          # - {<<: *model6}
+          - {<<: *model_cmip7}
           - {dataset: GPCP-SG, project: OBS, type: sat, tier: 2, mip: Amon, start_year: 1979, end_year: 2018}
       eq_sst_seacycle:
         short_name: tos
         preprocessor: eq_sea_cycle
-        mip: Omon
         additional_datasets:
+          # - {<<: *model6, mip: Omon}
+          - {<<: *model_cmip7, mip: ocean, grid: g118, branding_suffix: tavg-u-hxy-sea}
           - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, mip: Omon}
       eq_tauu_seacycle:
         short_name: tauu
         preprocessor: eq_sea_cycle
-        mip: Amon
         additional_datasets:
-         - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
+          # - {<<: *model6}
+          - {<<: *model_cmip7, grid: g109}
+          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
     scripts:
       plot_level1:
         script: diagnostic_scripts/climatology_diagnostic1.py
@@ -106,39 +117,45 @@ diagnostics:
       pr_bias:
         short_name: pr
         preprocessor: base_bias
-        mip: Amon
         additional_datasets:
+          # - {<<: *model6}
+          - {<<: *model_cmip7}
           - {dataset: GPCP-SG, project: OBS, type: sat, tier: 2, mip: Amon, start_year: 1979, end_year: 2018}
       sst_bias:
         short_name: ts
         preprocessor: base_bias
-        mip: Amon
         additional_datasets:
+          # - {<<: *model6}
+          - {<<: *model_cmip7}
           - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, mip: Amon}
       tauu_bias:
         short_name: tauu
         preprocessor: base_bias
-        mip: Amon
         additional_datasets:
-         - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
+          # - {<<: *model6}
+          - {<<: *model_cmip7, grid: g109}
+          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
       pr_seacycle:
         short_name: pr
         preprocessor: base_cycle
-        mip: Amon
         additional_datasets:
+          # - {<<: *model6}
+          - {<<: *model_cmip7}
           - {dataset: GPCP-SG, project: OBS, type: sat, tier: 2, mip: Amon, start_year: 1979, end_year: 2018}
       sst_seacycle:
         short_name: ts
         preprocessor: base_cycle
-        mip: Amon
         additional_datasets:
+          # - {<<: *model6}
+          - {<<: *model_cmip7}
           - {dataset: HadISST, project: OBS, type: reanaly, tier: 2, mip: Amon}
       tauu_seacycle:
         short_name: tauu
         preprocessor: base_cycle
-        mip: Amon
         additional_datasets:
-         - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
+          # - {<<: *model6}
+          - {<<: *model_cmip7, grid: g109}
+          - {dataset: ERA-Interim, project: OBS6, type: reanaly, tier: 3, mip: Amon, start_year: 1979, end_year: 2018}
     scripts:
       level2_map:
         script: diagnostic_scripts/climatology_diagnosticlevel2.py

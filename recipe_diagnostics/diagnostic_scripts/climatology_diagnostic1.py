@@ -43,10 +43,10 @@ def plot_level1(input_data, cfg): #input data is 2 - model and obs
             #plot title 
             title = f"{dataset['long_name']} seasonal cycle"
 
-        if proj == 'CMIP6':# group by models/ for each model with obs 
-            qplt.plot(cube, label=dt)
+        if proj in ['CMIP6', 'CMIP7']:# group by models/ for each model with obs 
+            qplt.plot(cube, label=dt+'_'+dataset['ensemble'])
             model_data = cube.data
-            filename = [dt, dataset['variable_group']]
+            filename = [dt+'_'+dataset['ensemble'], dataset['variable_group']]
         else:
             qplt.plot(cube, label=f'ref: {dt}', color='black')
             obs_data = cube.data
@@ -132,7 +132,7 @@ def main(cfg):
         for metadata in variable_groups[grp]:
             logger.info('iterate though datasets\n %s',pformat(metadata))
             pairs = [obs_data]
-            if metadata['project'] == 'CMIP6':
+            if metadata['project'] in ['CMIP6', 'CMIP7']:
                 pairs.append(metadata)
                 fig, filename = plot_level1(pairs, cfg)
 

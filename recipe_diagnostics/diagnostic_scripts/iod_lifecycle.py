@@ -340,7 +340,7 @@ def group_obs_models(obs, models, metric, var_preproc, cfg):
     # group models by dataset
     for dataset, attributes in group_metadata(
         models,
-        "dataset",
+        cfg["group_by"], # "dataset" or "ensemble"
         sort="project",
     ).items():
         logger.info(
@@ -348,7 +348,7 @@ def group_obs_models(obs, models, metric, var_preproc, cfg):
             metric,
             dataset,
         )
-        data_labels = [obs[0]["dataset"], dataset+"_"+attributes[0]["ensemble"]]
+        data_labels = [obs[0]["dataset"], attributes[0]["dataset"]+"_"+attributes[0]["ensemble"]]
         output = compute_enso_metrics(
             [
                 obs_datasets,
@@ -418,7 +418,7 @@ def get_provenance_record(metric, ancestor_files):
 def main(cfg):
     """Run ENSO metrics."""
     input_data = cfg["input_data"].values()
-
+    cfg.setdefault("group_by", "dataset")  # default to dataset if not specified
     # iterate through each metric and get variable group, select_metadata
     metrics = {
         "iod_lifecycle": ["iod_west","iod_east", "meridional"],

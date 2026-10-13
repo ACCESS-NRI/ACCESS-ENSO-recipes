@@ -221,14 +221,14 @@ def group_obs_models(obs, models, var_preproc, cfg):
     # group models by dataset
     for dataset, attributes in group_metadata(
         models,
-        "dataset",
+        cfg["group_by"], # "dataset"
         sort="project",
     ).items():
         logger.info(
             "dataset:%s",
             dataset,
         )
-        data_labels = [obs[0]["dataset"], dataset+"_"+attributes[0]["ensemble"]]
+        data_labels = [obs[0]["dataset"],attributes[0]["dataset"]+"_"+attributes[0]["ensemble"]]
         output = compute_enso_metrics(
             [
                 obs_datasets,
@@ -298,7 +298,7 @@ def get_provenance_record(metric, ancestor_files):
 def main(cfg):
     """Run metric iod_pattern."""
     input_data = cfg["input_data"].values()
-
+    cfg.setdefault("group_by", "dataset")  # default to dataset if not specified
     var_preproc = ["pattern_iode", "pattern_iodw", "sst_eq_meridional", "sst_eq"]
 
     obs, models = [], []

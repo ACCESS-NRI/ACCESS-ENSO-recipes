@@ -150,7 +150,9 @@ diagnostics:
     scripts:
       plot_pattern:
         script: diagnostic_scripts/iod_pattern.py
+        group_by: ensemble # "dataset" or "ensemble"
       plot_lifecycle: #seas, amp
         script: diagnostic_scripts/iod_lifecycle.py
+        group_by: ensemble # "dataset" or "ensemble"
 
 

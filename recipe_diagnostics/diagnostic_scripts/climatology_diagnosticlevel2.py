@@ -157,18 +157,18 @@ def main(cfg):
     )
     # for each select obs and iterate others, obs last
     for grp, var_attr in variable_groups.items():
-        logger.info("%s : %d, %s", grp, len(var_attr), pformat(var_attr))
+        logger.info("%s : count %d", grp, len(var_attr))
         iod = True if cfg["cenlon"] == 50.0 else False
-        prov = provenance_record(grp, list(cfg["input_data"].keys()), iod=iod)
+        # prov = provenance_record(grp, list(cfg["input_data"].keys()), iod=iod)
         for metadata in var_attr:
             # create pairs, add obs first to list
             pairs = [var_attr[-1]]
-            # prov = provenance_record(grp, list(cfg["input_data"].keys()), iod=iod)
-            logger.info("iterate though datasets\n %s", pformat(metadata))
+            logger.info("iterate though datasets\n %s", metadata["alias"])
             if metadata["project"] in ["CMIP6", "CMIP7"]:
                 pairs.append(metadata)
                 fig = plotmaps_level2(pairs, grp, cfg["figsize"], cfg["cenlon"])
                 # save_plotdata(data_cubes, grp, pairs, cfg)
+                prov = provenance_record(grp, [a['filename'] for a in pairs], iod=iod)
                 filename = "_".join(
                     [
                         metadata["dataset"],

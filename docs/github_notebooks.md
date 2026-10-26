@@ -12,14 +12,14 @@ A repo is a repository which is like a project folder of code, scripts and assoc
 
 - your local machine if you have your own python environments you use
 - on gadi (and use ARE to run the notebooks)
-    - `git clone <HTTPS_OR_SSH>`
+    - `git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-Recipes.git`
 
 This means you can:
 - run and test the code in your workspace
 - create your own branches to edit or add code and maintain your versions 
     - `git checkout -b *<name_your_branch>*` *from updated main branch
 - or pull any updates as others work on it.
-    - `git pull origin/main` 
+    - `git pull origin main`
 - or switch to a different branch to look at their changes
     - `git fetch` to get any updated branches from remote repo (GitHub)
     - `git checkout origin/<name_of_branch>` 
@@ -42,7 +42,7 @@ In a PR, you can review changes by going to the *Files changed* tab, where you w
 
 ## Git and Jupyter notebooks
 Git doesn't work well with Jupyter notebooks because of all the differences in kernels for cells and running them even though the python code may not have changed.
-We have an extension installed for this repo [*ReviewNB*](reviewnb.com) to assist with reviewing notebooks. You will find a link in the pull request.
+[*ReviewNB*](https://www.reviewnb.com/) can assist with reviewing notebooks when it is enabled for the repository. You will find a link in the pull request if it is configured.
 <p align="left"><img src="assets_github/reviewNB.png" alt="screenshot" width="60%"/></p>
 
 You can then add comments to specific lines in the notebook through ReviewNB similar to GitHub in a pull request.

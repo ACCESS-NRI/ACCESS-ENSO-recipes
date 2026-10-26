@@ -1,0 +1,1390 @@
+# Catalogue records for notebooks and runnable recipe YAML. See catalog/README.md.
+- id: recipes-enso-16-djf-pr-teleconnection
+  title: DJF precipitation teleconnection
+  summary: Structure of Boreal Winter Precipitation Anomalies
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/16-DJF_PR_Teleconnection.ipynb
+  legacy_path: 16-DJF_PR_Teleconnection.ipynb
+  preview: previews/recipes-enso-16-djf-pr-teleconnection.jpg
+- id: recipes-enso-17-djf-ts-teleconnection
+  title: DJF surface temperature teleconnection
+  summary: Structure of Boreal Winter Surface Temperature Anomalies
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/17-DJF_ts_teleconnection.ipynb
+  legacy_path: 17-DJF_ts_teleconnection.ipynb
+  preview: previews/recipes-enso-17-djf-ts-teleconnection.jpg
+- id: recipes-enso-01-double-itcz-bias
+  title: Double ITCZ bias
+  summary: Meridional structure of time-mean precipitation (PR) in the eastern Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/01-Double_ITCZ_bias.ipynb
+  legacy_path: 01-Double_ITCZ_bias.ipynb
+  preview: previews/recipes-enso-01-double-itcz-bias.jpg
+- id: recipes-enso-05-double-itcz-sea-cycle
+  title: Double ITCZ seasonal cycle
+  summary: Meridional structure of the amplitude of the mean seasonal cycle of PR in the eastern Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/05-double_ITCZ_sea_cycle.ipynb
+  legacy_path: 05-double_ITCZ_sea_cycle.ipynb
+  preview: previews/recipes-enso-05-double-itcz-sea-cycle.jpg
+- id: recipes-enso-11-enso-amplitude
+  title: ENSO amplitude
+  summary: Variability of SST Anomalies in the Central Equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/11-ENSO_amplitude.ipynb
+  legacy_path: 11-ENSO_amplitude.ipynb
+  preview: previews/recipes-enso-11-enso-amplitude.jpg
+- id: recipes-enso-13-enso-asymmetry
+  title: ENSO asymmetry
+  summary: Skewness of SST Anomalies in the Central Equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/13-ENSO_asymmetry.ipynb
+  legacy_path: 13-ENSO_asymmetry.ipynb
+  preview: previews/recipes-enso-13-enso-asymmetry.jpg
+- id: recipes-enso-15-enso-diversity
+  title: ENSO diversity
+  summary: Zonal Location of Maximum SST Anomalies in the Equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/15-ENSO_diversity.ipynb
+  legacy_path: 15-ENSO_diversity.ipynb
+  preview: previews/recipes-enso-15-enso-diversity.jpg
+- id: recipes-enso-14-enso-duration
+  title: ENSO duration
+  summary: Duration of SST Anomalies in the Central Equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/14-ENSO_duration.ipynb
+  legacy_path: 14-ENSO_duration.ipynb
+  preview: previews/recipes-enso-14-enso-duration.jpg
+- id: recipes-enso-10-enso-lifecycle
+  title: ENSO lifecycle
+  summary: Temporal evolution of SST anomalies in the central equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/10-ENSO_lifecycle.ipynb
+  legacy_path: 10-ENSO_lifecycle.ipynb
+  preview: previews/recipes-enso-10-enso-lifecycle.jpg
+- id: recipes-enso-09-enso-pattern
+  title: ENSO pattern
+  summary: Zonal structure of boreal winter SST anomalies in the equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/09-ENSO_pattern.ipynb
+  legacy_path: 09-ENSO_pattern.ipynb
+  preview: previews/recipes-enso-09-enso-pattern.jpg
+- id: recipes-enso-12-enso-seasonality
+  title: ENSO seasonality
+  summary: Seasonal Variability of SST Anomalies in the Central Equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/12-ENSO_seasonality.ipynb
+  legacy_path: 12-ENSO_seasonality.ipynb
+  preview: previews/recipes-enso-12-enso-seasonality.jpg
+- id: recipes-enso-02-eq-pr-bias
+  title: Equatorial PR bias
+  summary: Zonal structure of time-mean PR in the equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/02-eq_PR_bias.ipynb
+  legacy_path: 02-eq_PR_bias.ipynb
+  preview: previews/recipes-enso-02-eq-pr-bias.jpg
+- id: recipes-enso-06-eq-pr-sea-cycle
+  title: Equatorial PR seasonal cycle
+  summary: Zonal structure of the amplitude of the mean seasonal cycle of PR in the equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/06-eq_PR_sea_cycle.ipynb
+  legacy_path: 06-eq_PR_sea_cycle.ipynb
+  preview: previews/recipes-enso-06-eq-pr-sea-cycle.jpg
+- id: recipes-enso-03-eq-sst-bias
+  title: Equatorial SST bias
+  summary: Zonal structure of time-mean SST in the equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/03-eq_SST_bias.ipynb
+  legacy_path: 03-eq_SST_bias.ipynb
+  preview: previews/recipes-enso-03-eq-sst-bias.jpg
+- id: recipes-enso-07-eq-sst-sea-cycle
+  title: Equatorial SST seasonal cycle
+  summary: Zonal structure of the amplitude of the mean seasonal cycle of SST in the equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/07-eq_SST_sea_cycle.ipynb
+  legacy_path: 07-eq_SST_sea_cycle.ipynb
+  preview: previews/recipes-enso-07-eq-sst-sea-cycle.jpg
+- id: recipes-enso-04-eq-taux-bias
+  title: Equatorial zonal wind stress bias
+  summary: Zonal structure of time-mean Zonal Mean Stress (Taux) in the equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/04-eq_Taux_bias.ipynb
+  legacy_path: 04-eq_Taux_bias.ipynb
+  preview: previews/recipes-enso-04-eq-taux-bias.jpg
+- id: recipes-enso-08-eq-taux-sea-cycle
+  title: Equatorial zonal wind stress seasonal cycle
+  summary: Zonal structure of the amplitude of the mean seasonal cycle of Taux in the equatorial Pacific
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/08-eq_Taux_sea_cycle.ipynb
+  legacy_path: 08-eq_Taux_sea_cycle.ipynb
+  preview: previews/recipes-enso-08-eq-taux-sea-cycle.jpg
+- id: recipes-enso-18-jja-pr-teleconnection
+  title: JJA precipitation teleconnection
+  summary: Structure of Boreal Summer Precipitation Anomalies
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/18-JJA_pr_teleconnection.ipynb
+  legacy_path: 18-JJA_pr_teleconnection.ipynb
+  preview: previews/recipes-enso-18-jja-pr-teleconnection.jpg
+- id: recipes-enso-19-jja-ts-teleconnection
+  title: JJA surface temperature teleconnection
+  summary: Structure of Boreal Summer Surface Temperature Anomalies
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/19-JJA_ts_teleconnection.ipynb
+  legacy_path: 19-JJA_ts_teleconnection.ipynb
+  preview: previews/recipes-enso-19-jja-ts-teleconnection.jpg
+- id: recipes-enso-24-ocean-driven-sst
+  title: Ocean-driven SST
+  summary: Explore the ocean contribution to SST anomalies in the equatorial Pacific.
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/24-ocean_driven_SST.ipynb
+  legacy_path: 24-ocean_driven_SST.ipynb
+  preview: previews/recipes-enso-24-ocean-driven-sst.jpg
+- id: recipes-enso-22-ssh-sst-feedback
+  title: SSH–SST feedback
+  summary: Assess coupling between sea surface height and SST anomalies in the equatorial Pacific.
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/22-SSH_sst_feedback.ipynb
+  legacy_path: 22-SSH_sst_feedback.ipynb
+  preview: previews/recipes-enso-22-ssh-sst-feedback.jpg
+- id: recipes-enso-23-sst-nhf-feedback
+  title: SST–net heat flux feedback
+  summary: Assess coupling between SST and net heat flux anomalies in the eastern equatorial Pacific.
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/23-sst_nhf_feedback.ipynb
+  legacy_path: 23-sst_nhf_feedback.ipynb
+  preview: previews/recipes-enso-23-sst-nhf-feedback.jpg
+- id: recipes-enso-20-sst-taux-feedback
+  title: SST–wind stress feedback
+  summary: Assess coupling between equatorial Pacific SST anomalies and zonal wind stress anomalies.
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/20-SST_Taux_feedback.ipynb
+  legacy_path: 20-SST_Taux_feedback.ipynb
+  preview: previews/recipes-enso-20-sst-taux-feedback.jpg
+- id: recipes-enso-21-taux-ssh-feedback
+  title: Wind stress–SSH feedback
+  summary: Assess coupling between zonal wind stress and sea surface height anomalies in the equatorial
+    Pacific.
+  kind: Notebook
+  collection: ENSO metrics
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/21-Taux_SSH_feedback.ipynb
+  legacy_path: 21-Taux_SSH_feedback.ipynb
+  preview: previews/recipes-enso-21-taux-ssh-feedback.jpg
+- id: recipes-enso-esmvaltool-recipe-enso-feedbacknhf
+  title: ENSO net heat flux feedback · ESMValTool
+  summary: Reproducing ENSO feedback NHF metrics by Yann Planton
+  kind: ESMValTool recipe
+  collection: ENSO · ESMValTool
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValTool
+  - ESMValCore
+  path: recipes/enso/esmvaltool/recipe_enso_feedbacknhf.yml
+  legacy_path: recipe_diagnostics/recipe_enso_feedbacknhf.yml
+- id: recipes-enso-esmvaltool-recipe-enso-divedown9-10-14-15
+  title: ENSO pattern, lifecycle, duration and diversity · ESMValTool
+  summary: Reproducing basic ENSO characteristics dive down metrics by Yann Planton
+  kind: ESMValTool recipe
+  collection: ENSO · ESMValTool
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValTool
+  - ESMValCore
+  path: recipes/enso/esmvaltool/recipe_enso_divedown9-10_14-15.yml
+  legacy_path: recipe_diagnostics/recipe_enso_divedown9-10_14-15.yml
+- id: recipes-enso-esmvaltool-recipe-enso-feedback
+  title: ENSO feedback metrics · ESMValTool
+  summary: Reproducing ENSO feedback metrics by Yann Planton
+  kind: ESMValTool recipe
+  collection: ENSO · ESMValTool
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValTool
+  - ESMValCore
+  path: recipes/enso/esmvaltool/recipe_enso_feedback.yml
+  legacy_path: recipe_diagnostics/recipe_enso_feedback.yml
+- id: recipes-enso-esmvaltool-recipe-enso-characteristics
+  title: ENSO characteristics · ESMValTool
+  summary: Reproducing basic ENSO characteristics metrics by Yann Planton
+  kind: ESMValTool recipe
+  collection: ENSO · ESMValTool
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValTool
+  - ESMValCore
+  path: recipes/enso/esmvaltool/recipe_enso_characteristics.yml
+  legacy_path: recipe_diagnostics/recipe_enso_characteristics.yml
+- id: recipes-enso-esmvaltool-recipe-enso-divedown11-13
+  title: ENSO amplitude, seasonality and asymmetry · ESMValTool
+  summary: Reproducing basic ENSO characteristics dive down metrics by Yann Planton
+  kind: ESMValTool recipe
+  collection: ENSO · ESMValTool
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValTool
+  - ESMValCore
+  path: recipes/enso/esmvaltool/recipe_enso_divedown11-13.yml
+  legacy_path: recipe_diagnostics/recipe_enso_divedown11-13.yml
+- id: recipes-enso-esmvaltool-1-metrics-recipes
+  title: Historical ENSO metrics exploration
+  summary: Historical exploratory notebook with outdated local paths; use the ENSO YAML workflows for
+    current work.
+  kind: Notebook
+  collection: ENSO · ESMValTool
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/enso/esmvaltool/1_metrics_recipes.ipynb
+  legacy_path: recipe_diagnostics/1_metrics_recipes.ipynb
+  preview: previews/recipes-enso-esmvaltool-1-metrics-recipes.jpg
+  status: Historical
+- id: recipes-enso-esmvaltool-recipe-enso-climatology1
+  title: ENSO background climatology · ESMValTool
+  summary: ENSO CLIVAR metrics, background climatology, by Yann Planton
+  kind: ESMValTool recipe
+  collection: ENSO · ESMValTool
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValTool
+  - ESMValCore
+  path: recipes/enso/esmvaltool/recipe_enso_climatology1.yml
+  legacy_path: recipe_diagnostics/recipe_enso_climatology1.yml
+- id: recipes-enso-esmvaltool-recipe-enso-climatology-level2-3
+  title: ENSO climatology dive down · ESMValTool
+  summary: ENSO CLIVAR metrics by Yann Planton - background climatology diagnostic level 2 and 3
+  kind: ESMValTool recipe
+  collection: ENSO · ESMValTool
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValTool
+  - ESMValCore
+  path: recipes/enso/esmvaltool/recipe_enso_climatology_level2-3.yml
+  legacy_path: recipe_diagnostics/recipe_enso_climatology_level2-3.yml
+- id: recipes-enso-esmvaltool-recipe-enso-teleconnection
+  title: ENSO teleconnections · ESMValTool
+  summary: ENSO CLIVAR metrics - ENSO teleconnections
+  kind: ESMValTool recipe
+  collection: ENSO · ESMValTool
+  subjects:
+  - ENSO
+  realms:
+  - Coupled
+  tools:
+  - ESMValTool
+  - ESMValCore
+  path: recipes/enso/esmvaltool/recipe_enso_teleconnection.yml
+  legacy_path: recipe_diagnostics/recipe_enso_teleconnection.yml
+- id: examples-esmvalcore-ensembles-and-means
+  title: Ensembles and means
+  summary: Ensemble means and CMIP multi models
+  kind: Example
+  collection: ESMValCore examples
+  subjects:
+  - Methods
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  path: examples/esmvalcore/ensembles_and_means.ipynb
+  legacy_path: basic_functions_examples/ensembles_and_means.ipynb
+  preview: previews/examples-esmvalcore-ensembles-and-means.jpg
+- id: examples-esmvalcore-moppy-esm16-eq-sst-bias
+  title: ACCESS-ESM1.6 equatorial SST bias with MOPPeR
+  summary: Zonal structure of time-mean SST in the equatorial Pacific
+  kind: Example
+  collection: ESMValCore examples
+  subjects:
+  - Methods
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  - ACCESS-MOPPeR
+  path: examples/esmvalcore/MOPPy_esm16_eq_SST_bias.ipynb
+  legacy_path: basic_functions_examples/MOPPy_esm16_eq_SST_bias.ipynb
+  preview: previews/examples-esmvalcore-moppy-esm16-eq-sst-bias.jpg
+- id: examples-esmvalcore-regrid-example
+  title: Regridding with ESMValCore
+  summary: Regridding with esmvalcore API
+  kind: Example
+  collection: ESMValCore examples
+  subjects:
+  - Methods
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  path: examples/esmvalcore/regrid_example.ipynb
+  legacy_path: basic_functions_examples/regrid_example.ipynb
+  preview: previews/examples-esmvalcore-regrid-example.jpg
+- id: examples-esmvalcore-save-means-withsupplementaries
+  title: Save means with supplementary variables
+  summary: Save ensemble mean netcdf of ACCESS-ESM1.5 and ACCESS-CM2
+  kind: Example
+  collection: ESMValCore examples
+  subjects:
+  - Methods
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  path: examples/esmvalcore/save_means_withSupplementaries.ipynb
+  legacy_path: basic_functions_examples/save_means_withSupplementaries.ipynb
+- id: recipes-iod-eq-io-pr-bias
+  title: Equatorial Indian Ocean PR bias
+  summary: Zonal structure of time-mean PR in the equatorial Indian Ocean
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/eq_IO_PR_bias.ipynb
+  legacy_path: IOD_recipes/eq_IO_PR_bias.ipynb
+  preview: previews/recipes-iod-eq-io-pr-bias.jpg
+- id: recipes-iod-eq-io-pr-sea-cycle
+  title: Equatorial Indian Ocean PR seasonal cycle
+  summary: Zonal structure of the amplitude of the mean seasonal cycle of PR in the equatorial Indian
+    Ocean
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/eq_IO_PR_sea_cycle.ipynb
+  legacy_path: IOD_recipes/eq_IO_PR_sea_cycle.ipynb
+  preview: previews/recipes-iod-eq-io-pr-sea-cycle.jpg
+- id: recipes-iod-eq-io-sst-bias
+  title: Equatorial Indian Ocean SST bias
+  summary: Zonal structure of time-mean SST in the equatorial Indian Ocean
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/eq_IO_SST_bias.ipynb
+  legacy_path: IOD_recipes/eq_IO_SST_bias.ipynb
+  preview: previews/recipes-iod-eq-io-sst-bias.jpg
+- id: recipes-iod-eq-io-sst-sea-cycle
+  title: Equatorial Indian Ocean SST seasonal cycle
+  summary: Zonal structure of the amplitude of the mean seasonal cycle of SST in the equatorial Indian
+    Ocean
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/eq_IO_SST_sea_cycle.ipynb
+  legacy_path: IOD_recipes/eq_IO_SST_sea_cycle.ipynb
+  preview: previews/recipes-iod-eq-io-sst-sea-cycle.jpg
+- id: recipes-iod-eq-io-taux-bias
+  title: Equatorial Indian Ocean zonal wind stress bias
+  summary: Zonal structure of time-mean Zonal Mean Stress (Taux) in the equatorial Indian Ocean
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/eq_IO_Taux_bias.ipynb
+  legacy_path: IOD_recipes/eq_IO_Taux_bias.ipynb
+  preview: previews/recipes-iod-eq-io-taux-bias.jpg
+- id: recipes-iod-eq-io-taux-sea-cycle
+  title: Equatorial Indian Ocean zonal wind stress seasonal cycle
+  summary: Zonal structure of the amplitude of the mean seasonal cycle of Taux in the equatorial Pacific
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/eq_IO_Taux_sea_cycle.ipynb
+  legacy_path: IOD_recipes/eq_IO_Taux_sea_cycle.ipynb
+  preview: previews/recipes-iod-eq-io-taux-sea-cycle.jpg
+- id: recipes-iod-iod-amplitude
+  title: IOD amplitude
+  summary: Variability of SST Anomalies in the Eastern and Western Tropical Indian Ocean
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/IOD_amplitude.ipynb
+  legacy_path: IOD_recipes/IOD_amplitude.ipynb
+  preview: previews/recipes-iod-iod-amplitude.jpg
+- id: recipes-iod-iod-lifecycle
+  title: IOD lifecycle
+  summary: Temporal evolution of SST anomalies in the equatorial Indian Ocean
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/IOD_lifecycle.ipynb
+  legacy_path: IOD_recipes/IOD_lifecycle.ipynb
+  preview: previews/recipes-iod-iod-lifecycle.jpg
+- id: recipes-iod-iod-pattern
+  title: IOD pattern
+  summary: Zonal structure of austral spring SST anomalies in the tropical Indian Ocean
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/IOD_pattern.ipynb
+  legacy_path: IOD_recipes/IOD_pattern.ipynb
+  preview: previews/recipes-iod-iod-pattern.jpg
+- id: recipes-iod-iod-seasonality
+  title: IOD seasonality
+  summary: Seasonal Variability of SST Anomalies in the Tropical Indian Ocean
+  kind: Notebook
+  collection: Indian Ocean Dipole
+  subjects:
+  - IOD
+  realms:
+  - Coupled
+  tools:
+  - ESMValCore
+  path: recipes/iod/IOD_seasonality.ipynb
+  legacy_path: IOD_recipes/IOD_seasonality.ipynb
+  preview: previews/recipes-iod-iod-seasonality.jpg
+- id: recipes-mjo-bsiso-mjo-bsiso-composite-life-cycles
+  title: MJO and BSISO composite life cycles
+  summary: Compare composite life cycles of the Madden–Julian and boreal summer intraseasonal oscillations.
+  kind: Notebook
+  collection: MJO and BSISO
+  subjects:
+  - MJO
+  - BSISO
+  realms:
+  - Atmosphere
+  tools:
+  - ESMValCore
+  path: recipes/mjo-bsiso/mjo_bsiso_composite_life_cycles.ipynb
+  legacy_path: MJO_BSISO/mjo_bsiso_composite_life_cycles.ipynb
+  preview: previews/recipes-mjo-bsiso-mjo-bsiso-composite-life-cycles.jpg
+- id: recipes-mjo-bsiso-mjo-bsiso-patterns
+  title: MJO and BSISO patterns
+  summary: Analyse spatial patterns of the Madden–Julian and boreal summer intraseasonal oscillations.
+  kind: Notebook
+  collection: MJO and BSISO
+  subjects:
+  - MJO
+  - BSISO
+  realms:
+  - Atmosphere
+  tools:
+  - ESMValCore
+  path: recipes/mjo-bsiso/mjo_bsiso_patterns.ipynb
+  legacy_path: MJO_BSISO/mjo_bsiso_patterns.ipynb
+  preview: previews/recipes-mjo-bsiso-mjo-bsiso-patterns.jpg
+- id: recipes-mjo-bsiso-pr-summary-bias
+  title: May–October precipitation bias
+  summary: Compare May–October precipitation mean states and model biases.
+  kind: Notebook
+  collection: MJO and BSISO
+  subjects:
+  - MJO
+  - BSISO
+  realms:
+  - Atmosphere
+  tools:
+  - ESMValCore
+  path: recipes/mjo-bsiso/pr_summary_bias.ipynb
+  legacy_path: MJO_BSISO/pr_summary_bias.ipynb
+  preview: previews/recipes-mjo-bsiso-pr-summary-bias.jpg
+- id: recipes-ocean-cosima-cmip6-11-along-isobath-average
+  title: Along-isobath averaging
+  summary: Average fields along an isobath.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/11-Along_isobath_average.ipynb
+  legacy_path: cosima/cmip6/11-Along_isobath_average.ipynb
+- id: recipes-ocean-cosima-cmip6-04-sea-ice-seasonality
+  title: Antarctic sea-ice seasonality
+  summary: Analyse Antarctic sea-ice advance, retreat, and seasonal duration.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  - Sea ice
+  realms:
+  - Sea ice
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/04-Sea_ice_seasonality.ipynb
+  legacy_path: cosima/cmip6/04-Sea_ice_seasonality.ipynb
+- id: recipes-ocean-cosima-cmip6-09-along-slope-velocities
+  title: Antarctic slope current from along-slope velocities
+  summary: Analyse velocities along the Antarctic continental slope.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/09-Along_slope_velocities.ipynb
+  legacy_path: cosima/cmip6/09-Along_slope_velocities.ipynb
+- id: recipes-ocean-cosima-cmip6-12-cross-contour-transport
+  title: Cross-contour transport
+  summary: Estimate transport across a selected ocean contour.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/12-Cross_contour_transport.ipynb
+  legacy_path: cosima/cmip6/12-Cross_contour_transport.ipynb
+- id: recipes-ocean-cosima-cmip6-10-cross-slope-section
+  title: Cross-slope hydrographic section
+  summary: Create a cross-slope hydrographic section.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/10-Cross_slope_section.ipynb
+  legacy_path: cosima/cmip6/10-Cross_slope_section.ipynb
+- id: recipes-ocean-cosima-cmip6-16-density-compensation
+  title: Density compensation in the ocean
+  summary: Separate thermal and haline contributions to density differences.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/16-Density_compensation.ipynb
+  legacy_path: cosima/cmip6/16-Density_compensation.ipynb
+- id: recipes-ocean-cosima-cmip6-15-hydrographic-benchmark
+  title: 'Hydrographic benchmark: reference differences and control drift'
+  summary: Compare model temperature and salinity with WOA18 and assess control-run drift.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/15-Hydrographic_benchmark.ipynb
+  legacy_path: cosima/cmip6/15-Hydrographic_benchmark.ipynb
+- id: recipes-ocean-cosima-cmip6-13-heaving-decomposition
+  title: Isopycnal heave and along-isopycnal decomposition
+  summary: Separate isopycnal heave from changes along isopycnals.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/13-Heaving_decomposition.ipynb
+  legacy_path: cosima/cmip6/13-Heaving_decomposition.ipynb
+- id: recipes-ocean-cosima-cmip6-02-overturning-circulation
+  title: Meridional overturning circulation
+  summary: Calculate meridional overturning circulation in depth and density space.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/02-Overturning_circulation.ipynb
+  legacy_path: cosima/cmip6/02-Overturning_circulation.ipynb
+- id: recipes-ocean-cosima-cmip6-14-neutral-density
+  title: Neutral density
+  summary: Calculate neutral density from CMIP6 ocean fields.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/14-Neutral_density.ipynb
+  legacy_path: cosima/cmip6/14-Neutral_density.ipynb
+- id: recipes-ocean-cosima-cmip6-01-meridional-heat-transport
+  title: Ocean meridional heat transport
+  summary: Calculate ocean meridional heat transport from CMIP6 data.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/01-Meridional_heat_transport.ipynb
+  legacy_path: cosima/cmip6/01-Meridional_heat_transport.ipynb
+- id: recipes-ocean-cosima-cmip6-08-relative-vorticity
+  title: Relative vorticity
+  summary: Calculate relative vorticity and Rossby number from resolved currents.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/08-Relative_vorticity.ipynb
+  legacy_path: cosima/cmip6/08-Relative_vorticity.ipynb
+- id: recipes-ocean-cosima-cmip6-06-sea-ice-area-volume
+  title: Sea-ice area, extent and volume against observations
+  summary: Compare sea-ice area, extent, and volume with observations.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  - Sea ice
+  realms:
+  - Sea ice
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/06-Sea_ice_area_volume.ipynb
+  legacy_path: cosima/cmip6/06-Sea_ice_area_volume.ipynb
+- id: recipes-ocean-cosima-cmip6-05-geostrophic-velocities
+  title: Surface geostrophic velocities from sea level
+  summary: Estimate surface geostrophic velocities from sea level.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/05-Geostrophic_velocities.ipynb
+  legacy_path: cosima/cmip6/05-Geostrophic_velocities.ipynb
+- id: recipes-ocean-cosima-cmip6-03-surface-water-mass-transformation
+  title: Surface water-mass transformation
+  summary: Estimate surface water-mass transformation from CMIP6 fields.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/03-Surface_water_mass_transformation.ipynb
+  legacy_path: cosima/cmip6/03-Surface_water_mass_transformation.ipynb
+- id: recipes-ocean-cosima-cmip6-07-temperature-salinity-diagram
+  title: Volume-weighted temperature-salinity diagram
+  summary: Create a volume-weighted temperature–salinity diagram.
+  kind: Notebook
+  collection: Ocean · CMIP6
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/cmip6/07-Temperature_salinity_diagram.ipynb
+  legacy_path: cosima/cmip6/07-Temperature_salinity_diagram.ipynb
+- id: recipes-ocean-russell2018-01-wind-stress-polar
+  title: 'Figure 1: Annual-mean zonal wind stress'
+  summary: Reproduce Figure 1 — Annual-mean zonal wind stress from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Atmosphere
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/01-Wind_stress_polar.ipynb
+  legacy_path: russell18jgr/01-Wind_stress_polar.ipynb
+  preview: previews/recipes-ocean-russell2018-01-wind-stress-polar.jpg
+- id: recipes-ocean-russell2018-02-wind-stress-zonal-mean
+  title: 'Figure 2: Zonal and annual mean wind stress'
+  summary: Reproduce Figure 2 — Zonal and annual mean wind stress from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Atmosphere
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/02-Wind_stress_zonal_mean.ipynb
+  legacy_path: russell18jgr/02-Wind_stress_zonal_mean.ipynb
+  preview: previews/recipes-ocean-russell2018-02-wind-stress-zonal-mean.jpg
+- id: recipes-ocean-russell2018-04-polar-front
+  title: 'Figure 3b (part 2): Polar Front position'
+  summary: Reproduce Figure 3b (part 2) — Polar Front position from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/04-Polar_Front.ipynb
+  legacy_path: russell18jgr/04-Polar_Front.ipynb
+  preview: previews/recipes-ocean-russell2018-04-polar-front.jpg
+- id: recipes-ocean-russell2018-03-subantarctic-front
+  title: 'Figure 3b: Subantarctic Front position'
+  summary: Reproduce Figure 3b — Subantarctic Front position from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/03-Subantarctic_Front.ipynb
+  legacy_path: russell18jgr/03-Subantarctic_Front.ipynb
+  preview: previews/recipes-ocean-russell2018-03-subantarctic-front.jpg
+- id: recipes-ocean-russell2018-05-drake-passage
+  title: 'Figure 4: Drake Passage section velocity'
+  summary: Reproduce Figure 4 — Drake Passage section velocity from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/05-Drake_Passage.ipynb
+  legacy_path: russell18jgr/05-Drake_Passage.ipynb
+  preview: previews/recipes-ocean-russell2018-05-drake-passage.jpg
+- id: recipes-ocean-russell2018-06-sea-ice-extent
+  title: 'Figure 5: Sea ice maximum and minimum extent'
+  summary: Reproduce Figure 5 — Sea ice maximum and minimum extent from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  - Sea ice
+  realms:
+  - Sea ice
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/06-Sea_ice_extent.ipynb
+  legacy_path: russell18jgr/06-Sea_ice_extent.ipynb
+  preview: previews/recipes-ocean-russell2018-06-sea-ice-extent.jpg
+- id: recipes-ocean-russell2018-07-sea-ice-annual-cycle
+  title: 'Figure 5g: Annual cycle of sea ice area'
+  summary: Reproduce Figure 5g — Annual cycle of sea ice area from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  - Sea ice
+  realms:
+  - Sea ice
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/07-Sea_ice_annual_cycle.ipynb
+  legacy_path: russell18jgr/07-Sea_ice_annual_cycle.ipynb
+  preview: previews/recipes-ocean-russell2018-07-sea-ice-annual-cycle.jpg
+- id: recipes-ocean-russell2018-08-volume-transport-30s
+  title: 'Figure 6a: Density-layer volume transport'
+  summary: Reproduce Figure 6a — Density-layer volume transport from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/08-Volume_transport_30S.ipynb
+  legacy_path: russell18jgr/08-Volume_transport_30S.ipynb
+  preview: previews/recipes-ocean-russell2018-08-volume-transport-30s.jpg
+- id: recipes-ocean-russell2018-09-heat-transport-30s
+  title: 'Figure 6b: Density-layer heat transport'
+  summary: Reproduce Figure 6b — Density-layer heat transport from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/09-Heat_transport_30S.ipynb
+  legacy_path: russell18jgr/09-Heat_transport_30S.ipynb
+  preview: previews/recipes-ocean-russell2018-09-heat-transport-30s.jpg
+- id: recipes-ocean-russell2018-10-co2-flux-polar
+  title: 'Figure 7: Annual mean CO2 flux'
+  summary: Reproduce Figure 7 — Annual mean CO2 flux from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/10-CO2_flux_polar.ipynb
+  legacy_path: russell18jgr/10-CO2_flux_polar.ipynb
+  preview: previews/recipes-ocean-russell2018-10-co2-flux-polar.jpg
+- id: recipes-ocean-russell2018-11-co2-flux-zonal-mean
+  title: 'Figure 7h: Zonal mean CO2 flux'
+  summary: Reproduce Figure 7h — Zonal mean CO2 flux from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/11-CO2_flux_zonal_mean.ipynb
+  legacy_path: russell18jgr/11-CO2_flux_zonal_mean.ipynb
+  preview: previews/recipes-ocean-russell2018-11-co2-flux-zonal-mean.jpg
+- id: recipes-ocean-russell2018-12-co2-flux-cumulative
+  title: 'Figure 7i: Cumulative integrated CO2 flux'
+  summary: Reproduce Figure 7i — Cumulative integrated CO2 flux from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/12-CO2_flux_cumulative.ipynb
+  legacy_path: russell18jgr/12-CO2_flux_cumulative.ipynb
+  preview: previews/recipes-ocean-russell2018-12-co2-flux-cumulative.jpg
+- id: recipes-ocean-russell2018-13-surface-ph-polar
+  title: 'Figure 8: Surface pH'
+  summary: Reproduce Figure 8 — Surface pH from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/13-Surface_pH_polar.ipynb
+  legacy_path: russell18jgr/13-Surface_pH_polar.ipynb
+  preview: previews/recipes-ocean-russell2018-13-surface-ph-polar.jpg
+- id: recipes-ocean-russell2018-14-westerlies-vs-heat-uptake
+  title: 'Figure 9a: Westerly band width vs. heat uptake'
+  summary: Reproduce Figure 9a — Westerly band width vs. heat uptake from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/14-Westerlies_vs_heat_uptake.ipynb
+  legacy_path: russell18jgr/14-Westerlies_vs_heat_uptake.ipynb
+  preview: previews/recipes-ocean-russell2018-14-westerlies-vs-heat-uptake.jpg
+- id: recipes-ocean-russell2018-15-westerlies-vs-carbon-uptake
+  title: 'Figure 9b: Westerly band width vs. carbon uptake'
+  summary: Reproduce Figure 9b — Westerly band width vs. carbon uptake from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/15-Westerlies_vs_carbon_uptake.ipynb
+  legacy_path: russell18jgr/15-Westerlies_vs_carbon_uptake.ipynb
+  preview: previews/recipes-ocean-russell2018-15-westerlies-vs-carbon-uptake.jpg
+- id: recipes-ocean-russell2018-16-heat-vs-carbon-uptake
+  title: 'Figure 9c: Heat uptake vs. carbon uptake'
+  summary: Reproduce Figure 9c — Heat uptake vs. carbon uptake from Russell et al. (2018).
+  kind: Notebook
+  collection: Ocean · Russell et al. 2018
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/russell2018/16-Heat_vs_carbon_uptake.ipynb
+  legacy_path: russell18jgr/16-Heat_vs_carbon_uptake.ipynb
+  preview: previews/recipes-ocean-russell2018-16-heat-vs-carbon-uptake.jpg
+- id: recipes-ocean-cosima-03-barotropic-streamfunction
+  title: Barotropic Streamfunction
+  summary: Calculate and plot the barotropic streamfunction from ocean model output.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/03_Barotropic_Streamfunction.ipynb
+  legacy_path: cosima/03_Barotropic_Streamfunction.ipynb
+  preview: previews/recipes-ocean-cosima-03-barotropic-streamfunction.jpg
+- id: recipes-ocean-cosima-02-compare-sst-sss-to-woa18
+  title: Compare Temperature and Salinity from ACCESS-OM2 to WOA
+  summary: Compare ACCESS-OM2 temperature and salinity with WOA18 observations.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/02_Compare_SST_SSS_to_WOA18.ipynb
+  legacy_path: cosima/02_Compare_SST_SSS_to_WOA18.ipynb
+  preview: previews/recipes-ocean-cosima-02-compare-sst-sss-to-woa18.jpg
+- id: recipes-ocean-cosima-01-compare-ssh-model-obs
+  title: Compare sea surface height model output and observations
+  summary: Compare model sea surface height with observational estimates.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/01_Compare_SSH_model_obs.ipynb
+  legacy_path: cosima/01_Compare_SSH_model_obs.ipynb
+  preview: previews/recipes-ocean-cosima-01-compare-ssh-model-obs.jpg
+- id: recipes-ocean-cosima-04-hovmoller-temperature-depth
+  title: Depth-time Hovmoller plot
+  summary: Plot how ocean temperature changes with depth and time.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/04_Hovmoller_Temperature_Depth.ipynb
+  legacy_path: cosima/04_Hovmoller_Temperature_Depth.ipynb
+  preview: previews/recipes-ocean-cosima-04-hovmoller-temperature-depth.jpg
+- id: recipes-ocean-cosima-eddy-mean-kinetic-energy-decomposition
+  title: Kinetic Energy Mean-Transient Decomposition
+  summary: Separate mean and transient contributions to ocean kinetic energy.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/Eddy-Mean_Kinetic_Energy_Decomposition.ipynb
+  legacy_path: cosima/Eddy-Mean_Kinetic_Energy_Decomposition.ipynb
+  preview: previews/recipes-ocean-cosima-eddy-mean-kinetic-energy-decomposition.jpg
+- id: recipes-ocean-cosima-meridional-heat-transport
+  title: Meridional Heat Transport
+  summary: Calculate meridional heat transport from native ocean model output.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/Meridional_heat_transport.ipynb
+  legacy_path: cosima/Meridional_heat_transport.ipynb
+  preview: previews/recipes-ocean-cosima-meridional-heat-transport.jpg
+- id: recipes-ocean-cosima-05-sea-ice-coordinates
+  title: Sea Ice Coordinates & Plotting Examples
+  summary: Work with sea-ice coordinates and plotting on the native grid.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  - Sea ice
+  realms:
+  - Sea ice
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/05_Sea_Ice_Coordinates.ipynb
+  legacy_path: cosima/05_Sea_Ice_Coordinates.ipynb
+  preview: previews/recipes-ocean-cosima-05-sea-ice-coordinates.jpg
+- id: recipes-ocean-cosima-temperature-salinity-diagram
+  title: Temperature-Salinity diagram
+  summary: Build a temperature–salinity diagram from native ocean output.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/Temperature_Salinity_Diagram.ipynb
+  legacy_path: cosima/Temperature_Salinity_Diagram.ipynb
+  preview: previews/recipes-ocean-cosima-temperature-salinity-diagram.jpg
+- id: recipes-ocean-cosima-07-true-zonal-mean
+  title: True Zonal Mean
+  summary: Calculate a zonal mean on the native ocean grid.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/07_True_Zonal_Mean.ipynb
+  legacy_path: cosima/07_True_Zonal_Mean.ipynb
+  preview: previews/recipes-ocean-cosima-07-true-zonal-mean.jpg
+- id: recipes-ocean-cosima-06-extract-variables-at-ocean-bottom
+  title: Visualising Ocean Bottom Age Using the Ideal Age Tracer
+  summary: Extract and visualise ocean-bottom age using the ideal-age tracer.
+  kind: Notebook
+  collection: Ocean · native model
+  subjects:
+  - Ocean
+  realms:
+  - Ocean
+  tools:
+  - ESMValCore
+  path: recipes/ocean/cosima/06_Extract_Variables_at_Ocean_Bottom.ipynb
+  legacy_path: cosima/06_Extract_Variables_at_Ocean_Bottom.ipynb
+  preview: previews/recipes-ocean-cosima-06-extract-variables-at-ocean-bottom.jpg
+- id: training-2025-examples-cmorisation-enso-recipes
+  title: CMORise ACCESS-ESM1.6 spin-up for ENSO recipes
+  summary: CMORise ACCESS-ESM1.6 spin-up variables for evaluation workflows.
+  kind: Training
+  collection: Training · 2025
+  subjects:
+  - Training
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  - ACCESS-MOPPeR
+  path: training/2025/examples/CMORisation_ENSO_Recipes.ipynb
+  legacy_path: training2025/examples/CMORisation_ENSO_Recipes.ipynb
+- id: training-2025-examples-esm16-double-itcz-sea-cycle
+  title: ACCESS-ESM1.6 double ITCZ seasonal cycle
+  summary: Meridional structure of the amplitude of the mean seasonal cycle of PR in the eastern Pacific
+  kind: Training
+  collection: Training · 2025
+  subjects:
+  - Training
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  - ACCESS-MOPPeR
+  path: training/2025/examples/esm16_double_ITCZ_sea_cycle.ipynb
+  legacy_path: training2025/examples/esm16_double_ITCZ_sea_cycle.ipynb
+  preview: previews/training-2025-examples-esm16-double-itcz-sea-cycle.jpg
+- id: training-2025-examples-esm16-eq-sst-bias
+  title: ACCESS-ESM1.6 equatorial SST bias
+  summary: Zonal structure of time-mean SST in the equatorial Pacific
+  kind: Training
+  collection: Training · 2025
+  subjects:
+  - Training
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  - ACCESS-MOPPeR
+  path: training/2025/examples/esm16_eq_SST_bias.ipynb
+  legacy_path: training2025/examples/esm16_eq_SST_bias.ipynb
+- id: training-2025-exercises-ex01-double-itcz-bias
+  title: 'Exercise: double ITCZ bias'
+  summary: Meridional structure of time-mean precipitation (PR) in the eastern Pacific
+  kind: Training
+  collection: Training · 2025
+  subjects:
+  - Training
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  path: training/2025/exercises/ex01-double_ITCZ_bias.ipynb
+  legacy_path: training2025/exercises/ex01-double_ITCZ_bias.ipynb
+- id: training-2025-exercises-ex11-enso-amplitude
+  title: 'Exercise: ENSO amplitude'
+  summary: Variability of SST Anomalies in the Central Equatorial Pacific
+  kind: Training
+  collection: Training · 2025
+  subjects:
+  - Training
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  path: training/2025/exercises/ex11-ENSO_amplitude.ipynb
+  legacy_path: training2025/exercises/ex11-ENSO_amplitude.ipynb
+  preview: previews/training-2025-exercises-ex11-enso-amplitude.jpg
+- id: training-2025-exercises-withmopper-ex12-esm16-enso-seasonality
+  title: 'Exercise: ACCESS-ESM1.6 ENSO seasonality'
+  summary: Seasonal Variability of SST Anomalies in the Central Equatorial Pacific
+  kind: Training
+  collection: Training · 2025
+  subjects:
+  - Training
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  path: training/2025/exercises/withMOPPeR/ex12-esm16_ENSO_seasonality.ipynb
+  legacy_path: training2025/exercises/withMOPPeR/ex12-esm16_ENSO_seasonality.ipynb
+- id: training-2025-exercises-withmopper-ex9-esm16-enso-pattern
+  title: 'Exercise: ACCESS-ESM1.6 ENSO pattern'
+  summary: Zonal structure of boreal winter SST anomalies in the equatorial Pacific
+  kind: Training
+  collection: Training · 2025
+  subjects:
+  - Training
+  realms:
+  - General
+  tools:
+  - ESMValCore
+  - ACCESS-MOPPeR
+  path: training/2025/exercises/withMOPPeR/ex9-esm16_ENSO_pattern.ipynb
+  legacy_path: training2025/exercises/withMOPPeR/ex9-esm16_ENSO_pattern.ipynb

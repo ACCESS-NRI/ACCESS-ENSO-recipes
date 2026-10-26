@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Browse ACCESS model evaluation notebooks and ESMValTool recipes by subject, realm, tool and collection.">
+    <meta name="theme-color" content="#102936">
+    <title>ACCESS Evaluation Recipes</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#catalogue">Skip to recipes</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="ACCESS Evaluation Recipes home">
+          <span class="brand-mark" aria-hidden="true">A<span>·</span></span>
+          <span class="brand-name">ACCESS <strong>Evaluation Recipes</strong></span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <a href="#catalogue">Browse recipes</a>
+          <a href="#about">How to use</a>
+          <a class="repository-link" href="https://github.com/ACCESS-NRI/ACCESS-Evaluation-Recipes">Repository <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span> Model evaluation, made explorable</p>
+            <h1 id="hero-title">Find your next <em>evaluation recipe.</em></h1>
+            <p class="hero-description">Explore notebooks, metrics and diagnostics for ACCESS and other climate models. Browse by scientific subject, realm or tool, then open the source to adapt a recipe for your data.</p>
+            <a class="primary-action" href="#catalogue">Explore the catalogue <span aria-hidden="true">↘</span></a>
+          </div>
+          <div class="hero-graphic" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+            <div class="orbit-core">ACCESS<span>↗</span></div>
+            <span class="orbit-label label-one">OCEAN</span>
+            <span class="orbit-label label-two">IOD</span>
+            <span class="orbit-label label-three">MJO</span>
+            <span class="orbit-label label-four">ENSO</span>
+            <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span><span class="orbit-dot dot-three"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-bar" aria-label="Collection at a glance">
+        <div class="stats-inner">
+          <div><strong id="stat-recipes">—</strong><span>recipes to explore</span></div>
+          <div><strong id="stat-subjects">—</strong><span>subjects</span></div>
+          <div><strong id="stat-previews">—</strong><span>visual previews</span></div>
+          <p>Curated pathways into ACCESS model evaluation.</p>
+        </div>
+      </section>
+
+      <section id="catalogue" class="catalogue" aria-labelledby="catalogue-title">
+        <div class="catalogue-heading">
+          <div>
+            <p class="section-kicker">The collection</p>
+            <h2 id="catalogue-title">Browse recipes</h2>
+            <p>Find a starting point for your analysis. Preview images show saved notebook output and may use older model runs.</p>
+          </div>
+          <span class="result-count" id="result-count" role="status" aria-live="polite">Loading catalogue…</span>
+        </div>
+
+        <form class="filters" id="filters" role="search" aria-label="Filter recipes">
+          <label class="search-field" for="search">
+            <span>Search</span>
+            <input id="search" name="q" type="search" placeholder="Try ENSO amplitude, sea ice, heat transport…" autocomplete="off">
+          </label>
+          <label for="subject"><span>Subject</span><select id="subject" name="subject"><option value="">All subjects</option></select></label>
+          <label for="realm"><span>Realm</span><select id="realm" name="realm"><option value="">All realms</option></select></label>
+          <label for="tool"><span>Tool</span><select id="tool" name="tool"><option value="">All tools</option></select></label>
+          <label for="kind"><span>Type</span><select id="kind" name="kind"><option value="">All types</option></select></label>
+          <button id="reset" class="reset-button" type="reset">Clear filters</button>
+        </form>
+
+        <div id="results" class="recipe-grid" aria-live="off"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <h3>No recipes found</h3>
+          <p>Try a broader search or clear one of the filters.</p>
+          <button id="empty-reset" type="button">Show all recipes</button>
+        </div>
+        <noscript><p class="noscript">Enable JavaScript to use the interactive catalogue. The notebooks are also available in the repository.</p></noscript>
+      </section>
+
+      <section id="about" class="about-section" aria-labelledby="about-title">
+        <div class="about-inner">
+          <div>
+            <p class="section-kicker">From discovery to analysis</p>
+            <h2 id="about-title">A starting point, ready to adapt.</h2>
+          </div>
+          <div class="about-steps">
+            <article><span>01</span><h3>Find a recipe</h3><p>Use the filters to narrow the collection by subject, realm, tool or format.</p></article>
+            <article><span>02</span><h3>Inspect the approach</h3><p>Open the notebook or ESMValTool YAML in the repository. Previews are illustrations, not validation results.</p></article>
+            <article><span>03</span><h3>Run with your data</h3><p>Clone the repository on Gadi, check the recipe’s input requirements, and adapt it to your model or observations.</p></article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer><span>ACCESS Evaluation Recipes</span><span>Developed by the ACCESS-NRI model evaluation community · Apache-2.0</span></footer>
+  </body>
+</html>

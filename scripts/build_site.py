@@ -12,14 +12,34 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "catalog" / "recipes.yml"
+MODELS = ROOT / "catalog" / "models.yml"
 LEGACY = ROOT / "catalog" / "legacy-paths.json"
 WEB = ROOT / "web"
+DATA_SCRIPT = WEB / "catalogue-data.js"
 OUTPUT = ROOT / "_site"
 CONTENT_ROOTS = ("recipes", "examples", "training")
 KINDS = {"Notebook", "ESMValTool recipe", "Training", "Example"}
 
 
-def validate(records: list[dict]) -> None:
+def validate_models(models: list[dict]) -> set[str]:
+    if not isinstance(models, list) or not models:
+        raise ValueError("catalog/models.yml must contain a nonempty list")
+    names: set[str] = set()
+    for model in models:
+        if not isinstance(model, dict) or set(model) != {"name", "family", "featured"}:
+            raise ValueError("Each model needs name, family and featured fields")
+        name = model["name"]
+        if not isinstance(name, str) or not name.strip() or name in names:
+            raise ValueError(f"Invalid or duplicate model name: {name}")
+        if not isinstance(model["family"], str) or not model["family"].strip() or not isinstance(model["featured"], bool):
+            raise ValueError(f"{name}: invalid family or featured value")
+        names.add(name)
+    if not any(model["featured"] for model in models):
+        raise ValueError("At least one model must be featured")
+    return names
+
+
+def validate(records: list[dict], model_names: set[str]) -> None:
     if not isinstance(records, list):
         raise ValueError("catalog/recipes.yml must contain a list")
     legacy = json.loads(LEGACY.read_text(encoding="utf-8"))
@@ -27,7 +47,7 @@ def validate(records: list[dict]) -> None:
     ids: set[str] = set()
     paths: set[str] = set()
     for record in records:
-        required = {"id", "title", "summary", "kind", "collection", "subjects", "realms", "tools", "path", "legacy_path"}
+        required = {"id", "title", "summary", "kind", "collection", "subjects", "realms", "tools", "models", "path", "legacy_path"}
         missing = required - record.keys()
         if missing:
             raise ValueError(f"{record.get('id', 'record')}: missing {sorted(missing)}")
@@ -44,6 +64,9 @@ def validate(records: list[dict]) -> None:
         for key in ("subjects", "realms", "tools"):
             if not isinstance(record[key], list) or not record[key] or not all(isinstance(value, str) and value.strip() for value in record[key]):
                 raise ValueError(f"{item_id}: {key} must be a nonempty list of strings")
+        models = record["models"]
+        if not isinstance(models, list) or not all(isinstance(model, str) for model in models) or len(models) != len(set(models)) or any(model not in model_names for model in models):
+            raise ValueError(f"{item_id}: models must be a unique list of known model names")
         file_path = Path(path)
         if file_path.is_absolute() or ".." in file_path.parts or file_path.parts[0] not in CONTENT_ROOTS:
             raise ValueError(f"{item_id}: invalid source path {path}")
@@ -80,14 +103,22 @@ def main() -> None:
     parser.add_argument("--check", action="store_true", help="validate only; do not write _site")
     args = parser.parse_args()
     records = yaml.safe_load(CATALOG.read_text(encoding="utf-8"))
-    validate(records)
+    models = yaml.safe_load(MODELS.read_text(encoding="utf-8"))
+    validate(records, validate_models(models))
     print(f"Validated {len(records)} catalogue entries")
+    data_script = "window.ACCESS_RECIPE_CATALOGUE = " + json.dumps(
+        {"recipes": records, "models": models}, ensure_ascii=True, separators=(",", ":")
+    ) + ";\n"
     if args.check:
+        if not DATA_SCRIPT.is_file() or DATA_SCRIPT.read_text(encoding="utf-8") != data_script:
+            raise ValueError("web/catalogue-data.js is stale; run python scripts/build_site.py")
         return
+    DATA_SCRIPT.write_text(data_script, encoding="utf-8")
     if OUTPUT.exists():
         shutil.rmtree(OUTPUT)
     shutil.copytree(WEB, OUTPUT)
     (OUTPUT / "catalogue.json").write_text(json.dumps(records, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+    (OUTPUT / "models.json").write_text(json.dumps(models, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     (OUTPUT / ".nojekyll").touch()
     print(f"Built {OUTPUT}")
 

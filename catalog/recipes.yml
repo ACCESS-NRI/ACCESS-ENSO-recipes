@@ -10,6 +10,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/16-DJF_PR_Teleconnection.ipynb
   legacy_path: 16-DJF_PR_Teleconnection.ipynb
   preview: previews/recipes-enso-16-djf-pr-teleconnection.jpg
@@ -24,6 +26,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/17-DJF_ts_teleconnection.ipynb
   legacy_path: 17-DJF_ts_teleconnection.ipynb
   preview: previews/recipes-enso-17-djf-ts-teleconnection.jpg
@@ -38,6 +42,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/01-Double_ITCZ_bias.ipynb
   legacy_path: 01-Double_ITCZ_bias.ipynb
   preview: previews/recipes-enso-01-double-itcz-bias.jpg
@@ -52,6 +58,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/05-double_ITCZ_sea_cycle.ipynb
   legacy_path: 05-double_ITCZ_sea_cycle.ipynb
   preview: previews/recipes-enso-05-double-itcz-sea-cycle.jpg
@@ -66,6 +74,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/11-ENSO_amplitude.ipynb
   legacy_path: 11-ENSO_amplitude.ipynb
   preview: previews/recipes-enso-11-enso-amplitude.jpg
@@ -80,6 +90,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/13-ENSO_asymmetry.ipynb
   legacy_path: 13-ENSO_asymmetry.ipynb
   preview: previews/recipes-enso-13-enso-asymmetry.jpg
@@ -94,6 +106,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/enso/15-ENSO_diversity.ipynb
   legacy_path: 15-ENSO_diversity.ipynb
   preview: previews/recipes-enso-15-enso-diversity.jpg
@@ -108,6 +122,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/enso/14-ENSO_duration.ipynb
   legacy_path: 14-ENSO_duration.ipynb
   preview: previews/recipes-enso-14-enso-duration.jpg
@@ -122,6 +138,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/enso/10-ENSO_lifecycle.ipynb
   legacy_path: 10-ENSO_lifecycle.ipynb
   preview: previews/recipes-enso-10-enso-lifecycle.jpg
@@ -136,6 +154,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/enso/09-ENSO_pattern.ipynb
   legacy_path: 09-ENSO_pattern.ipynb
   preview: previews/recipes-enso-09-enso-pattern.jpg
@@ -150,6 +170,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/12-ENSO_seasonality.ipynb
   legacy_path: 12-ENSO_seasonality.ipynb
   preview: previews/recipes-enso-12-enso-seasonality.jpg
@@ -164,6 +186,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/02-eq_PR_bias.ipynb
   legacy_path: 02-eq_PR_bias.ipynb
   preview: previews/recipes-enso-02-eq-pr-bias.jpg
@@ -178,6 +202,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/06-eq_PR_sea_cycle.ipynb
   legacy_path: 06-eq_PR_sea_cycle.ipynb
   preview: previews/recipes-enso-06-eq-pr-sea-cycle.jpg
@@ -192,6 +218,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/03-eq_SST_bias.ipynb
   legacy_path: 03-eq_SST_bias.ipynb
   preview: previews/recipes-enso-03-eq-sst-bias.jpg
@@ -206,6 +234,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/07-eq_SST_sea_cycle.ipynb
   legacy_path: 07-eq_SST_sea_cycle.ipynb
   preview: previews/recipes-enso-07-eq-sst-sea-cycle.jpg
@@ -220,6 +250,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/04-eq_Taux_bias.ipynb
   legacy_path: 04-eq_Taux_bias.ipynb
   preview: previews/recipes-enso-04-eq-taux-bias.jpg
@@ -234,6 +266,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/08-eq_Taux_sea_cycle.ipynb
   legacy_path: 08-eq_Taux_sea_cycle.ipynb
   preview: previews/recipes-enso-08-eq-taux-sea-cycle.jpg
@@ -248,6 +282,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/18-JJA_pr_teleconnection.ipynb
   legacy_path: 18-JJA_pr_teleconnection.ipynb
   preview: previews/recipes-enso-18-jja-pr-teleconnection.jpg
@@ -262,6 +298,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/19-JJA_ts_teleconnection.ipynb
   legacy_path: 19-JJA_ts_teleconnection.ipynb
   preview: previews/recipes-enso-19-jja-ts-teleconnection.jpg
@@ -276,6 +314,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/24-ocean_driven_SST.ipynb
   legacy_path: 24-ocean_driven_SST.ipynb
   preview: previews/recipes-enso-24-ocean-driven-sst.jpg
@@ -290,6 +330,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/22-SSH_sst_feedback.ipynb
   legacy_path: 22-SSH_sst_feedback.ipynb
   preview: previews/recipes-enso-22-ssh-sst-feedback.jpg
@@ -304,6 +346,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/23-sst_nhf_feedback.ipynb
   legacy_path: 23-sst_nhf_feedback.ipynb
   preview: previews/recipes-enso-23-sst-nhf-feedback.jpg
@@ -318,6 +362,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/20-SST_Taux_feedback.ipynb
   legacy_path: 20-SST_Taux_feedback.ipynb
   preview: previews/recipes-enso-20-sst-taux-feedback.jpg
@@ -333,6 +379,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/21-Taux_SSH_feedback.ipynb
   legacy_path: 21-Taux_SSH_feedback.ipynb
   preview: previews/recipes-enso-21-taux-ssh-feedback.jpg
@@ -348,6 +396,8 @@
   tools:
   - ESMValTool
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/esmvaltool/recipe_enso_feedbacknhf.yml
   legacy_path: recipe_diagnostics/recipe_enso_feedbacknhf.yml
 - id: recipes-enso-esmvaltool-recipe-enso-divedown9-10-14-15
@@ -362,6 +412,8 @@
   tools:
   - ESMValTool
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/esmvaltool/recipe_enso_divedown9-10_14-15.yml
   legacy_path: recipe_diagnostics/recipe_enso_divedown9-10_14-15.yml
 - id: recipes-enso-esmvaltool-recipe-enso-feedback
@@ -376,6 +428,8 @@
   tools:
   - ESMValTool
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/esmvaltool/recipe_enso_feedback.yml
   legacy_path: recipe_diagnostics/recipe_enso_feedback.yml
 - id: recipes-enso-esmvaltool-recipe-enso-characteristics
@@ -390,6 +444,8 @@
   tools:
   - ESMValTool
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/esmvaltool/recipe_enso_characteristics.yml
   legacy_path: recipe_diagnostics/recipe_enso_characteristics.yml
 - id: recipes-enso-esmvaltool-recipe-enso-divedown11-13
@@ -404,6 +460,8 @@
   tools:
   - ESMValTool
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/esmvaltool/recipe_enso_divedown11-13.yml
   legacy_path: recipe_diagnostics/recipe_enso_divedown11-13.yml
 - id: recipes-enso-esmvaltool-1-metrics-recipes
@@ -418,6 +476,7 @@
   - Coupled
   tools:
   - ESMValCore
+  models: []
   path: recipes/enso/esmvaltool/1_metrics_recipes.ipynb
   legacy_path: recipe_diagnostics/1_metrics_recipes.ipynb
   preview: previews/recipes-enso-esmvaltool-1-metrics-recipes.jpg
@@ -434,6 +493,9 @@
   tools:
   - ESMValTool
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-CM2
   path: recipes/enso/esmvaltool/recipe_enso_climatology1.yml
   legacy_path: recipe_diagnostics/recipe_enso_climatology1.yml
 - id: recipes-enso-esmvaltool-recipe-enso-climatology-level2-3
@@ -448,6 +510,9 @@
   tools:
   - ESMValTool
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-CM2
   path: recipes/enso/esmvaltool/recipe_enso_climatology_level2-3.yml
   legacy_path: recipe_diagnostics/recipe_enso_climatology_level2-3.yml
 - id: recipes-enso-esmvaltool-recipe-enso-teleconnection
@@ -462,6 +527,8 @@
   tools:
   - ESMValTool
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/enso/esmvaltool/recipe_enso_teleconnection.yml
   legacy_path: recipe_diagnostics/recipe_enso_teleconnection.yml
 - id: examples-esmvalcore-ensembles-and-means
@@ -475,6 +542,8 @@
   - General
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: examples/esmvalcore/ensembles_and_means.ipynb
   legacy_path: basic_functions_examples/ensembles_and_means.ipynb
   preview: previews/examples-esmvalcore-ensembles-and-means.jpg
@@ -490,6 +559,9 @@
   tools:
   - ESMValCore
   - ACCESS-MOPPeR
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-ESM1.6
   path: examples/esmvalcore/MOPPy_esm16_eq_SST_bias.ipynb
   legacy_path: basic_functions_examples/MOPPy_esm16_eq_SST_bias.ipynb
   preview: previews/examples-esmvalcore-moppy-esm16-eq-sst-bias.jpg
@@ -504,6 +576,9 @@
   - General
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-CM2
   path: examples/esmvalcore/regrid_example.ipynb
   legacy_path: basic_functions_examples/regrid_example.ipynb
   preview: previews/examples-esmvalcore-regrid-example.jpg
@@ -518,6 +593,8 @@
   - General
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: examples/esmvalcore/save_means_withSupplementaries.ipynb
   legacy_path: basic_functions_examples/save_means_withSupplementaries.ipynb
 - id: recipes-iod-eq-io-pr-bias
@@ -531,6 +608,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/eq_IO_PR_bias.ipynb
   legacy_path: IOD_recipes/eq_IO_PR_bias.ipynb
   preview: previews/recipes-iod-eq-io-pr-bias.jpg
@@ -546,6 +625,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/eq_IO_PR_sea_cycle.ipynb
   legacy_path: IOD_recipes/eq_IO_PR_sea_cycle.ipynb
   preview: previews/recipes-iod-eq-io-pr-sea-cycle.jpg
@@ -560,6 +641,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/eq_IO_SST_bias.ipynb
   legacy_path: IOD_recipes/eq_IO_SST_bias.ipynb
   preview: previews/recipes-iod-eq-io-sst-bias.jpg
@@ -575,6 +658,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/eq_IO_SST_sea_cycle.ipynb
   legacy_path: IOD_recipes/eq_IO_SST_sea_cycle.ipynb
   preview: previews/recipes-iod-eq-io-sst-sea-cycle.jpg
@@ -589,6 +674,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/eq_IO_Taux_bias.ipynb
   legacy_path: IOD_recipes/eq_IO_Taux_bias.ipynb
   preview: previews/recipes-iod-eq-io-taux-bias.jpg
@@ -603,6 +690,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/eq_IO_Taux_sea_cycle.ipynb
   legacy_path: IOD_recipes/eq_IO_Taux_sea_cycle.ipynb
   preview: previews/recipes-iod-eq-io-taux-sea-cycle.jpg
@@ -617,6 +706,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/IOD_amplitude.ipynb
   legacy_path: IOD_recipes/IOD_amplitude.ipynb
   preview: previews/recipes-iod-iod-amplitude.jpg
@@ -631,6 +722,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/IOD_lifecycle.ipynb
   legacy_path: IOD_recipes/IOD_lifecycle.ipynb
   preview: previews/recipes-iod-iod-lifecycle.jpg
@@ -645,6 +738,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/IOD_pattern.ipynb
   legacy_path: IOD_recipes/IOD_pattern.ipynb
   preview: previews/recipes-iod-iod-pattern.jpg
@@ -659,6 +754,8 @@
   - Coupled
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/iod/IOD_seasonality.ipynb
   legacy_path: IOD_recipes/IOD_seasonality.ipynb
   preview: previews/recipes-iod-iod-seasonality.jpg
@@ -674,6 +771,8 @@
   - Atmosphere
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/mjo-bsiso/mjo_bsiso_composite_life_cycles.ipynb
   legacy_path: MJO_BSISO/mjo_bsiso_composite_life_cycles.ipynb
   preview: previews/recipes-mjo-bsiso-mjo-bsiso-composite-life-cycles.jpg
@@ -689,6 +788,8 @@
   - Atmosphere
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/mjo-bsiso/mjo_bsiso_patterns.ipynb
   legacy_path: MJO_BSISO/mjo_bsiso_patterns.ipynb
   preview: previews/recipes-mjo-bsiso-mjo-bsiso-patterns.jpg
@@ -704,6 +805,9 @@
   - Atmosphere
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-CM2
   path: recipes/mjo-bsiso/pr_summary_bias.ipynb
   legacy_path: MJO_BSISO/pr_summary_bias.ipynb
   preview: previews/recipes-mjo-bsiso-pr-summary-bias.jpg
@@ -718,6 +822,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/11-Along_isobath_average.ipynb
   legacy_path: cosima/cmip6/11-Along_isobath_average.ipynb
 - id: recipes-ocean-cosima-cmip6-04-sea-ice-seasonality
@@ -733,6 +839,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/04-Sea_ice_seasonality.ipynb
   legacy_path: cosima/cmip6/04-Sea_ice_seasonality.ipynb
 - id: recipes-ocean-cosima-cmip6-09-along-slope-velocities
@@ -746,6 +854,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/09-Along_slope_velocities.ipynb
   legacy_path: cosima/cmip6/09-Along_slope_velocities.ipynb
 - id: recipes-ocean-cosima-cmip6-12-cross-contour-transport
@@ -759,6 +869,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/12-Cross_contour_transport.ipynb
   legacy_path: cosima/cmip6/12-Cross_contour_transport.ipynb
 - id: recipes-ocean-cosima-cmip6-10-cross-slope-section
@@ -772,6 +884,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/10-Cross_slope_section.ipynb
   legacy_path: cosima/cmip6/10-Cross_slope_section.ipynb
 - id: recipes-ocean-cosima-cmip6-16-density-compensation
@@ -785,6 +899,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/16-Density_compensation.ipynb
   legacy_path: cosima/cmip6/16-Density_compensation.ipynb
 - id: recipes-ocean-cosima-cmip6-15-hydrographic-benchmark
@@ -798,6 +914,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/15-Hydrographic_benchmark.ipynb
   legacy_path: cosima/cmip6/15-Hydrographic_benchmark.ipynb
 - id: recipes-ocean-cosima-cmip6-13-heaving-decomposition
@@ -811,6 +929,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/13-Heaving_decomposition.ipynb
   legacy_path: cosima/cmip6/13-Heaving_decomposition.ipynb
 - id: recipes-ocean-cosima-cmip6-02-overturning-circulation
@@ -824,6 +944,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/02-Overturning_circulation.ipynb
   legacy_path: cosima/cmip6/02-Overturning_circulation.ipynb
 - id: recipes-ocean-cosima-cmip6-14-neutral-density
@@ -837,6 +959,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/14-Neutral_density.ipynb
   legacy_path: cosima/cmip6/14-Neutral_density.ipynb
 - id: recipes-ocean-cosima-cmip6-01-meridional-heat-transport
@@ -850,6 +974,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/01-Meridional_heat_transport.ipynb
   legacy_path: cosima/cmip6/01-Meridional_heat_transport.ipynb
 - id: recipes-ocean-cosima-cmip6-08-relative-vorticity
@@ -863,6 +989,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/08-Relative_vorticity.ipynb
   legacy_path: cosima/cmip6/08-Relative_vorticity.ipynb
 - id: recipes-ocean-cosima-cmip6-06-sea-ice-area-volume
@@ -878,6 +1006,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/06-Sea_ice_area_volume.ipynb
   legacy_path: cosima/cmip6/06-Sea_ice_area_volume.ipynb
 - id: recipes-ocean-cosima-cmip6-05-geostrophic-velocities
@@ -891,6 +1021,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/05-Geostrophic_velocities.ipynb
   legacy_path: cosima/cmip6/05-Geostrophic_velocities.ipynb
 - id: recipes-ocean-cosima-cmip6-03-surface-water-mass-transformation
@@ -904,6 +1036,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/03-Surface_water_mass_transformation.ipynb
   legacy_path: cosima/cmip6/03-Surface_water_mass_transformation.ipynb
 - id: recipes-ocean-cosima-cmip6-07-temperature-salinity-diagram
@@ -917,6 +1051,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-CM2
   path: recipes/ocean/cosima/cmip6/07-Temperature_salinity_diagram.ipynb
   legacy_path: cosima/cmip6/07-Temperature_salinity_diagram.ipynb
 - id: recipes-ocean-russell2018-01-wind-stress-polar
@@ -931,6 +1067,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/01-Wind_stress_polar.ipynb
   legacy_path: russell18jgr/01-Wind_stress_polar.ipynb
   preview: previews/recipes-ocean-russell2018-01-wind-stress-polar.jpg
@@ -946,6 +1084,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/02-Wind_stress_zonal_mean.ipynb
   legacy_path: russell18jgr/02-Wind_stress_zonal_mean.ipynb
   preview: previews/recipes-ocean-russell2018-02-wind-stress-zonal-mean.jpg
@@ -960,6 +1100,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/04-Polar_Front.ipynb
   legacy_path: russell18jgr/04-Polar_Front.ipynb
   preview: previews/recipes-ocean-russell2018-04-polar-front.jpg
@@ -974,6 +1116,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/03-Subantarctic_Front.ipynb
   legacy_path: russell18jgr/03-Subantarctic_Front.ipynb
   preview: previews/recipes-ocean-russell2018-03-subantarctic-front.jpg
@@ -988,6 +1132,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/05-Drake_Passage.ipynb
   legacy_path: russell18jgr/05-Drake_Passage.ipynb
   preview: previews/recipes-ocean-russell2018-05-drake-passage.jpg
@@ -1004,6 +1150,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/06-Sea_ice_extent.ipynb
   legacy_path: russell18jgr/06-Sea_ice_extent.ipynb
   preview: previews/recipes-ocean-russell2018-06-sea-ice-extent.jpg
@@ -1020,6 +1168,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/07-Sea_ice_annual_cycle.ipynb
   legacy_path: russell18jgr/07-Sea_ice_annual_cycle.ipynb
   preview: previews/recipes-ocean-russell2018-07-sea-ice-annual-cycle.jpg
@@ -1034,6 +1184,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/08-Volume_transport_30S.ipynb
   legacy_path: russell18jgr/08-Volume_transport_30S.ipynb
   preview: previews/recipes-ocean-russell2018-08-volume-transport-30s.jpg
@@ -1048,6 +1200,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/09-Heat_transport_30S.ipynb
   legacy_path: russell18jgr/09-Heat_transport_30S.ipynb
   preview: previews/recipes-ocean-russell2018-09-heat-transport-30s.jpg
@@ -1062,6 +1216,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/10-CO2_flux_polar.ipynb
   legacy_path: russell18jgr/10-CO2_flux_polar.ipynb
   preview: previews/recipes-ocean-russell2018-10-co2-flux-polar.jpg
@@ -1076,6 +1232,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/11-CO2_flux_zonal_mean.ipynb
   legacy_path: russell18jgr/11-CO2_flux_zonal_mean.ipynb
   preview: previews/recipes-ocean-russell2018-11-co2-flux-zonal-mean.jpg
@@ -1090,6 +1248,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/12-CO2_flux_cumulative.ipynb
   legacy_path: russell18jgr/12-CO2_flux_cumulative.ipynb
   preview: previews/recipes-ocean-russell2018-12-co2-flux-cumulative.jpg
@@ -1104,6 +1264,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/13-Surface_pH_polar.ipynb
   legacy_path: russell18jgr/13-Surface_pH_polar.ipynb
   preview: previews/recipes-ocean-russell2018-13-surface-ph-polar.jpg
@@ -1118,6 +1280,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/14-Westerlies_vs_heat_uptake.ipynb
   legacy_path: russell18jgr/14-Westerlies_vs_heat_uptake.ipynb
   preview: previews/recipes-ocean-russell2018-14-westerlies-vs-heat-uptake.jpg
@@ -1132,6 +1296,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/15-Westerlies_vs_carbon_uptake.ipynb
   legacy_path: russell18jgr/15-Westerlies_vs_carbon_uptake.ipynb
   preview: previews/recipes-ocean-russell2018-15-westerlies-vs-carbon-uptake.jpg
@@ -1146,6 +1312,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: recipes/ocean/russell2018/16-Heat_vs_carbon_uptake.ipynb
   legacy_path: russell18jgr/16-Heat_vs_carbon_uptake.ipynb
   preview: previews/recipes-ocean-russell2018-16-heat-vs-carbon-uptake.jpg
@@ -1160,6 +1328,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-OM2
   path: recipes/ocean/cosima/03_Barotropic_Streamfunction.ipynb
   legacy_path: cosima/03_Barotropic_Streamfunction.ipynb
   preview: previews/recipes-ocean-cosima-03-barotropic-streamfunction.jpg
@@ -1174,6 +1344,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-OM2
   path: recipes/ocean/cosima/02_Compare_SST_SSS_to_WOA18.ipynb
   legacy_path: cosima/02_Compare_SST_SSS_to_WOA18.ipynb
   preview: previews/recipes-ocean-cosima-02-compare-sst-sss-to-woa18.jpg
@@ -1188,6 +1360,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-OM2
   path: recipes/ocean/cosima/01_Compare_SSH_model_obs.ipynb
   legacy_path: cosima/01_Compare_SSH_model_obs.ipynb
   preview: previews/recipes-ocean-cosima-01-compare-ssh-model-obs.jpg
@@ -1202,6 +1376,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-OM2
   path: recipes/ocean/cosima/04_Hovmoller_Temperature_Depth.ipynb
   legacy_path: cosima/04_Hovmoller_Temperature_Depth.ipynb
   preview: previews/recipes-ocean-cosima-04-hovmoller-temperature-depth.jpg
@@ -1216,6 +1392,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-OM2
   path: recipes/ocean/cosima/Eddy-Mean_Kinetic_Energy_Decomposition.ipynb
   legacy_path: cosima/Eddy-Mean_Kinetic_Energy_Decomposition.ipynb
   preview: previews/recipes-ocean-cosima-eddy-mean-kinetic-energy-decomposition.jpg
@@ -1230,6 +1408,9 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-OM2
+  - ACCESS-CM2
   path: recipes/ocean/cosima/Meridional_heat_transport.ipynb
   legacy_path: cosima/Meridional_heat_transport.ipynb
   preview: previews/recipes-ocean-cosima-meridional-heat-transport.jpg
@@ -1246,6 +1427,9 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-OM2
   path: recipes/ocean/cosima/05_Sea_Ice_Coordinates.ipynb
   legacy_path: cosima/05_Sea_Ice_Coordinates.ipynb
   preview: previews/recipes-ocean-cosima-05-sea-ice-coordinates.jpg
@@ -1260,6 +1444,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-OM2
   path: recipes/ocean/cosima/Temperature_Salinity_Diagram.ipynb
   legacy_path: cosima/Temperature_Salinity_Diagram.ipynb
   preview: previews/recipes-ocean-cosima-temperature-salinity-diagram.jpg
@@ -1274,6 +1460,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-OM2
   path: recipes/ocean/cosima/07_True_Zonal_Mean.ipynb
   legacy_path: cosima/07_True_Zonal_Mean.ipynb
   preview: previews/recipes-ocean-cosima-07-true-zonal-mean.jpg
@@ -1288,6 +1476,8 @@
   - Ocean
   tools:
   - ESMValCore
+  models:
+  - ACCESS-OM2
   path: recipes/ocean/cosima/06_Extract_Variables_at_Ocean_Bottom.ipynb
   legacy_path: cosima/06_Extract_Variables_at_Ocean_Bottom.ipynb
   preview: previews/recipes-ocean-cosima-06-extract-variables-at-ocean-bottom.jpg
@@ -1303,6 +1493,8 @@
   tools:
   - ESMValCore
   - ACCESS-MOPPeR
+  models:
+  - ACCESS-ESM1.6
   path: training/2025/examples/CMORisation_ENSO_Recipes.ipynb
   legacy_path: training2025/examples/CMORisation_ENSO_Recipes.ipynb
 - id: training-2025-examples-esm16-double-itcz-sea-cycle
@@ -1317,6 +1509,9 @@
   tools:
   - ESMValCore
   - ACCESS-MOPPeR
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-ESM1.6
   path: training/2025/examples/esm16_double_ITCZ_sea_cycle.ipynb
   legacy_path: training2025/examples/esm16_double_ITCZ_sea_cycle.ipynb
   preview: previews/training-2025-examples-esm16-double-itcz-sea-cycle.jpg
@@ -1332,6 +1527,9 @@
   tools:
   - ESMValCore
   - ACCESS-MOPPeR
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-ESM1.6
   path: training/2025/examples/esm16_eq_SST_bias.ipynb
   legacy_path: training2025/examples/esm16_eq_SST_bias.ipynb
 - id: training-2025-exercises-ex01-double-itcz-bias
@@ -1345,6 +1543,8 @@
   - General
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
   path: training/2025/exercises/ex01-double_ITCZ_bias.ipynb
   legacy_path: training2025/exercises/ex01-double_ITCZ_bias.ipynb
 - id: training-2025-exercises-ex11-enso-amplitude
@@ -1358,6 +1558,9 @@
   - General
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-CM2
   path: training/2025/exercises/ex11-ENSO_amplitude.ipynb
   legacy_path: training2025/exercises/ex11-ENSO_amplitude.ipynb
   preview: previews/training-2025-exercises-ex11-enso-amplitude.jpg
@@ -1372,6 +1575,9 @@
   - General
   tools:
   - ESMValCore
+  models:
+  - ACCESS-ESM1.5
+  - ACCESS-ESM1.6
   path: training/2025/exercises/withMOPPeR/ex12-esm16_ENSO_seasonality.ipynb
   legacy_path: training2025/exercises/withMOPPeR/ex12-esm16_ENSO_seasonality.ipynb
 - id: training-2025-exercises-withmopper-ex9-esm16-enso-pattern
@@ -1386,5 +1592,8 @@
   tools:
   - ESMValCore
   - ACCESS-MOPPeR
+  models:
+  - ACCESS-ESM1.6
+  - ACCESS-CM2
   path: training/2025/exercises/withMOPPeR/ex9-esm16_ENSO_pattern.ipynb
   legacy_path: training2025/exercises/withMOPPeR/ex9-esm16_ENSO_pattern.ipynb

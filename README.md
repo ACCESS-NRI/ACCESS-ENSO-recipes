@@ -4,7 +4,7 @@
 
 A community collection of notebooks and ESMValTool workflows for evaluating ACCESS and other climate models. The collection began with the [CLIVAR ENSO metrics](https://doi.org/10.1175/BAMS-D-19-0337.1) and now includes the Indian Ocean Dipole, MJO/BSISO, ocean diagnostics, examples, and training material. Most notebooks use [ESMValCore](https://docs.esmvaltool.org/projects/ESMValCore/en/stable/) to discover, load, and preprocess climate data.
 
-**Browse the catalogue:** the static gallery in [`web/`](web/) can be built locally with `python -m pip install -r requirements-site.txt` followed by `python scripts/build_site.py`. Once this repository is published, its GitHub Pages site will provide searchable cards, filters, and saved-output previews. Previews illustrate a notebook; they do not establish that its data or environment is current.
+**Browse the catalogue:** the static gallery in [`web/`](web/) can be built locally with `python -m pip install -r requirements-site.txt` followed by `python scripts/build_site.py`. Once this repository is published, its GitHub Pages site will provide searchable cards, model and science filters, and saved-output previews. The model spotlight features ACCESS-ESM1.5, ACCESS-ESM1.6, ACCESS-OM2, ACCESS-OM3, ACCESS-ESM3, and ACCESS-CM3. Counts reflect recipes with an explicit model input or comparison, so a model without tagged recipes may still be usable with a general method. Previews illustrate a notebook; they do not establish that its data or environment is current.
 
 ## Find a recipe
 

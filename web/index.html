@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#102936">
     <title>ACCESS Evaluation Recipes</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="catalogue-data.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -31,7 +32,7 @@
           <div class="hero-copy">
             <p class="eyebrow"><span class="eyebrow-line"></span> Recipes for model evaluation</p>
             <h1 id="hero-title">Evaluate <em>ACCESS models.</em></h1>
-            <p class="hero-description">Browse notebooks, metrics and diagnostics by scientific subject, realm or tool. Inspect the methods, then adapt them to your model data.</p>
+            <p class="hero-description">Browse notebooks, metrics and diagnostics by ACCESS model, scientific subject, realm or tool. Inspect the methods, then adapt them to your data.</p>
             <a class="primary-action" href="#catalogue">Browse recipes <span aria-hidden="true">↘</span></a>
           </div>
           <div class="hero-graphic" aria-hidden="true">
@@ -55,6 +56,19 @@
         </div>
       </section>
 
+      <section class="models-section" aria-labelledby="models-title">
+        <div class="models-inner">
+          <div class="models-heading">
+            <div>
+              <p class="section-kicker">Model focus</p>
+              <h2 id="models-title">Browse by ACCESS model</h2>
+            </div>
+            <p>Counts show recipes that explicitly use or compare each model. Other methods may also be adaptable.</p>
+          </div>
+          <div id="model-spotlight" class="model-grid" aria-label="Featured ACCESS models"></div>
+        </div>
+      </section>
+
       <section id="catalogue" class="catalogue" aria-labelledby="catalogue-title">
         <div class="catalogue-heading">
           <div>
@@ -70,6 +84,7 @@
             <span>Search</span>
             <input id="search" name="q" type="search" placeholder="Try ENSO amplitude, sea ice, heat transport…" autocomplete="off">
           </label>
+          <label for="model"><span>Model</span><select id="model" name="model"><option value="">All models</option></select></label>
           <label for="subject"><span>Subject</span><select id="subject" name="subject"><option value="">All subjects</option></select></label>
           <label for="realm"><span>Realm</span><select id="realm" name="realm"><option value="">All realms</option></select></label>
           <label for="tool"><span>Tool</span><select id="tool" name="tool"><option value="">All tools</option></select></label>
@@ -93,7 +108,7 @@
             <h2 id="about-title">A starting point, ready to adapt.</h2>
           </div>
           <div class="about-steps">
-            <article><span>01</span><h3>Find a recipe</h3><p>Use the filters to narrow the collection by subject, realm, tool or format.</p></article>
+            <article><span>01</span><h3>Find a recipe</h3><p>Use the filters to narrow the collection by model, subject, realm, tool or format.</p></article>
             <article><span>02</span><h3>Inspect the approach</h3><p>Open the notebook or ESMValTool YAML in the repository. Previews are illustrations, not validation results.</p></article>
             <article><span>03</span><h3>Run with your data</h3><p>Clone the repository on Gadi, check the recipe’s input requirements, and adapt it to your model or observations.</p></article>
           </div>

@@ -2,6 +2,7 @@ const REPOSITORY = 'https://github.com/ACCESS-NRI/ACCESS-Evaluation-Recipes';
 const form = document.querySelector('#filters');
 const fields = {
   q: document.querySelector('#search'),
+  model: document.querySelector('#model'),
   subject: document.querySelector('#subject'),
   realm: document.querySelector('#realm'),
   tool: document.querySelector('#tool'),
@@ -10,7 +11,9 @@ const fields = {
 const results = document.querySelector('#results');
 const resultCount = document.querySelector('#result-count');
 const emptyState = document.querySelector('#empty-state');
+const modelSpotlight = document.querySelector('#model-spotlight');
 let recipes = [];
+let models = [];
 
 function node(tag, className, text) {
   const element = document.createElement(tag);
@@ -46,6 +49,11 @@ function cardFor(recipe) {
   const topline = node('div', 'card-topline');
   topline.append(node('span', '', recipe.collection), node('span', 'card-kind', recipe.status || recipe.kind));
   body.append(topline, node('h3', '', recipe.title), node('p', 'card-summary', recipe.summary));
+  if (recipe.models.length) {
+    const modelTags = node('div', 'model-tags');
+    for (const model of recipe.models) modelTags.append(node('span', '', model));
+    body.append(modelTags);
+  }
   const tags = node('div', 'card-tags');
   for (const value of [...new Set([...recipe.subjects, ...recipe.realms, ...recipe.tools])].slice(0, 4)) {
     tags.append(node('span', '', value));
@@ -65,25 +73,61 @@ function selected() {
 }
 
 function matching(recipe, filters) {
+  if (filters.model && !recipe.models.includes(filters.model)) return false;
   if (filters.subject && !recipe.subjects.includes(filters.subject)) return false;
   if (filters.realm && !recipe.realms.includes(filters.realm)) return false;
   if (filters.tool && !recipe.tools.includes(filters.tool)) return false;
   if (filters.kind && recipe.kind !== filters.kind) return false;
   if (!filters.q) return true;
-  const haystack = [recipe.title, recipe.summary, recipe.collection, ...recipe.subjects, ...recipe.realms, ...recipe.tools].join(' ').toLocaleLowerCase();
+  const haystack = [recipe.title, recipe.summary, recipe.collection, ...recipe.models, ...recipe.subjects, ...recipe.realms, ...recipe.tools].join(' ').toLocaleLowerCase();
   return filters.q.toLocaleLowerCase().split(/\s+/).every(term => haystack.includes(term));
+}
+
+function modelTile(model) {
+  const count = recipes.filter(recipe => recipe.models.includes(model.name)).length;
+  const tile = node('button', `model-tile${count ? '' : ' model-tile-empty'}`);
+  tile.type = 'button';
+  tile.dataset.model = model.name;
+  tile.setAttribute('aria-controls', 'results');
+  tile.setAttribute('aria-pressed', 'false');
+  const arrow = node('span', 'model-arrow', '↘');
+  arrow.setAttribute('aria-hidden', 'true');
+  tile.append(
+    node('span', 'model-family', model.family),
+    node('strong', 'model-name', model.name),
+    node('span', 'model-availability', count ? `${count} tagged ${count === 1 ? 'recipe' : 'recipes'}` : 'No tagged recipes yet'),
+    arrow,
+  );
+  tile.addEventListener('click', () => {
+    fields.model.value = model.name;
+    render();
+    fields.model.focus();
+  });
+  return tile;
 }
 
 function render() {
   const filters = selected();
   const matches = recipes.filter(recipe => matching(recipe, filters));
+  for (const tile of modelSpotlight.children) {
+    const active = tile.dataset.model === filters.model;
+    tile.classList.toggle('is-active', active);
+    tile.setAttribute('aria-pressed', String(active));
+  }
   results.replaceChildren(...matches.map(cardFor));
   emptyState.hidden = matches.length !== 0;
+  const modelHasRecipes = filters.model && recipes.some(recipe => recipe.models.includes(filters.model));
+  emptyState.querySelector('h3').textContent = filters.model && !modelHasRecipes ? `No ${filters.model} recipes yet` : 'No matching recipes';
+  emptyState.querySelector('p').textContent = filters.model && !modelHasRecipes
+    ? 'No recipe explicitly uses this model yet. Other methods in the collection may still be adaptable.'
+    : 'Try a broader search or clear one of the filters.';
   resultCount.textContent = `${matches.length} of ${recipes.length} recipes`;
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(filters)) if (value) params.set(key, value);
   const search = params.toString();
-  history.replaceState(null, '', `${location.pathname}${search ? `?${search}` : ''}${location.hash}`);
+  if (location.protocol !== 'file:') {
+    history.replaceState(null, '', `${location.pathname}${search ? `?${search}` : ''}${location.hash}`);
+  }
 }
 
 function reset() {
@@ -91,11 +135,20 @@ function reset() {
   requestAnimationFrame(render);
 }
 
-async function init() {
+function init() {
   try {
-    const response = await fetch('catalogue.json');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    recipes = await response.json();
+    const catalogue = window.ACCESS_RECIPE_CATALOGUE;
+    if (!catalogue || !Array.isArray(catalogue.recipes) || !Array.isArray(catalogue.models)) {
+      throw new Error('Could not load catalogue metadata');
+    }
+    recipes = catalogue.recipes;
+    models = catalogue.models;
+    for (const model of models) {
+      const option = node('option', '', model.name);
+      option.value = model.name;
+      fields.model.append(option);
+    }
+    modelSpotlight.replaceChildren(...models.filter(model => model.featured).map(modelTile));
     optionsFor(fields.subject, recipes.flatMap(recipe => recipe.subjects));
     optionsFor(fields.realm, recipes.flatMap(recipe => recipe.realms));
     optionsFor(fields.tool, recipes.flatMap(recipe => recipe.tools));

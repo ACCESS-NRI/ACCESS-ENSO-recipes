@@ -1,0 +1,22 @@
+# Models shown in the gallery. Featured models appear in the model spotlight.
+- name: ACCESS-ESM1.5
+  family: Earth system
+  featured: true
+- name: ACCESS-ESM1.6
+  family: Earth system
+  featured: true
+- name: ACCESS-OM2
+  family: Ocean and sea ice
+  featured: true
+- name: ACCESS-OM3
+  family: Ocean and sea ice
+  featured: true
+- name: ACCESS-ESM3
+  family: Earth system
+  featured: true
+- name: ACCESS-CM3
+  family: Coupled climate
+  featured: true
+- name: ACCESS-CM2
+  family: Coupled climate
+  featured: false

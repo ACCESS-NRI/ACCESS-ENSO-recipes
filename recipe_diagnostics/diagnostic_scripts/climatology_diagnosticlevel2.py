@@ -22,10 +22,10 @@ from esmvaltool.diag_scripts.shared import (
 logger = logging.getLogger(os.path.basename(__file__))
 
 
-def plotmaps_level2(input_data, grp):
+def plotmaps_level2(input_data, grp, figsize=[18, 6], cenlon=210.0):
     """Create map plots for pair of input data."""
-    fig = plt.figure(figsize=(18, 6))
-    proj = ccrs.Orthographic(central_longitude=210.0)
+    fig = plt.figure(figsize=(figsize[0], figsize[1])) #20,10
+    proj = ccrs.Orthographic(central_longitude=cenlon) #50
     # data_to_save = []
     for plt_pos, dataset in enumerate(input_data, start=121):
         logger.info(
@@ -52,8 +52,12 @@ def plotmaps_level2(input_data, grp):
         else:
             cf1 = iplt.contourf(cube, cmap="coolwarm", extend="both")
 
-        ax1.set_extent([130, 290, -20, 20], crs=ccrs.PlateCarree())
-        ax1.set_title(dataset["dataset"])
+        if cenlon == 210.0:
+            ax1.set_extent([130, 290, -20, 20], crs=ccrs.PlateCarree())
+        else:
+            ax1.set_extent([50, 110, -25, 25], crs=ccrs.PlateCarree())
+        ens = dataset.get('ensemble', '')
+        ax1.set_title(f"{dataset['dataset']} {ens}")
 
         # Add gridlines for latitude and longitude
         gl1 = ax1.gridlines(draw_labels=True, linestyle="--")
@@ -70,7 +74,7 @@ def plotmaps_level2(input_data, grp):
 
 def load_seacycle_stdev(dataset):
     """Load, seasonal cycle std dev if required."""
-    var_units = {"tos": "degC", "pr": "mm/day", "tauu": "1e-3 N/m2"}
+    var_units = {"tos": "degC", "ts": "degC", "pr": "mm/day", "tauu": "1e-3 N/m2"}
     sname = dataset["short_name"]
     cube = iris.load_cube(dataset["filename"])
     # convert units for different variables
@@ -87,7 +91,7 @@ def load_seacycle_stdev(dataset):
     return cube, cbar_label
 
 
-def provenance_record(var_grp, ancestor_files):
+def provenance_record(var_grp, ancestor_files, iod=False):
     """Create a provenance record describing the diagnostic plot."""
     caption = {
         "pr_bias": (
@@ -114,8 +118,9 @@ def provenance_record(var_grp, ancestor_files):
             + "zonal wind stress in the equatorial Pacific."
         ),
     }
+    caption_str = caption[var_grp].replace("equatorial Pacific", "equatorial Indian Ocean").split(",")[0] if iod else caption[var_grp]
     record = {
-        "caption": caption[var_grp],
+        "caption": caption_str,
         "authors": [
             "chun_felicity",
             "beucher_romain",
@@ -152,19 +157,22 @@ def main(cfg):
     )
     # for each select obs and iterate others, obs last
     for grp, var_attr in variable_groups.items():
-        logger.info("%s : %d, %s", grp, len(var_attr), pformat(var_attr))
-        prov = provenance_record(grp, list(cfg["input_data"].keys()))
+        logger.info("%s : count %d", grp, len(var_attr))
+        iod = True if cfg["cenlon"] == 50.0 else False
+        # prov = provenance_record(grp, list(cfg["input_data"].keys()), iod=iod)
         for metadata in var_attr:
             # create pairs, add obs first to list
             pairs = [var_attr[-1]]
-            logger.info("iterate though datasets\n %s", pformat(metadata))
-            if metadata["project"] == "CMIP6":
+            logger.info("iterate though datasets\n %s", metadata["alias"])
+            if metadata["project"] in ["CMIP6", "CMIP7"]:
                 pairs.append(metadata)
-                fig = plotmaps_level2(pairs, grp)
+                fig = plotmaps_level2(pairs, grp, cfg["figsize"], cfg["cenlon"])
                 # save_plotdata(data_cubes, grp, pairs, cfg)
+                prov = provenance_record(grp, [a['filename'] for a in pairs], iod=iod)
                 filename = "_".join(
                     [
                         metadata["dataset"],
+                        metadata["ensemble"],
                         metadata["short_name"],
                         metadata["preprocessor"],
                     ],

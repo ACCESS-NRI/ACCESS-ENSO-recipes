@@ -824,7 +824,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/11-Along_isobath_average.ipynb
+  path: recipes/ocean/cmip6/11-Along_isobath_average.ipynb
   legacy_path: cosima/cmip6/11-Along_isobath_average.ipynb
 - id: recipes-ocean-cosima-cmip6-04-sea-ice-seasonality
   title: Antarctic sea-ice seasonality
@@ -841,7 +841,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/04-Sea_ice_seasonality.ipynb
+  path: recipes/ocean/cmip6/04-Sea_ice_seasonality.ipynb
   legacy_path: cosima/cmip6/04-Sea_ice_seasonality.ipynb
 - id: recipes-ocean-cosima-cmip6-09-along-slope-velocities
   title: Antarctic slope current from along-slope velocities
@@ -856,7 +856,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/09-Along_slope_velocities.ipynb
+  path: recipes/ocean/cmip6/09-Along_slope_velocities.ipynb
   legacy_path: cosima/cmip6/09-Along_slope_velocities.ipynb
 - id: recipes-ocean-cosima-cmip6-12-cross-contour-transport
   title: Cross-contour transport
@@ -871,7 +871,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/12-Cross_contour_transport.ipynb
+  path: recipes/ocean/cmip6/12-Cross_contour_transport.ipynb
   legacy_path: cosima/cmip6/12-Cross_contour_transport.ipynb
 - id: recipes-ocean-cosima-cmip6-10-cross-slope-section
   title: Cross-slope hydrographic section
@@ -886,7 +886,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/10-Cross_slope_section.ipynb
+  path: recipes/ocean/cmip6/10-Cross_slope_section.ipynb
   legacy_path: cosima/cmip6/10-Cross_slope_section.ipynb
 - id: recipes-ocean-cosima-cmip6-16-density-compensation
   title: Density compensation in the ocean
@@ -901,7 +901,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/16-Density_compensation.ipynb
+  path: recipes/ocean/cmip6/16-Density_compensation.ipynb
   legacy_path: cosima/cmip6/16-Density_compensation.ipynb
 - id: recipes-ocean-cosima-cmip6-15-hydrographic-benchmark
   title: 'Hydrographic benchmark: reference differences and control drift'
@@ -916,7 +916,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/15-Hydrographic_benchmark.ipynb
+  path: recipes/ocean/cmip6/15-Hydrographic_benchmark.ipynb
   legacy_path: cosima/cmip6/15-Hydrographic_benchmark.ipynb
 - id: recipes-ocean-cosima-cmip6-13-heaving-decomposition
   title: Isopycnal heave and along-isopycnal decomposition
@@ -931,7 +931,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/13-Heaving_decomposition.ipynb
+  path: recipes/ocean/cmip6/13-Heaving_decomposition.ipynb
   legacy_path: cosima/cmip6/13-Heaving_decomposition.ipynb
 - id: recipes-ocean-cosima-cmip6-02-overturning-circulation
   title: Meridional overturning circulation
@@ -946,7 +946,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/02-Overturning_circulation.ipynb
+  path: recipes/ocean/cmip6/02-Overturning_circulation.ipynb
   legacy_path: cosima/cmip6/02-Overturning_circulation.ipynb
 - id: recipes-ocean-cosima-cmip6-14-neutral-density
   title: Neutral density
@@ -961,7 +961,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/14-Neutral_density.ipynb
+  path: recipes/ocean/cmip6/14-Neutral_density.ipynb
   legacy_path: cosima/cmip6/14-Neutral_density.ipynb
 - id: recipes-ocean-cosima-cmip6-01-meridional-heat-transport
   title: Ocean meridional heat transport
@@ -976,7 +976,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/01-Meridional_heat_transport.ipynb
+  path: recipes/ocean/cmip6/01-Meridional_heat_transport.ipynb
   legacy_path: cosima/cmip6/01-Meridional_heat_transport.ipynb
 - id: recipes-ocean-cosima-cmip6-08-relative-vorticity
   title: Relative vorticity
@@ -991,7 +991,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/08-Relative_vorticity.ipynb
+  path: recipes/ocean/cmip6/08-Relative_vorticity.ipynb
   legacy_path: cosima/cmip6/08-Relative_vorticity.ipynb
 - id: recipes-ocean-cosima-cmip6-06-sea-ice-area-volume
   title: Sea-ice area, extent and volume against observations
@@ -1008,7 +1008,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/06-Sea_ice_area_volume.ipynb
+  path: recipes/ocean/cmip6/06-Sea_ice_area_volume.ipynb
   legacy_path: cosima/cmip6/06-Sea_ice_area_volume.ipynb
 - id: recipes-ocean-cosima-cmip6-05-geostrophic-velocities
   title: Surface geostrophic velocities from sea level
@@ -1023,7 +1023,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/05-Geostrophic_velocities.ipynb
+  path: recipes/ocean/cmip6/05-Geostrophic_velocities.ipynb
   legacy_path: cosima/cmip6/05-Geostrophic_velocities.ipynb
 - id: recipes-ocean-cosima-cmip6-03-surface-water-mass-transformation
   title: Surface water-mass transformation
@@ -1038,7 +1038,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/03-Surface_water_mass_transformation.ipynb
+  path: recipes/ocean/cmip6/03-Surface_water_mass_transformation.ipynb
   legacy_path: cosima/cmip6/03-Surface_water_mass_transformation.ipynb
 - id: recipes-ocean-cosima-cmip6-07-temperature-salinity-diagram
   title: Volume-weighted temperature-salinity diagram
@@ -1053,7 +1053,7 @@
   - ESMValCore
   models:
   - ACCESS-CM2
-  path: recipes/ocean/cosima/cmip6/07-Temperature_salinity_diagram.ipynb
+  path: recipes/ocean/cmip6/07-Temperature_salinity_diagram.ipynb
   legacy_path: cosima/cmip6/07-Temperature_salinity_diagram.ipynb
 - id: recipes-ocean-russell2018-01-wind-stress-polar
   title: 'Figure 1: Annual-mean zonal wind stress'

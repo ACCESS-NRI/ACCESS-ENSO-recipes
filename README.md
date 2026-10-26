@@ -8,12 +8,31 @@ A community collection of notebooks and ESMValTool workflows for evaluating ACCE
 
 ## Find a recipe
 
+The repository is organised first by purpose, then by science subject. The gallery's subject, realm, tool, and model filters come from catalogue metadata rather than folder names.
+
+```text
+recipes/              Evaluation notebooks and ESMValTool workflows
+  enso/               ENSO notebooks; esmvaltool/ holds YAML workflows and scripts
+  iod/                Indian Ocean Dipole notebooks
+  mjo-bsiso/          Intraseasonal variability notebooks
+  ocean/
+    cosima/           Native ACCESS-OM/CICE analyses using the COSIMA approach
+    cmip6/            CMORised ocean and sea-ice analyses using ESMValCore
+    russell2018/      Russell et al. Southern Ocean diagnostics
+examples/             Small ESMValCore technique demonstrations
+training/             Workshop material, grouped by year
+catalog/              Recipe and model metadata used by the gallery
+web/                  Static gallery source and preview images
+scripts/              Catalogue, preview, and workflow preparation tools
+docs/                 Setup, review, and migration guidance
+```
+
 | Area | Contents |
 | --- | --- |
 | [ENSO metrics](recipes/enso/) | CLIVAR metrics notebooks and [ESMValTool YAML workflows](recipes/enso/esmvaltool/) |
 | [Indian Ocean Dipole](recipes/iod/) | IOD characteristics and Indian Ocean climatology |
 | [MJO and BSISO](recipes/mjo-bsiso/) | Intraseasonal patterns, life cycles, and precipitation biases |
-| [Ocean](recipes/ocean/) | Native-model COSIMA examples, CMIP6 counterparts, and Russell et al. diagnostics |
+| [Ocean](recipes/ocean/) | Native-model COSIMA examples, [CMIP6 counterparts](recipes/ocean/cmip6/), and Russell et al. diagnostics |
 | [ESMValCore examples](examples/esmvalcore/) | Regridding, ensembles, means, and data handling |
 | [Training](training/2025/) | 2025 workshop examples and exercises |
 
@@ -38,6 +57,6 @@ New notebooks and YAML workflows belong in the relevant subject folder. Add a re
 
 ## Provenance and citation
 
-This project reorganises material from [ACCESS-ENSO-recipes](https://github.com/ACCESS-NRI/ACCESS-ENSO-recipes), whose releases have a [Zenodo record](https://doi.org/10.5281/zenodo.14168217). Refer to that record when citing an earlier release. A new release and citation for this broader collection should be configured after the new repository is published. The original authorship remains in the notebook history and `.zenodo.json`.
+This project grows from [ACCESS-ENSO-recipes](https://github.com/ACCESS-NRI/ACCESS-ENSO-recipes), whose releases have a [Zenodo record](https://doi.org/10.5281/zenodo.14168217). Refer to that record when citing an earlier release. The recommended publication path is to rename the existing GitHub repository and merge this work into it, preserving its history and community. Check the Zenodo connection before the first release under the broader name. The original authorship remains in the notebook history and `.zenodo.json`.
 
 Licensed under [Apache-2.0](LICENSE). Developed by the ACCESS-NRI Model Evaluation and Diagnostics team and contributors.

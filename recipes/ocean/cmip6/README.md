@@ -2,8 +2,8 @@
 
 This directory contains standalone CMIP6 counterparts of selected
 [COSIMA advanced recipes](https://github.com/COSIMA/cosima-recipes/tree/main/03-Advanced-Recipes).
-They complement the native ACCESS-OM/CICE examples in the parent
-[`recipes/ocean/cosima/`](../) directory: input is loaded through ESMValCore's
+They complement the native ACCESS-OM/CICE examples in the sibling
+[`recipes/ocean/cosima/`](../cosima/) directory: input is loaded through ESMValCore's
 `Dataset` interface and preprocessing utilities rather than the
 ACCESS-NRI intake catalogue.
 
@@ -46,7 +46,7 @@ their native grids rather than regridded, and the relative-vorticity
 notebook labels coarse-grid results as resolved-current shear rather
 than mesoscale eddy fields.
 
-The existing [`Temperature_Salinity_Diagram.ipynb`](../Temperature_Salinity_Diagram.ipynb) remains a
+The existing [`Temperature_Salinity_Diagram.ipynb`](../cosima/Temperature_Salinity_Diagram.ipynb) remains a
 native-model example. `07-Temperature_salinity_diagram.ipynb` is its
 CMIP6-oriented companion, with CMOR inputs and a volume-weighted
 histogram.

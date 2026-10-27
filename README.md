@@ -4,7 +4,11 @@
 
 A community collection of notebooks and ESMValTool workflows for evaluating ACCESS and other climate models. The collection began with the [CLIVAR ENSO metrics](https://doi.org/10.1175/BAMS-D-19-0337.1) and now includes the Indian Ocean Dipole, MJO/BSISO, ocean diagnostics, examples, and training material. Most notebooks use [ESMValCore](https://docs.esmvaltool.org/projects/ESMValCore/en/stable/) to discover, load, and preprocess climate data.
 
-**Browse the catalogue:** the static gallery in [`web/`](web/) can be built locally with `python -m pip install -r requirements-site.txt` followed by `python scripts/build_site.py`. After this branch is merged, the GitHub Pages workflow will publish searchable cards, model and science filters, and saved-output previews. The model spotlight features ACCESS-ESM1.5, ACCESS-ESM1.6, ACCESS-OM2, ACCESS-OM3, ACCESS-ESM3, and ACCESS-CM3. Counts reflect recipes with an explicit model input or comparison, so a model without tagged recipes may still be usable with a general method. Previews illustrate a notebook; they do not establish that its data or environment is current.
+**[Browse the recipe gallery](https://access-nri.github.io/ACCESS-Evaluation-recipes/)** to search the collection and filter by ACCESS model, scientific subject, realm, tool, or recipe type. Click the screenshot to open the live gallery.
+
+[![Screenshot of the ACCESS Evaluation Recipes gallery showing the model diagram and recipe counts](docs/gallery-screenshot.jpg)](https://access-nri.github.io/ACCESS-Evaluation-recipes/)
+
+The model spotlight features ACCESS-ESM1.5, ACCESS-ESM1.6, ACCESS-OM2, ACCESS-OM3, ACCESS-ESM3, and ACCESS-CM3. Counts reflect recipes with an explicit model input or comparison, so a model without tagged recipes may still be usable with a general method. Previews illustrate a notebook; they do not establish that its data or environment is current. To build the static gallery in [`web/`](web/) locally, run `python -m pip install -r requirements-site.txt` followed by `python scripts/build_site.py`.
 
 ## Find a recipe
 

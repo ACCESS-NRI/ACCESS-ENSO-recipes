@@ -1615,6 +1615,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/01-Double_ITCZ_bias.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-01-double-itcz-bias.png
 - id: recipes-enso-cmip7-02-eq-pr-bias
   title: CMIP7 Equatorial PR bias
   summary: Zonal structure of time-mean PR in the equatorial Pacific using ACCESS-ESM1.6
@@ -1631,6 +1632,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/02-eq_PR_bias.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-02-eq-pr-bias.png
 - id: recipes-enso-cmip7-03-eq-sst-bias
   title: CMIP7 Equatorial SST bias
   summary: Zonal structure of time-mean SST in the equatorial Pacific using ACCESS-ESM1.6
@@ -1647,6 +1649,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/03-eq_SST_bias.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-03-eq-sst-bias.png
 - id: recipes-enso-cmip7-04-eq-taux-bias
   title: CMIP7 Equatorial zonal wind stress bias
   summary: Zonal structure of time-mean Zonal Mean Stress (Taux) in the equatorial
@@ -1663,6 +1666,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/04-eq_Taux_bias.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-04-eq-taux-bias.png
 - id: recipes-enso-cmip7-05-double-itcz-sea-cycle
   title: CMIP7 Double ITCZ seasonal cycle
   summary: Meridional structure of the amplitude of the mean seasonal cycle of PR
@@ -1679,6 +1683,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/05-double_ITCZ_sea_cycle.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-05-double-itcz-sea-cycle.png
 - id: recipes-enso-cmip7-06-eq-pr-sea-cycle
   title: CMIP7 Equatorial PR seasonal cycle
   summary: Zonal structure of the amplitude of the mean seasonal cycle of PR in the
@@ -1695,6 +1700,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/06-eq_PR_sea_cycle.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-06-eq-pr-sea-cycle.png
 - id: recipes-enso-cmip7-07-eq-sst-sea-cycle
   title: CMIP7 Equatorial SST seasonal cycle
   summary: Zonal structure of the amplitude of the mean seasonal cycle of SST in the
@@ -1711,6 +1717,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/07-eq_SST_sea_cycle.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-07-eq-sst-sea-cycle.png
 - id: recipes-enso-cmip7-08-eq-taux-sea-cycle
   title: CMIP7 Equatorial zonal wind stress seasonal cycle
   summary: Zonal structure of the amplitude of the mean seasonal cycle of Taux in
@@ -1727,6 +1734,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/08-eq_Taux_sea_cycle.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-08-eq-taux-sea-cycle.png
 - id: recipes-enso-cmip7-09-enso-pattern
   title: CMIP7 ENSO pattern
   summary: Zonal structure of boreal winter SST anomalies in the equatorial Pacific
@@ -1743,6 +1751,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/09-ENSO_pattern.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-09-enso-pattern.png
 - id: recipes-enso-cmip7-10-enso-lifecycle
   title: CMIP7 ENSO lifecycle
   summary: Temporal evolution of SST anomalies in the central equatorial Pacific using
@@ -1759,6 +1768,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/10-ENSO_lifecycle.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-10-enso-lifecycle.png
 - id: recipes-enso-cmip7-11-enso-amplitude
   title: CMIP7 ENSO amplitude
   summary: Variability of SST Anomalies in the Central Equatorial Pacific using ACCESS-ESM1.6
@@ -1775,6 +1785,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/11-ENSO_amplitude.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-11-enso-amplitude.png
 - id: recipes-enso-cmip7-12-enso-seasonality
   title: CMIP7 ENSO seasonality
   summary: Seasonal Variability of SST Anomalies in the Central Equatorial Pacific
@@ -1791,6 +1802,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/12-ENSO_seasonality.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-12-enso-seasonality.png
 - id: recipes-enso-cmip7-13-enso-asymmetry
   title: CMIP7 ENSO asymmetry
   summary: Skewness of SST Anomalies in the Central Equatorial Pacific using ACCESS-ESM1.6
@@ -1807,6 +1819,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/13-ENSO_asymmetry.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-13-enso-asymmetry.png
 - id: recipes-enso-cmip7-14-enso-duration
   title: CMIP7 ENSO duration
   summary: Duration of SST Anomalies in the Central Equatorial Pacific using ACCESS-ESM1.6
@@ -1823,6 +1836,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/14-ENSO_duration.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-14-enso-duration.png
 - id: recipes-enso-cmip7-15-enso-diversity
   title: CMIP7 ENSO diversity
   summary: Zonal Location of Maximum SST Anomalies in the Equatorial Pacific using
@@ -1855,6 +1869,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/16-DJF_PR_Teleconnection.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-16-djf-pr-teleconnection.png
 - id: recipes-enso-cmip7-17-djf-ts-teleconnection
   title: CMIP7 DJF surface temperature teleconnection
   summary: Structure of Boreal Winter Surface Temperature Anomalies using ACCESS-ESM1.6
@@ -1871,6 +1886,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/17-DJF_ts_teleconnection.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-17-djf-ts-teleconnection.png
 - id: recipes-enso-cmip7-18-jja-pr-teleconnection
   title: CMIP7 JJA precipitation teleconnection
   summary: Structure of Boreal Summer Precipitation Anomalies using ACCESS-ESM1.6
@@ -1887,6 +1903,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/18-JJA_pr_teleconnection.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-18-jja-pr-teleconnection.png
 - id: recipes-enso-cmip7-19-jja-ts-teleconnection
   title: CMIP7 JJA surface temperature teleconnection
   summary: Structure of Boreal Summer Surface Temperature Anomalies using ACCESS-ESM1.6
@@ -1903,6 +1920,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/19-JJA_ts_teleconnection.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-19-jja-ts-teleconnection.png
 - id: recipes-enso-cmip7-20-sst-taux-feedback
   title: CMIP7 SST–wind stress feedback
   summary: Assess coupling between equatorial Pacific SST anomalies and zonal wind
@@ -1919,6 +1937,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/20-SST_Taux_feedback.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-20-sst-taux-feedback.png
 - id: recipes-enso-cmip7-21-taux-ssh-feedback
   title: CMIP7 Wind stress–SSH feedback
   summary: Assess coupling between zonal wind stress and sea surface height anomalies
@@ -1935,6 +1954,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/21-Taux_SSH_feedback.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-21-taux-ssh-feedback.png
 - id: recipes-enso-cmip7-22-ssh-sst-feedback
   title: CMIP7 SSH–SST feedback
   summary: Assess coupling between sea surface height and SST anomalies in the equatorial
@@ -1951,6 +1971,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/22-SSH_sst_feedback.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-22-ssh-sst-feedback.png
 - id: recipes-enso-cmip7-23-sst-nhf-feedback
   title: CMIP7 SST–net heat flux feedback
   summary: Assess coupling between SST and net heat flux anomalies in the eastern
@@ -1967,6 +1988,7 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/23-sst_nhf_feedback.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-23-sst-nhf-feedback.png
 - id: recipes-enso-cmip7-24-ocean-driven-sst
   title: CMIP7 Ocean-driven SST
   summary: Explore the ocean contribution to SST anomalies in the equatorial Pacific
@@ -1983,3 +2005,4 @@
   - ACCESS-ESM1.6
   path: recipes/enso/cmip7/24-ocean_driven_SST.ipynb
   legacy_path: null
+  preview: previews/recipes-enso-cmip7-24-ocean-driven-sst.png

@@ -11,8 +11,8 @@ Most notebooks are intended for an [Australian Research Environment (ARE)](https
    ```bash
    module use /g/data/xp65/public/modules
    module load conda/analysis3
-   git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-Recipes.git
-   cd ACCESS-Evaluation-Recipes
+   git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-recipes.git
+   cd ACCESS-Evaluation-recipes
    ```
 
 4. Open a notebook from `recipes/`, `examples/`, or `training/`. Inspect dataset names, time periods, and any local paths before executing cells.

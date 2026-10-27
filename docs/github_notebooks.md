@@ -12,7 +12,7 @@ A repo is a repository which is like a project folder of code, scripts and assoc
 
 - your local machine if you have your own python environments you use
 - on gadi (and use ARE to run the notebooks)
-    - `git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-Recipes.git`
+    - `git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-recipes.git`
 
 This means you can:
 - run and test the code in your workspace

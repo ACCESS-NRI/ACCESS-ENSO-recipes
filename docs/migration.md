@@ -4,11 +4,11 @@ This branch starts from `ACCESS-NRI/ACCESS-ENSO-recipes` at commit `d95e08d` (26
 
 ## Repository transition
 
-Rename the existing `ACCESS-NRI/ACCESS-ENSO-recipes` repository to `ACCESS-NRI/ACCESS-Evaluation-Recipes`, then merge this branch there. A second repository is unnecessary for this expansion and would split the existing history, issues, and contributors. GitHub redirects the old repository URL and Git remotes after a rename, but individual moved notebook paths and an old GitHub Pages project URL need explicit link updates. Keep the former repository name available for GitHub's redirect.
+The existing `ACCESS-NRI/ACCESS-ENSO-recipes` repository was renamed to `ACCESS-NRI/ACCESS-Evaluation-recipes`. Merge this branch there; the rename retains the history, issues, and contributors. GitHub redirects the old repository URL and Git remotes, but links to moved notebook files need explicit updates. Keep the former repository name available for GitHub's redirect.
 
 Before releasing under the new name, check that Zenodo still receives releases from the renamed repository and review the citation metadata. Earlier Zenodo releases remain citable by their existing DOI.
 
-This branch has not renamed the GitHub repository or changed its remote; that requires repository administration.
+GitHub Pages is configured to publish from GitHub Actions. Once this branch is merged into `main`, `.github/workflows/catalogue.yml` builds and deploys the gallery.
 
 ## Folder moves
 

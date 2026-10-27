@@ -1,4 +1,4 @@
-const REPOSITORY = 'https://github.com/ACCESS-NRI/ACCESS-Evaluation-Recipes';
+const REPOSITORY = 'https://github.com/ACCESS-NRI/ACCESS-Evaluation-recipes';
 const form = document.querySelector('#filters');
 const fields = {
   q: document.querySelector('#search'),

@@ -96,7 +96,7 @@ Open a terminal and `cd` to working folder.
 <p align="center"><img src="../../docs/assets_ARE/clone_enso_recipes.png" alt="drawing" width="60%"/></p>
 
 ```
-git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-Recipes.git
+git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-recipes.git
 ```
 
 ## References and docs

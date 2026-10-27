@@ -4,7 +4,7 @@
 
 A community collection of notebooks and ESMValTool workflows for evaluating ACCESS and other climate models. The collection began with the [CLIVAR ENSO metrics](https://doi.org/10.1175/BAMS-D-19-0337.1) and now includes the Indian Ocean Dipole, MJO/BSISO, ocean diagnostics, examples, and training material. Most notebooks use [ESMValCore](https://docs.esmvaltool.org/projects/ESMValCore/en/stable/) to discover, load, and preprocess climate data.
 
-**Browse the catalogue:** the static gallery in [`web/`](web/) can be built locally with `python -m pip install -r requirements-site.txt` followed by `python scripts/build_site.py`. Once this repository is published, its GitHub Pages site will provide searchable cards, model and science filters, and saved-output previews. The model spotlight features ACCESS-ESM1.5, ACCESS-ESM1.6, ACCESS-OM2, ACCESS-OM3, ACCESS-ESM3, and ACCESS-CM3. Counts reflect recipes with an explicit model input or comparison, so a model without tagged recipes may still be usable with a general method. Previews illustrate a notebook; they do not establish that its data or environment is current.
+**Browse the catalogue:** the static gallery in [`web/`](web/) can be built locally with `python -m pip install -r requirements-site.txt` followed by `python scripts/build_site.py`. After this branch is merged, the GitHub Pages workflow will publish searchable cards, model and science filters, and saved-output previews. The model spotlight features ACCESS-ESM1.5, ACCESS-ESM1.6, ACCESS-OM2, ACCESS-OM3, ACCESS-ESM3, and ACCESS-CM3. Counts reflect recipes with an explicit model input or comparison, so a model without tagged recipes may still be usable with a general method. Previews illustrate a notebook; they do not establish that its data or environment is current.
 
 ## Find a recipe
 
@@ -45,8 +45,8 @@ Clone this repository on NCI Gadi, open an ARE JupyterLab session, and choose a 
 ```bash
 module use /g/data/xp65/public/modules
 module load conda/analysis3
-git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-Recipes.git
-cd ACCESS-Evaluation-Recipes
+git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-recipes.git
+cd ACCESS-Evaluation-recipes
 ```
 
 For ESMValTool YAML workflows with local diagnostic scripts, first generate machine-specific copies as described in the [ENSO ESMValTool guide](recipes/enso/esmvaltool/README.md).
@@ -57,6 +57,6 @@ New notebooks and YAML workflows belong in the relevant subject folder. Add a re
 
 ## Provenance and citation
 
-This project grows from [ACCESS-ENSO-recipes](https://github.com/ACCESS-NRI/ACCESS-ENSO-recipes), whose releases have a [Zenodo record](https://doi.org/10.5281/zenodo.14168217). Refer to that record when citing an earlier release. The recommended publication path is to rename the existing GitHub repository and merge this work into it, preserving its history and community. Check the Zenodo connection before the first release under the broader name. The original authorship remains in the notebook history and `.zenodo.json`.
+This project grows from ACCESS-ENSO-recipes, whose releases have a [Zenodo record](https://doi.org/10.5281/zenodo.14168217). Refer to that record when citing an earlier release. The existing GitHub repository was renamed to preserve its history and community. Check the Zenodo connection before the first release under the broader name. The original authorship remains in the notebook history and `.zenodo.json`.
 
 Licensed under [Apache-2.0](LICENSE). Developed by the ACCESS-NRI Model Evaluation and Diagnostics team and contributors.

@@ -1,2 +1,9 @@
-# Jupyter Notebook
-.ipynb_checkpoints
+# Jupyter
+.ipynb_checkpoints/
+# Built gallery
+_site/
+# Python
+__pycache__/
+*.py[cod]
+# Local ESMValTool recipe copies
+build/

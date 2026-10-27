@@ -1,119 +1,62 @@
-# ACCESS-ENSO-Recipes (El Niño-Southern Oscillation)
+![ACCESS-NRI logo](web/assets/access-nri-logo.svg)
 
-[![DOI](https://zenodo.org/badge/855479992.svg)](https://doi.org/10.5281/zenodo.14168217)
+# ACCESS Evaluation Recipes
 
-## Overview
+A community collection of notebooks and ESMValTool workflows for evaluating ACCESS and other climate models. The collection began with the [CLIVAR ENSO metrics](https://doi.org/10.1175/BAMS-D-19-0337.1) and now includes the Indian Ocean Dipole, MJO/BSISO, ocean diagnostics, examples, and training material. Most notebooks use [ESMValCore](https://docs.esmvaltool.org/projects/ESMValCore/en/stable/) to discover, load, and preprocess climate data.
 
-The **ACCESS-ENSO-Recipes** package is a collection of Jupyter notebooks designed to reproduce the metrics described in the **CLIVAR 2020 ENSO Metrics Package**. These metrics are based on the methodology outlined by Planton et al. (2021) ([DOI:10.1175/BAMS-D-19-0337.1](https://doi.org/10.1175/BAMS-D-19-0337.1)) and implemented following the instructions provided by Yann Planton.
+**Browse the catalogue:** the static gallery in [`web/`](web/) can be built locally with `python -m pip install -r requirements-site.txt` followed by `python scripts/build_site.py`. After this branch is merged, the GitHub Pages workflow will publish searchable cards, model and science filters, and saved-output previews. The model spotlight features ACCESS-ESM1.5, ACCESS-ESM1.6, ACCESS-OM2, ACCESS-OM3, ACCESS-ESM3, and ACCESS-CM3. Counts reflect recipes with an explicit model input or comparison, so a model without tagged recipes may still be usable with a general method. Previews illustrate a notebook; they do not establish that its data or environment is current.
 
-This package integrates with **ESMValTool**, utilising its preprocessors to streamline analysis. Users can explore the ENSO metrics interactively in Jupyter notebooks or execute them as an **ESMValTool recipe** for batch processing.
+## Find a recipe
 
-### Key Features:
-- Reproduction of ENSO metrics from the CLIVAR 2020 ENSO Metrics Package.
-- Simplified diagnostics for integration into ESMValTool.
-- Support for interactive exploration in Jupyter notebooks or execution via ESMValTool recipes.
-- Configured for use on **NCI Gadi** with the **ACCESS-NRI conda environment**.
+The repository is organised first by purpose, then by science subject. The gallery's subject, realm, tool, and model filters come from catalogue metadata rather than folder names.
 
----
-
-## What is ESMValTool?
-
-The **Earth System Model Evaluation Tool (ESMValTool)** is a community-developed software package for the evaluation of Earth System Models (ESMs).
-
-For more information, visit the [official ESMValTool website](https://esmvaltool.org/).
-
----
-
-## Requirements
-
-To use the **ACCESS-ENSO-Recipes**, ensure the following:
-
-### Environment:
-- Access to **NCI Gadi**.
-- The **ACCESS-NRI conda environment** pre-configured with the esmvaltool-workflow.
-
----
-
-## How to Use on ARE (Australian Research Environment)
-
-## 1. Open ARE on Gadi
-Go to the [Australian Research Environment](https://are-auth.nci.org.au/) website and login with your **NCI username and password**. If you don't have an NCI account, you can sign up for one at the [MyNCI website](https://my.nci.org.au).
-
-<p align="center"><img src="docs/assets_ARE/login.png" alt="drawing" width="60%"/></p>
-
-## 2. Start JupyterLab App
-Click on `JupyterLab` under *Featured Apps* to configure a new JupyterLab instance. This option is also available under the *All Apps* section at the bottom of the page and the *Interactive Apps* dropdown located in the top menu.
-
-<p align="center"><img src="docs/assets_ARE/jupyter_select.png" alt="drawing" width="60%"/></p>
-
-## 3. Configure JupyterLab session
-You will now be presented with the main JupyterLab instance configuration form. Please complete **only** the fields below - leave all other fields blank or to their default values.
-
-- *3.1* **Walltime**: The number of hours the JupyterLab instance will run. For the hackathon, please insert a walltime of `4` hours.
-
-<p align="center"><img src="docs/assets_ARE/walltime.png" alt="drawing" width="60%"/></p>
-
-- *3.2* **Compute Size**: Select `Medium (4 cpus, 18G mem)` from the dropdown menu.
-
-<p align="center"><img src="docs/assets_ARE/compute.png" alt="drawing" width="60%"/></p>
-
-- *3.3* **Project**: Please enter `nf33`. This will allocate SU usage to the workshop project.
-
-<p align="center"><img src="docs/assets_ARE/project.png" alt="drawing" width="60%"/></p>
-
-- *3.4* **Storage**: In ARE, storage locations need to be explicitly defined to access these data from within a JupyterLab instance.
-   Please copy and paste the following string in its entirety into the storage input field:
-```
-gdata/xp65+gdata/fs38+gdata/oi10+gdata/al33+gdata/rr3+gdata/rt52+gdata/zz93+gdata/ct11+gdata/zv30
+```text
+recipes/              Evaluation notebooks and ESMValTool workflows
+  enso/               ENSO notebooks; esmvaltool/ holds YAML workflows and scripts
+  iod/                Indian Ocean Dipole notebooks
+  mjo-bsiso/          Intraseasonal variability notebooks
+  ocean/
+    cosima/           Native ACCESS-OM/CICE analyses using the COSIMA approach
+    cmip6/            CMORised ocean and sea-ice analyses using ESMValCore
+    russell2018/      Russell et al. Southern Ocean diagnostics
+examples/             Small ESMValCore technique demonstrations
+training/             Workshop material, grouped by year
+catalog/              Recipe and model metadata used by the gallery
+web/                  Static gallery source and preview images
+scripts/              Catalogue, preview, and workflow preparation tools
+docs/                 Setup, review, and migration guidance
 ```
 
-<p align="center"><img src="docs/assets_ARE/project.png" alt="drawing" width="60%"/></p>
+| Area | Contents |
+| --- | --- |
+| [ENSO metrics](recipes/enso/) | CLIVAR metrics notebooks and [ESMValTool YAML workflows](recipes/enso/esmvaltool/) |
+| [Indian Ocean Dipole](recipes/iod/) | IOD characteristics and Indian Ocean climatology |
+| [MJO and BSISO](recipes/mjo-bsiso/) | Intraseasonal patterns, life cycles, and precipitation biases |
+| [Ocean](recipes/ocean/) | Native-model COSIMA examples, [CMIP6 counterparts](recipes/ocean/cmip6/), and Russell et al. diagnostics |
+| [ESMValCore examples](examples/esmvalcore/) | Regridding, ensembles, means, and data handling |
+| [Training](training/2025/) | 2025 workshop examples and exercises |
 
-- *3.5* Click `Advanced options ...`
-  * Optional: You can check the box here to receive an email notification when your JupyterLab instance starts, but as we are running a relatively small instance, it will likely spin up quickly so this probably isn't necessary.</p>
+The [catalogue metadata](catalog/recipes.yml) describes all 91 notebooks and eight ESMValTool YAML recipes. It is the source for the gallery. The `catalog/legacy-paths.json` file maps files from the former `ACCESS-ENSO-recipes` layout to their new locations.
 
-- *3.6* **Module directories**: To load the required environment modules, please copy and paste the following. This is equivalent to using `module use` on the command line.
+## Run a notebook
+
+Clone this repository on NCI Gadi, open an ARE JupyterLab session, and choose a notebook from the catalogue. The data collections and compute resources needed vary by recipe. See [running recipes](docs/running.md) for setup guidance, and read the first cells of each notebook before running it.
+
+```bash
+module use /g/data/xp65/public/modules
+module load conda/analysis3
+git clone https://github.com/ACCESS-NRI/ACCESS-Evaluation-recipes.git
+cd ACCESS-Evaluation-recipes
 ```
-/g/data/xp65/public/modules
-```
 
-<p align="center"><img src="docs/assets_ARE/module_directories.png" alt="drawing" width="60%"/></p>
+For ESMValTool YAML workflows with local diagnostic scripts, first generate machine-specific copies as described in the [ENSO ESMValTool guide](recipes/enso/esmvaltool/README.md).
 
-- *3.7* **Modules** To load the ESMValTool-workflow environment, please copy and paste the following. This is equivalent to using `module load` on the command line.
-```
-conda/analysis3
-```
+## Contribute
 
-<p align="center"><img src="docs/assets_ARE/modules.png" alt="drawing" width="60%"/></p>
+New notebooks and YAML workflows belong in the relevant subject folder. Add a record to [the catalogue](catalog/README.md), then run `python scripts/build_site.py --check`. Use a pull request so the scientific method, data requirements, preview, and metadata can be reviewed together. [Notebook review guidance](docs/github_notebooks.md) is available for contributors.
 
-- *3.7* Click `Launch` to start your JupyterLab instance.
+## Provenance and citation
 
+This project grows from ACCESS-ENSO-recipes, whose releases have a [Zenodo record](https://doi.org/10.5281/zenodo.14168217). Refer to that record when citing an earlier release. The existing GitHub repository was renamed to preserve its history and community. Check the Zenodo connection before the first release under the broader name. The original authorship remains in the notebook history and `.zenodo.json`.
 
-<p align="center"><img src="docs/assets_ARE/launch.png" alt="drawing" width="60%"/></p>
-
-## 4. Launch JupyterLab session
-Once you have clicked `Launch` the browser will redirect to the 'interactive sessions' page where you will see your JupyterLab instance details and current status which will look something like this:
-
-<p align="center"><img src="docs/assets_ARE/queue.png" alt="drawing" width="60%"/></p>
-
-Once the JupyterLab instance has started (this usually takes around 30 seconds), this status window should update and look something like the following, reporting that the instance has started and the time remaining. More detailed information on the instance can be accessed by clicking the `Session ID` link.
-
-<p align="center"><img src="docs/assets_ARE/running.png" alt="drawing" width="60%"/></p>
-
-Click `Open JupyterLab`. This opens the instance in a new browser window where you can navigate to the location of the files.
-
----
-
-## Feedback and Support
-
-This package is maintained by the **ACCESS-NRI Model Evaluation and Diagnostics Team**. For issues, suggestions, or assistance, please contact [ACCESS-NRI support](mailto:support@access-nri.org).
-
-We welcome contributions! Please follow the [contribution guidelines](CONTRIBUTING.md) to submit enhancements or bug fixes.
-
----
-
-## References
-
-- CLIVAR 2020 ENSO Metrics Package: [CLIVAR Website](https://www.clivar.org/news/clivar-2020-enso-metrics-package)
-- Planton et al. (2021): [DOI:10.1175/BAMS-D-19-0337.1](https://doi.org/10.1175/BAMS-D-19-0337.1)
-- ESMValTool: [ESMValTool Official Website](https://esmvaltool.org/)
+Licensed under [Apache-2.0](LICENSE). Developed by the ACCESS-NRI Model Evaluation and Diagnostics team and contributors.
